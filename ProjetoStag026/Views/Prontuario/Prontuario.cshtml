@@ -1,0 +1,174 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="~/Content/bootstrap.min.css" type="text/css" />
+<div>
+    <div id="atualiza">
+        <header class="popove-header">
+            @Html.ActionLink("Voltar para a lista de Prontuario", "Index", "Prontuario")
+
+        </header>
+
+        <div style="width:100%">
+            <h2>Dados do Prontuario</h2>
+
+            <ul class="form list-group">
+                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                    Paciente
+                    <span class=" badge badge-primary badge-pill" id="tags"> </span>
+                </li>
+                <h2>Historia Patologica Pregressa</h2>
+                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                    HPP(história médica do paciente)
+                    <span class="badge badge-primary badge-pill" id="HPP"></span>
+                </li>
+                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                    HF(Histórico familiar)
+                    <span class="badge badge-primary badge-pill" id="HF"> </span>
+                </li>
+                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                    HistoriaSocial
+                    <span class="badge badge-primary badge-pill" id="social"> </span>
+                </li>
+                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                    Componente Alergico
+                    <span class="badge badge-primary badge-pill" id="componente"></span>
+                </li>
+
+                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                    Observações
+                    <span class="badge badge-primary badge-pill" id="obs"> </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="modal">
+
+    </div>
+</div>
+<link rel="stylesheet" href="~/Content/bootstrap.min.css" type="text/css" />
+
+<div>
+    <a href="#" onclick="edit()" class="btn btn-primary " data-toggle="modal" data-target="#myModal">
+        Editar
+    </a>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog ">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">Cancelar</button>
+            </div>
+
+            <div class="modal-body">
+
+                <input type="hidden" value=" @ViewBag.Prontuario.ID" id="idProntuario" />
+                <label for="tags">Paciente</label>
+                <input type="text" id="nomePaciente" value="@ViewBag.Paciente.Nome" class="form-control ">
+                <h2>Historia Patológica Pregressa</h2>
+                <div>
+                    <label for="historia">HPP(História patológica pregressa)</label>
+                    <textarea class="form-control" id="hpp" placeholder="História...">@ViewBag.historia.HPP</textarea>
+                </div>
+                <div>
+                    <label for="hf">HF( Histórico familiar)</label>
+                    <input type="text" id="hf" value="@ViewBag.historia.HF" class="form-control">
+                </div>
+                <div>
+                    <label for="historiaSocial">HistoriaSocial</label>
+                    <input type="text" id="HistoriaSocial" value="@ViewBag.historia.HistoriaSocial" class="form-control">
+                </div>
+                <div>
+                    <input type="checkbox" />
+                    <label for="comp">Componente Alergico</label>
+                    <input type="text" id="comp" value="@ViewBag.Componente" class="form-control ">
+                </div>
+                <div>
+                    <label for="observacao">Observação</label>
+                    <textarea class="form-control" id="observacao" placeholder="Observação...">@ViewBag.Prontuario.Observacoes</textarea>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary " data-dismiss="modal" onclick="alterar()">atualizar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var nome = "@ViewBag.Paciente.Nome";
+    var hpp = "@ViewBag.historia.HPP";
+    var hf = " @ViewBag.historia.HF";
+    var social = "@ViewBag.historia.HistoriaSocial";
+    var cmop = "@ViewBag.Componente";
+     var observacao = " @ViewBag.Prontuario.Observacoes";
+
+
+    $(function () {
+        $("#tags").text(nome);
+        $("#HPP").text(hpp);
+        $("#HF").text(hf);
+        $("#social").text(social);
+        $("#componente").text(cmop);
+        $("#obs").text(observacao);
+    });
+    function alterar() {
+
+        var nomeP = $("#nomePaciente").val();
+        var hppP = $("#hpp").val();
+        var hfP = $("#hf").val();
+        var socialP = $("#HistoriaSocial").val();
+        var cmopP = $("#nomeComponente").val();
+        var observacaoP = $("#observacao").val();
+        var idprontuarioP = $("#idProntuario").val();
+
+        var atualizacao = $("#atualiza").html();
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            url: "@Url.Action("Update","Prontuario")", // webmethod or web serivces URL
+            data: {
+                nomePaciente: nomeP,
+                HPP: hppP ,
+                HF: hfP ,
+                HistoriaSocial: socialP,
+                nomeComponente: cmopP ,
+                observacao: observacaoP ,
+                idProntuario: idprontuarioP
+            },
+            complete:
+                function validar(jqXHR, resposta) {
+                    if (jqXHR.responseJSON == "Sim") {
+                        $("#atualiza").html(atualizacao);
+                        $("#tags").text(nomeP);
+                        $("#HPP").text(hppP);
+                        $("#Hf").text(hfP);
+                        $("#social").text(socialP);
+                        $("#componente").text(cmopP);
+                        $("#obs").text(observacaoP);
+                    } else {
+                        alert("Erro ao excluir");
+                    }
+                },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+            }
+        });
+    }
+</script>
+
+
+
+

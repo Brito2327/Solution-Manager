@@ -1,0 +1,107 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<section>
+    <div class="row ">
+        <div class="form-group float-left">
+            <form action="Cadastrar">
+                <div class="form-group">
+                    <h2>Dados</h2>
+                    <div class="row">
+                        <div class="col-5">
+                            <label for="tags">Paciente</label>
+                            <input type="text" id="tags" name="nomePaciente" class="form-control ">
+                        </div>
+
+                    </div>
+                    
+                    <h2>Historia Patológica Pregressa</h2>
+                    <div class="row">
+                        <div class="col-5">
+                            <label for="historia">HPP(História patológica pregressa)</label>
+                            <textarea class="form-control" placeholder="História..." name="historia.HPP"></textarea>
+                        </div>
+
+                        <div class="col-5">
+                            <label for="hf">HF( Histórico familiar)</label>
+                            <input type="text" name="historia.HF" class="form-control">
+                        </div>
+                        <div class="col-5">
+                            <label for="historiaSocial">HistoriaSocial</label>
+                            <input type="text" name="historia.HistoriaSocial" class="form-control">
+                        </div>
+                        <div class="col-5">
+                            <input type="checkbox" onclick="desabilitar('sim')" />
+                            <label for="comp">Componente Alergico</label>
+                            <input type="text" id="tel" disabled="" name="nomeComponente" class="form-control ">
+                        </div>
+                        <div class="col-5">
+                            <label for="observacao">Observação</label>
+                            <textarea class="form-control" placeholder="Observação..." name="prontuario.Observacoes"></textarea>
+                        </div>
+                    </div>
+                    </div>
+                    
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Criar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<script>
+    var lista = [];
+
+</script>
+@foreach (var item in @ViewBag.Pacientes)
+{
+    <script>
+     lista.push("@item.Nome");
+    </script>
+}
+<script>
+    $(function () {
+        $("#tags").autocomplete({
+            source: lista
+        });
+    });
+</script>
+
+<script>
+    var listaComponentes = [];
+
+</script>
+@foreach (var componentes in @ViewBag.Componentes)
+{
+    <script>
+        listaComponentes.push("@componentes.Nome");
+    </script>
+}
+<script>
+    $(function () {
+        $("#tel").autocomplete({
+            source: listaComponentes
+        });
+    });
+</script>
+<script>
+    function desabilitar(valor) {
+        var status = document.getElementById('tel').disabled;
+
+        if (valor == 'sim' && !status) {
+            document.getElementById('tel').disabled = true;
+        } else {
+            document.getElementById('tel').disabled = false;
+        }
+    }
+</script>
+

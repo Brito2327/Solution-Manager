@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+<script src="https://use.fontawesome.com/f72947d947.js"></script>
+<link rel="stylesheet" type="text/css" href="htpps://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/font-awesome.css" />
+<div class="background-full"></div>
+<div class="login">
+    <form action="~/Login/Autentica" method="post">
+        <label for="login">Login</label>
+        <div class="icon">
+            <div class="input-ima">
+                <i class="fa fa-user fa-lg fa-fw"></i>
+                <input type="text" name="login" id="login" class="form-control" placeholder="Usuario..." />
+            </div>
+        </div>
+        <div class="icon">
+            <div class="input-ima">
+                <i class="fa fa-unlock-alt fa-lg fa-fw"></i>
+                <input type="password" name="senha" id="senha" class="form-control" required placeholder="Senha..." />
+            </div>
+        </div>
+        <input type="submit" class="btn btn-secondary" required value="Entrar" />
+    </form>
+
+</div>
+<div class="rodape">
+    <p>&copy; @DateTime.Now.Year -Solução Manager Doctor Sistem</p>
+</div>
+
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+

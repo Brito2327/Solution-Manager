@@ -1,0 +1,209 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+<div class="container">
+    <h2>Atendimento</h2>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">Consulta</a></li>
+        <li><a data-toggle="tab" href="#prontu">Prontuario do paciente</a></li>
+        <li><a data-toggle="tab" href="#menu2">consultas do paciente</a></li>
+
+    </ul>
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+
+            <div class="form-group float-left">
+                <form action="~/Consulta/Cadastrar" method="post">
+                    <div class="row">
+                        <div>
+                            <ul class="form list-group">
+                                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                                    Paciente
+                                    <span class=" badge badge-primary badge-pill" id="tags">@ViewBag.Paciente.Nome </span>
+                                    <input type="hidden" value="@ViewBag.Paciente.ID" name="consulta.PacienteId"/>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <ul class="form list-group">
+                                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                                    Data
+                                    <span class=" badge badge-primary badge-pill" id="tags">@ViewBag.Agendamento.data </span>
+                                    <input type="hidden" value="@ViewBag.Agendamento.Id" name="agendamentoId" />
+                                    <input type="hidden" value="@ViewBag.Agendamento.data" name="consulta.Data" />
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <ul class="form list-group">
+                                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                                    Hora
+                                    <span class=" badge badge-primary badge-pill" id="tags">@ViewBag.Agendamento.hora </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <div>
+                                <ul class="form list-group">
+                                    <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                                        Médico
+                                        <span class=" badge badge-primary badge-pill" id="tags">@ViewBag.Medico.nome </span>
+                                        <input type="hidden" value="@ViewBag.Medico.ID" name="consulta.MedicoId" />
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="form-group">
+                                <label for="TPR">TPR( temperatura - pulso - respiração)</label>
+                                <input type="text" required class="form-control" name="anamnese.TPR" />
+                                <label for="Antecedentes">Antecedentes</label>
+                                <input type="text" name="anamnese.Antecedentes" required class="form-control" />
+                            </div>
+                            <div>
+                                <label for="qp">QP(Queixa principal )</label>
+                                <input type="text" name="anamnese.QP"   required class="form-control" />
+                                <label for="HDA">HDA(História da doença atual)</label>
+                                <textarea name="anamnese.HDA" class="form-control" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div>
+                                <label for="exame">Exame físico</label>
+                                <input type="text" name="anamnese.ExameFisico" required class="form-control" />
+
+                                <label for="diagnostico">Diagnóstico</label>
+                                <textarea name="anamnese.Diagnostico" required class="form-control"></textarea>
+
+                                <label for="diagnostico">Prescrição</label>
+                                <input type="search" onfocus="myFunction(this)" name="anamnese.componentePrescrito" required class="form-control" />
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Finalizar consulta</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div id="prontu" class="tab-pane fade">
+            <div style="width:100%">
+
+                <h2>Dados do Prontuario</h2>
+
+                <ul class="form list-group">
+                    <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                        Paciente
+                        <span class=" badge badge-primary badge-pill" id="tags">@ViewBag.Paciente.Nome </span>
+                    </li>
+                    <h2>Historia Patologica Pregressa</h2>
+                    <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                        HPP(história médica do paciente)
+                        <span class="badge badge-primary badge-pill" id="HPP">@ViewBag.Historia.HPP</span>
+                    </li>
+                    <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                        HF(Histórico familiar)
+                        <span class="badge badge-primary badge-pill" id="HF"> @ViewBag.Historia.HF</span>
+                    </li>
+                    <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                        HistoriaSocial
+                        <span class="badge badge-primary badge-pill" id="social"> @ViewBag.Historia.HistoriaSocial</span>
+                    </li>
+                    <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                        Componente Alergico
+                        <span class="badge badge-primary badge-pill" id="componente"> @ViewBag.Historia.HF</span>
+                    </li>
+
+                    <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                        Observações
+                        <span class="badge badge-primary badge-pill" id="obs">@ViewBag.Prontuario.Observacoes </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div>
+                    <span class="close">&times;</span>
+                    <p>Paciente Alergico ao componente @ViewBag.Componente</p>
+                </div>
+
+            </div>
+
+        </div>
+        <div id="menu2" class="tab-pane fade">
+            <h3>Consultas</h3>
+            <table class="table table-hover" id="myTable">
+                <thead>
+                    <tr>
+                        <th class="align-content-center">Id</th>
+                        <th class="align-content-center">Data</th>
+                        <th class="align-content-center">Observações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var consulta in @ViewBag.Consultas)
+                    {
+                        <tr>
+                            <td class="align-content-center">@consulta.ID</td>
+                            <td>@consulta.Data </td>
+                            <td>@consulta.Observacao </td>
+                            <td>
+                                <button type="button">Ver Mais</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    function myFunction(x) {
+        if (@ViewBag.Historia.ComponenteId!= null) {
+            AbriModal();
+        }
+    }
+
+    var modal = document.getElementById("myModal");
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    // When the user clicks the button, open the modal
+     function AbriModal () {
+        modal.style.display = "block";
+    }
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+
+
+

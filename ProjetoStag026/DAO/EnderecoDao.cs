@@ -1,0 +1,76 @@
+﻿using ProjetoStag026.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace ProjetoStag026.DAO
+{
+    public class EnderecoDao
+    {
+       
+            public void Cadastrar(Endereco endereco)
+            {
+                using (var contexto = new ConecaoContext())
+                {
+
+                    contexto.Endereco.Add(endereco);
+                    contexto.SaveChanges();
+                }
+
+            }
+
+            public IList<Endereco> Select()
+            {
+                using (var contexto = new ConecaoContext())
+                {
+                    return contexto.Endereco.ToList();
+                }
+
+            }
+            public void Alterar(Endereco endereco)
+            {
+                foreach (var item in Select())
+                {
+                    if (item.ID == endereco.ID)
+                    {
+                        using (var contexto = new ConecaoContext())
+                        {
+                        item.rua = endereco.rua;
+                        item.Bairro = endereco.Bairro;
+                        item.Numero = endereco.Numero;
+                        item.Cidade = endereco.Cidade;
+                       
+                        contexto.Endereco.Update(item);
+                            contexto.SaveChanges();
+                        }
+                    }
+                }
+
+            }
+            public void excluir(Endereco endereco)
+            {
+                foreach (var item in Select())
+                {
+                    if (item.ID == endereco.ID)
+                    {
+                        using (var contexto = new ConecaoContext())
+                        {
+                            contexto.Endereco.Remove(item);
+                            contexto.SaveChanges();
+                        }
+                    }
+                }
+            }
+        public Endereco BuscaPorId(int id)
+        {
+            using (var contexto = new ConecaoContext())
+            {
+                return contexto.Endereco
+                    .Where(p => p.ID == id)
+                    .FirstOrDefault();
+            }
+        }
+    }
+    
+}

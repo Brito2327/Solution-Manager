@@ -1,0 +1,77 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutFuncionario.cshtml";
+}
+
+<div>
+    @using (Html.BeginForm("Cadastrar", "Paciente", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {<div>
+            <div>
+                <h3>Dados</h3>
+            </div>
+
+            <div class="form-group float-right">
+                <label for="imagem">Imagem de perfil</label>
+                <input type="file" class="form-control-file" id="upImagem" name="upImagem">
+            </div>
+            <label for="nome">Nome</label>
+            <input id="nome" name="paciente.Nome" required value="@ViewBag.Paciente.Nome" class="form-control" />
+
+            <label for="data">Data de nascimento</label>
+            <input id="data" type="date" name="paciente.data" required value="@ViewBag.Paciente.data" class="form-control" />
+
+            <label for="user">
+                Email
+            </label>
+            <input id="user " name="usuario.User" required value="@ViewBag.Usuario.User" class="form-control" />
+
+            <label for="senha">
+                Senha
+            </label>
+            <input type="password" id="senha " name="usuario.Password" required value="@ViewBag.Usuario.Password" class="form-control" />
+
+        </div>
+
+        <hr />
+        <h3>Endereço</h3>
+        <div class="row">
+            <div class="col-4">
+                <label for="rua">Rua</label>
+                <input id="rua " name="endereco.rua" required value="@ViewBag.Endereco.rua" class="form-control" />
+            </div>
+            <div class="col-4">
+                <label for="bairro">Bairro</label>
+                <input id="bairro " name="endereco.Bairro" required value="@ViewBag.Endereco.Bairro" class="form-control" />
+            </div>
+            <div class="col-4">
+                <label for="cidade">Cidade</label>
+                <input id="cidade " name="endereco.Cidade" value="@ViewBag.Endereco.Cidade" class="form-control" />
+            </div>
+
+            <div class="col-4">
+                <label for="numero">Numero</label>
+                <input id="numero " name="endereco.Numero" required value="@ViewBag.Endereco.Numero" class="form-control" />
+            </div>
+            <div class="col-4">
+                <label for="telefone">Telefone</label>
+                <input id="telefone " name="Paciente.Telefone" required value="@ViewBag.Paciente.Telefone" class="form-control" />
+            </div>
+            <div class="col-4">
+                <label for="sexo">Sexo</label>
+                <input id="sexo " name="Paciente.sexo" required value="@ViewBag.Paciente.sexo" class="form-control" />
+            </div>
+            <div class="col-4">
+                <label for="naturalidade">Naturalidade</label>
+                <input id="naturalidade " name="Paciente.Naturalidade" required value="@ViewBag.Paciente.Naturalidade" class="form-control" />
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Cadastrar" />
+
+    }
+
+</div>
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+

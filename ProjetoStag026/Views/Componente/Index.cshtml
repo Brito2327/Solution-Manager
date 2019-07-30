@@ -1,0 +1,205 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutFuncionario.cshtml";
+}
+
+
+
+<div>
+
+
+    <table class="table table-hover" id="myTable">
+        <thead>
+
+            <tr>
+                <th class="align-content-center">Id</th>
+                <th class="align-content-center">Nome</th>
+                <th class="align-content-center"></th>
+                <th class="align-content-center"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var componente in ViewBag.Componentes)
+            {
+                <tr id="componente-@componente.ID">
+                    <td class="align-content-center">@componente.ID</td>
+                    <td class="align-content-center" id="nome-@componente.ID">@componente.Nome</td>
+                    <td class="align-content-center">
+                        <a href="#" data-toggle="modal" onclick="Armazena(@componente.ID)" data-target="#AlterarModal">Editar</a>
+                    </td>
+                    <td class="align-content-center"><a href="#" onclick="excluir(@componente.ID);">Excluir</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <button onclick="edit()" class="btn btn-primary " data-toggle="modal" data-target="#myModal">Cadastrar Componente</button>
+    </div>
+    <div class="modal">
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog ">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">Cancelar</button>
+            </div>
+            <div class="modal-body">
+                <form action="~/Componente/Cadastrar" method="post">
+
+                    <div class="form-group">
+                        <div>
+                            <h2>Nome</h2>
+                            <input type="text" id="tags" name="componente.Nome" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="AlterarModal" role="dialog">
+    <div class="modal-dialog ">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">Cancelar</button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <div>
+                        <h2>Nome</h2>
+                        <input type="text" id="nomeA"  value="" class="form-control" required>
+                        <input type="hidden" value="1" id="idArmzenado" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="alterar()">Alterar</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    var lista = [];
+</script>
+@foreach (var item in @ViewBag.Componentes)
+{
+    <script>
+     lista.push("@item.Nome");
+    </script>
+}
+<script>
+    $(function () {
+
+        $("#tags").autocomplete({
+            source: lista
+        });
+    });
+</script>
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });</script>
+
+<script type="text/javascript">
+    function excluir(componente) {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            url: "@Url.Action("Excluir","Componente")", // webmethod or web serivces URL
+            data: { id: componente },
+            complete:
+                function validar(jqXHR, resposta) {
+                    if (jqXHR.responseJSON == "Sim") {
+                        $("#componente-" + componente).html("");
+                    } else {
+                        alert("Erro ao excluir");
+                    }
+                },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+            }
+        });
+
+
+    }
+
+    function Armazena(id) {
+
+        $("#idArmzenado").val(id);
+    }
+
+    function alterar() {
+
+       
+        var nomeA = $("#nomeA").val();
+        var id = $("#idArmzenado").val();
+
+
+       
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            url: "@Url.Action("update", "Componente")", // webmethod or web serivces URL
+            data: {
+                id: id,
+                Nome: nomeA
+                
+            },
+            complete:
+                function validar(jqXHR, resposta) {
+                    if (jqXHR.responseJSON == "Sim") {
+                        $("#componente-").html("");
+                        $("#nome-" + id).text(nomeA);
+                       
+                    } else {
+                        alert("Erro ao excluir");
+                    }
+                },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+            }
+        });
+    }
+
+</script>
+

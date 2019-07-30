@@ -1,0 +1,221 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutFuncionario.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+
+<div id="atualiza">
+    <div>
+        <div>
+            <button onclick="edit()" class="btn btn-primary " data-toggle="modal" data-target="#myModal">
+                Novo Agendamento
+            </button>
+        </div>
+    </div>
+    <table class="table table-hover" id="myTable">
+        <thead>
+
+            <tr>
+                <th class="align-content-center">Id</th>
+                <th class="align-content-center">Paciente</th>
+                <th class="align-content-center">Data</th>
+                <th class="align-content-center">Hora</th>
+                <th class="align-content-center">Observações</th>
+                <th class="align-content-center"></th>
+
+
+
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (int p = 0; p < ViewBag.Agendamento.Count; p++)
+            {
+                <tr id="agendamento-@ViewBag.Agendamento[p].Id">
+                    <td class="align-content-center">@ViewBag.Agendamento[p].Id</td>
+                    <td class="align-content-center">
+                        <a href="~/Agendamento/Agendamento/@ViewBag.Agendamento[p].Id">@ViewBag.Paciente[p].Nome</a>
+                    </td>
+                    <td>@ViewBag.Agendamento[p].data.Date.ToString("dd/MM/yyyy") </td>
+                    <td>@ViewBag.Agendamento[p].hora </td>
+                    <td>@ViewBag.Agendamento[p].observacao </td>
+
+
+                    <td>
+                        <button class="btn btn-primary" onclick="excluir(@ViewBag.Agendamento[p].Id);">Excluir</button>
+                    </td>
+
+                </tr>
+            }
+
+
+
+        </tbody>
+    </table>
+
+
+    <div class="modal">
+
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="myModal" role="dialog">
+    <div class="modal-dialog ">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">Cancelar</button>
+            </div>
+            <div class="modal-body">
+                <h2>Agendamento</h2>
+                <form>
+                    <div class="form-group">
+                        <div>
+
+                            <label for="tags">Paciente</label>
+                            <input type="text" id="tags" class="form-control ">
+                        </div>
+                        <div class="form-group">
+                            <label for="medi">Medico</label>
+                            <input type="search" id="medi" class="form-control ">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="data">Data</label>
+                            <input type="date" id="data" class="form-control">
+                        </div>
+
+                        <div>
+                            <label for="hora">Horario</label>
+                            <input type="time" id="hora" class="form-control">
+                        </div>
+                        <div>
+                            <label for=" observacao">Observações</label>
+                            <textarea class="form-control" id="observacao" placeholder="Observações..."></textarea>
+                        </div>
+                        <label for=" plano">Plano</label>
+                        <select id="plano" class="form-control">
+                            <option value="Particular">Particular</option>
+                            <option value="Unimmeed">Unimmeed</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" onclick="Cadastro()">Agendar</button>
+                    </div>
+
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var lista = [];
+</script>
+@foreach (var item in @ViewBag.Pacientes)
+{
+    <script>
+     lista.push("@item.Nome");
+    </script>
+}
+<script>
+    $(function () {
+
+        $("#tags").autocomplete({
+            source: lista
+        });
+    });
+</script>
+
+<script>
+    var listaMedicos = [];
+</script>
+@foreach (var medico in @ViewBag.Medicos)
+{
+    <script>
+        listaMedicos.push("@medico.nome");
+    </script>
+}
+<script>
+    $(function () {
+
+        $("#medi").autocomplete({
+            source: listaMedicos
+        });
+    });
+</script>
+
+<script type="text/javascript">
+
+    function excluir(agendamentoId) {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            url: "@Url.Action("Excluir","Agendamento")", // webmethod or web serivces URL
+            data: { id: agendamentoId },
+            complete:
+                function validar(jqXHR, resposta) {
+                    if (jqXHR.responseText == "\"Sim\"") {
+                        $("#agendamento-" + agendamentoId).html("");
+                    } else {
+                        alert("Erro ao excluir");
+                    }
+                },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+            }
+        });
+
+
+    }
+</script>
+<script>
+    function Cadastro() {
+
+        var nomeP = $("#tags").val();
+        var nomeM = $("#medi").val();
+        var data = $("#data").val();
+        var hora = $("#hora").val();
+        var observacao = $("#observacao").val();
+        var plano = $("#plano").val();
+
+
+        var atualizacao = $("atualiza").html();
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            url: "@Url.Action("Cadastrar","Agendamento")", // webmethod or web serivces URL
+            data: {
+                nomePaciente: nomeP,
+                nomeMedico: nomeM,
+                Data: data,
+                Hora: hora,
+                Observacao: observacao,
+                Plano: plano
+            },
+            complete:
+                function validar(jqXHR, resposta) {
+                    if (jqXHR.responseText == "\"Sim\"") {
+                        $("#Atualiza").html(atualizacao);
+                    } else {
+                        alert("Erro ao cadastrar agendamento");
+                    }
+                },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+            }
+        });
+
+
+    }
+
+</script>

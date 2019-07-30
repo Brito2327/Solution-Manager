@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section>
+
+    <div class="row">
+        @for (int p = 0; p < ViewBag.Agendamento.Count; p++)
+        {
+            <div class="col-3">
+                <div class="card agenda" style="width: 18rem;">
+                    <h2>@ViewBag.Agendamento[p].hora</h2>                   
+                        <img src="~/Content/imagens/relogio.jpeg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@ViewBag.Paciente[p].Nome</h5>
+                            <p class="card-text">@ViewBag.Agendamento[p].observacao</p>
+
+
+
+                            <a href="~/Consulta/Form?pacienteId=@ViewBag.Paciente[p].ID&agendamentoId=@ViewBag.Agendamento[p].Id" class="btn btn-primary">Atender</a>
+                        </div>
+                    
+                   
+                </div>
+            </div>
+
+        }
+    </div>
+</section>
+
+
+

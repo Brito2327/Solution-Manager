@@ -1,0 +1,149 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutFuncionario.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/bootstrap.min.css" type="text/css" />
+
+
+<div>
+    <div id="atualiza">
+        <div>
+            @Html.ActionLink("Voltar para a lista de Prontuario", "Index", "Prontuario")
+        </div>
+        <div style="width:100%">
+            <h2>Dados do Médico</h2>
+            <input type="hidden" id="idMedico"  />
+            <ul class="form list-group">
+
+                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                    Nome
+                    <span class=" badge badge-primary badge-pill" id="tags"> </span>
+                </li>
+
+                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                    N°- CRM
+                    <span class="badge badge-primary badge-pill" id="crm"></span>
+                </li>
+                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                    Situação
+                    <span class="badge badge-primary badge-pill" id="situacao"> </span>
+                </li>
+                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                    Área de Atuação
+                    <span class="badge badge-primary badge-pill" id="area"> </span>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="modal">
+
+    </div>
+</div>
+<div>
+    <button onclick="edit()" class="btn btn-primary " data-toggle="modal" data-target="#myModal">Editar</button>
+</div>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog ">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">Cancelar</button>
+            </div>
+            <div class="modal-body">
+                    <h3>Informações do Médico</h3>
+                    <div class="row">
+
+                        <div class="col-6">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nomeM" value="@ViewBag.Medico.nome" required class="form-control ">
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label for="numero">Nº do CRM</label>
+                            <input type="tel" id="crmM" value="@ViewBag.Medico.CRM" class="form-control" required>
+                        </div>
+
+                        <div class="col-6">
+                            <label for="situacao">Stituação</label>
+                            <input type="text" id="situacaoM" value=" @ViewBag.Medico.Situacao" required class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <label for=" area">Área de Atuação</label>
+                            <textarea class="form-control" id="areaM" placeholder="Área..." required>@ViewBag.Medico.AreaDeAtuacao</textarea>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <button  class="btn btn-primary" data-dismiss="modal" onclick="alterar()">Salvar</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var nome = "@ViewBag.Medico.nome";
+    var crm = "@ViewBag.Medico.CRM";
+    var situacao = " @ViewBag.Medico.Situacao";
+    var area = "@ViewBag.Medico.AreaDeAtuacao";
+    var idM = "@ViewBag.Medico.ID";
+
+
+
+    $(function () {
+        $("#tags").text(nome);
+        $("#crm").text(crm);
+        $("#situacao").text(situacao);
+        $("#area").text(area);
+        $("#idMedico").text(idM);
+    });
+   
+</script>
+<script>
+     function alterar() {
+
+        var idmedico = $("#idMedico").text();
+        var nomeA = $("#nomeM").val();
+        var crmA = $("#crmM").val();
+        var situacaoA = $("#situacaoM").val();
+        var areaA = $("#areaM").val();
+
+
+        var atualizacao = $("#atualiza").html();
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            url: "@Url.Action("Alterar","Medico")", // webmethod or web serivces URL
+            data: {
+                id: idM,
+                Nome: nomeA,
+                CRM: crmA,
+                Situacao: situacaoA,
+                Area: areaA
+            },
+            complete:
+                function validar(jqXHR, resposta) {
+                    if (jqXHR.responseJSON == "Sim") {
+                        $("#atualiza").html(atualizacao);
+                        $("#tags").text(nomeA);
+                        $("#crm").text(crmA);
+                        $("#situacao").text(situacaoA);
+                        $("#area").text(areaA);
+                        $("#idMedico").text(idM);
+                    } else {
+                        alert("Erro ao excluir");
+                    }
+                },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+            }
+        });
+    }
+</script>
