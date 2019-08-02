@@ -1,14 +1,15 @@
 ﻿using ProjetoStag026.DAO;
 using ProjetoStag026.Filtros;
 using ProjetoStag026.Models;
-using System;
+using System.Web;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
+
 namespace ProjetoStag026.Controllers
-{[FiltroP]
+{
+    [FiltroP]
     public class ClienteController:Controller
     {
         public ActionResult Index()
@@ -20,7 +21,7 @@ namespace ProjetoStag026.Controllers
             return View();
             
         }
-        public ActionResult ConsultaIndividual(int id)
+        public ActionResult ConsultaIndividualP(int id)
         {
             ConsultaDao dao = new ConsultaDao();
             Consulta consulta = dao.BuscaPorId(id);
@@ -38,8 +39,9 @@ namespace ProjetoStag026.Controllers
             
         }
 
-        public ActionResult Prontuario()
+        public ActionResult ProntuarioP()
         {
+            Componente_PacienteDao com = new Componente_PacienteDao();
             Paciente paciente = (Paciente)Session["Paciente"];
             ProntuarioDao dao = new ProntuarioDao();
             Prontuario prontuario = dao.BuscaPorId(paciente.ID);
@@ -47,21 +49,23 @@ namespace ProjetoStag026.Controllers
             HistoriaPatologicaPregressa historia = new HistoriaPatologicaPregressa();
             historia= h.BuscaPorId(prontuario.HistoriaPatologicaPregressaId);
             ComponenteDao co = new ComponenteDao();
-            
-           
 
-          
 
-            if (historia.ComponenteId != null)
+
+
+            IList<Componente> lista_componente = new List<Componente>();
+
+            if (com.BuscarAgendamentos(paciente.ID) != null)
             {
-                Componente componente = co.BuscaPorId(historia.ComponenteId);
+                IList<Componente_Paciente> lista = com.BuscarAgendamentos(paciente.ID);
+                foreach (var item in lista)
+                {
+                    Componente componente = co.BuscaPorId(item.ComponenteId);
+                    lista_componente.Add(componente);
+                }
+            }
 
-                ViewBag.Componente = componente;
-            }
-            else
-            {
-                ViewBag.Componente = "Nao Possui alergia";
-            }
+            ViewBag.Componente = lista_componente;
             ViewBag.Historia = historia;
             ViewBag.Prontuario = prontuario;
             ViewBag.Paciente = paciente;

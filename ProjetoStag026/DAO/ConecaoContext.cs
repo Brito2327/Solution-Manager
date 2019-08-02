@@ -22,6 +22,7 @@ namespace ProjetoStag026.DAO
         public DbSet<Agendamento> Agendamento { get; set; }
         public DbSet<Funcionario> Funcionario { get; set; }
         public DbSet<Atendimentos> Atendimentos { get; set; }
+        public DbSet<Componente_Paciente> Componente_Paciente { get; set; }
 
 
         public ConecaoContext(){

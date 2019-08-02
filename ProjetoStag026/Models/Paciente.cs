@@ -9,6 +9,7 @@ namespace ProjetoStag026.Models
     {
         public int ID{get;set;}
         public string Nome { get; set; }
+        public string CPF { get; set; }
         public Endereco Endereco { get; set; }
         public int EnderecoId { get; set; }
         public string sexo { get; set; }

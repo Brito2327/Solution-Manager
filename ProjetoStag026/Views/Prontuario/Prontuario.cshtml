@@ -5,6 +5,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="~/Content/bootstrap.min.css" type="text/css" />
+
 <div>
     <div id="atualiza">
         <header class="popove-header">
@@ -88,9 +89,12 @@
                     <input type="text" id="HistoriaSocial" value="@ViewBag.historia.HistoriaSocial" class="form-control">
                 </div>
                 <div>
-                    <input type="checkbox" />
-                    <label for="comp">Componente Alergico</label>
-                    <input type="text" id="comp" value="@ViewBag.Componente" class="form-control ">
+                    <div class="container1">
+
+                        <input type="checkbox" />
+                        <label for="comp">Componente Alergico</label>
+                        <input type="text" id="comp" value="@ViewBag.Componente" class="form-control ">
+                    </div>
                 </div>
                 <div>
                     <label for="observacao">Observação</label>
@@ -99,6 +103,7 @@
                 <div class="form-group">
                     <button type="button" class="btn btn-primary " data-dismiss="modal" onclick="alterar()">atualizar</button>
                 </div>
+
 
             </div>
         </div>
@@ -110,9 +115,39 @@
     var hpp = "@ViewBag.historia.HPP";
     var hf = " @ViewBag.historia.HF";
     var social = "@ViewBag.historia.HistoriaSocial";
-    var cmop = "@ViewBag.Componente";
+    var cmop = [];
      var observacao = " @ViewBag.Prontuario.Observacoes";
 
+</script>
+
+@if (ViewBag.Componente != null)
+{
+    int total = ViewBag.Componente.Count;
+    int contador = 0;
+
+    while (contador < total)
+    {
+
+        if (contador > 0)
+        {
+            <script>cmop.push(",");</script>
+            <script>cmop.push("@ViewBag.Componente[contador].Nome");</script>
+        }
+        else
+        {
+        <script>cmop.push("@ViewBag.Componente[contador].Nome");</script>
+                contador++;
+            }    }
+
+    }
+    else
+    {
+    <script>
+        cmop.push("Não possui nenhuma alergia");
+    </script>
+    }
+
+<script>
 
     $(function () {
         $("#tags").text(nome);
@@ -149,8 +184,8 @@
                 idProntuario: idprontuarioP
             },
             complete:
-                function validar(jqXHR, resposta) {
-                    if (jqXHR.responseJSON == "Sim") {
+            function validar(jqXHR, resposta) {
+                if (jqXHR.responseJSON == "Sim") {
                         $("#atualiza").html(atualizacao);
                         $("#tags").text(nomeP);
                         $("#HPP").text(hppP);
@@ -158,15 +193,17 @@
                         $("#social").text(socialP);
                         $("#componente").text(cmopP);
                         $("#obs").text(observacaoP);
-                    } else {
-                        alert("Erro ao excluir");
-                    }
-                },
+                } else {
+                    alert("Erro ao excluir");
+                }
+            },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert('Error - ' + errorThrown);
             }
         });
-    }
+}
+
+
 </script>
 
 

@@ -302,11 +302,6 @@
     <Content Include="App_Data\Prontuario_log.ldf">
       <DependentUpon>Prontuario.mdf</DependentUpon>
     </Content>
-    <Content Include="assets\css\fullcalendar.css" />
-    <Content Include="assets\css\fullcalendar.print.css" />
-    <Content Include="assets\js\fullcalendar.js" />
-    <Content Include="assets\js\jquery-1.10.2.js" />
-    <Content Include="assets\js\jquery-ui.custom.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -384,6 +379,7 @@
     <Compile Include="DAO\AtendimentosDao.cs" />
     <Compile Include="DAO\CategoriasDAO.cs" />
     <Compile Include="DAO\ComponenteDao.cs" />
+    <Compile Include="DAO\Componente_PacienteDao.cs" />
     <Compile Include="DAO\ConecaoContext.cs" />
     <Compile Include="DAO\ConsultaDao.cs" />
     <Compile Include="DAO\EnderecoDao.cs" />
@@ -429,6 +425,10 @@
     <Compile Include="Migrations\20190730194153_att.designer.cs">
       <DependentUpon>20190730194153_att.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20190801195825_bla.cs" />
+    <Compile Include="Migrations\20190801195825_bla.designer.cs">
+      <DependentUpon>20190801195825_bla.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ConecaoContextModelSnapshot.cs" />
     <Compile Include="Models\Agendamento.cs" />
     <Compile Include="Models\Anamnese.cs" />
@@ -436,6 +436,7 @@
     <Compile Include="Models\Atendimentos.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Componente.cs" />
+    <Compile Include="Models\Componente_Paciente.cs" />
     <Compile Include="Models\Componente_Remedio.cs" />
     <Compile Include="Models\Consulta.cs" />
     <Compile Include="Models\Endereco.cs" />
@@ -482,12 +483,12 @@
     <Content Include="Views\Shared\_LayoutPaciente.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\Cliente\ConsultaIndividual.cshtml" />
-    <Content Include="Views\Cliente\Prontuario.cshtml" />
     <Content Include="Views\Funcionario\Dashbord.cshtml" />
     <Content Include="Views\Shared\_LayoutCalendario.cshtml" />
     <Content Include="Views\Medico\Medico.cshtml" />
     <Content Include="Views\Atendimento\Index.cshtml" />
     <Content Include="Views\Relatorios\Relatorio.cshtml" />
+    <Content Include="Views\Cliente\ProntuarioP.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

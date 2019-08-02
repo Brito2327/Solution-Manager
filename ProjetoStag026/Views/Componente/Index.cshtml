@@ -27,9 +27,9 @@
                     <td class="align-content-center">@componente.ID</td>
                     <td class="align-content-center" id="nome-@componente.ID">@componente.Nome</td>
                     <td class="align-content-center">
-                        <a href="#" data-toggle="modal" onclick="Armazena(@componente.ID)" data-target="#AlterarModal">Editar</a>
+                        <button class="btn btn-primary" type="button" data-toggle="modal" onclick="Armazena('@componente.ID','@componente.Nome')" data-target="#AlterarModal">Editar</button>
                     </td>
-                    <td class="align-content-center"><a href="#" onclick="excluir(@componente.ID);">Excluir</a></td>
+                    <td class="align-content-center"><button class="btn btn-primary" type="button" onclick="excluir(@componente.ID);">Excluir</button></td>
                 </tr>
             }
         </tbody>
@@ -86,7 +86,7 @@
                 <div class="form-group">
                     <div>
                         <h2>Nome</h2>
-                        <input type="text" id="nomeA"  value="" class="form-control" required>
+                        <input type="text" id="nomeA" value="a" class="form-control" required>
                         <input type="hidden" value="1" id="idArmzenado" />
                     </div>
                 </div>
@@ -161,19 +161,26 @@
 
     }
 
-    function Armazena(id) {
+
+
+    function Armazena(id ,nomec) {
+        
 
         $("#idArmzenado").val(id);
+        $("#nomeA").val(nomec);
+        
+
+
     }
 
     function alterar() {
 
-       
+
         var nomeA = $("#nomeA").val();
         var id = $("#idArmzenado").val();
 
 
-       
+
 
         $.ajax({
             type: 'POST',
@@ -183,14 +190,14 @@
             data: {
                 id: id,
                 Nome: nomeA
-                
+
             },
             complete:
                 function validar(jqXHR, resposta) {
                     if (jqXHR.responseJSON == "Sim") {
                         $("#componente-").html("");
                         $("#nome-" + id).text(nomeA);
-                       
+
                     } else {
                         alert("Erro ao excluir");
                     }

@@ -87,6 +87,21 @@ namespace ProjetoStag026.DAO
                 return contexto.Paciente.FirstOrDefault(u => u.Usuario.ID == UsuarioId );
             }
         }
+
+        public bool VerificarExistencia(string nome,string usuario)
+        {
+            bool valida = false;
+            using (var contexto = new ConecaoContext())
+            {
+                var item = contexto.Paciente.FirstOrDefault(u => u.Nome == nome);
+                var item2 = contexto.Usuario.FirstOrDefault(u => u.User == usuario);
+                if (item != null && item2 != null)
+                {
+                    valida = true;
+                }
+            }
+            return valida;
+        }
     }
 
 }

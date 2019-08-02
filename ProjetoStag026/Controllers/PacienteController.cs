@@ -129,6 +129,12 @@ namespace ProjetoStag026.Controllers
 
 
         }
+        public ActionResult verificarExistente(string nome, string user)
+        {
+            PacienteDao dao = new PacienteDao();
+            string valida = (dao.VerificarExistencia(nome, user) ? "Sim" : "Não");
+            return Json(valida);
+        }
 
     }
 }

@@ -29,7 +29,7 @@
                     <td class="align-content-center">@funcionario.ID</td>
                     <td class="align-content-center" id="nome-@funcionario.ID">@funcionario.Nome</td>
                     <td class="align-content-center">
-                        <button class="btn btn-primary" data-toggle="modal" onclick="Armazena(@funcionario.ID)" data-target="#AlterarModal">Editar</button>
+                        <button class="btn btn-primary" data-toggle="modal" onclick="Armazena('@funcionario.ID','@funcionario.Nome')" data-target="#AlterarModal">Editar</button>
                     </td>
                     <td class="align-content-center">
                         <button class="btn btn-primary"  onclick="excluir(@funcionario.ID);">Excluir</button>
@@ -155,9 +155,10 @@
         });
     }
 
-    function Armazena(id) {
+    function Armazena(id,nome) {
 
         $("#idArmzenado").val(id);
+        $("#nomeA").val(nome);
     }
 
     function alterar() {

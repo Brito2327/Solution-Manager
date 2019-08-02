@@ -13,7 +13,6 @@ namespace ProjetoStag026.Models
         //Histórico familiar (HF): para saber se existe alguma relação de hereditariedade das doenças.
         public string HF { get; set; }
         public string HistoriaSocial { get; set; }
-        public Componente Componente { get; set; }
-        public int? ComponenteId { get; set; }
+       
     }
 }

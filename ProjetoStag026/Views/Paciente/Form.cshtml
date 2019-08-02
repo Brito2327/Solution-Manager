@@ -14,8 +14,15 @@
                 <label for="imagem">Imagem de perfil</label>
                 <input type="file" class="form-control-file" id="upImagem" name="upImagem">
             </div>
-            <label for="nome">Nome</label>
+            <label>Nome</label>
             <input id="nome" name="paciente.Nome" required value="@ViewBag.Paciente.Nome" class="form-control" />
+
+            <label>CPF</label>
+            <input id="cpf" name="paciente.CPF" required class="form-control" />
+
+            <label>Telefone ()</label>
+            <input id="tel" type="tel" name="paciente.telefone" required class="form-control" />
+
 
             <label for="data">Data de nascimento</label>
             <input id="data" type="date" name="paciente.data" required value="@ViewBag.Paciente.data" class="form-control" />
@@ -23,7 +30,7 @@
             <label for="user">
                 Email
             </label>
-            <input id="user " name="usuario.User" required value="@ViewBag.Usuario.User" class="form-control" />
+            <input id="user " type="email" name="usuario.User" required value="@ViewBag.Usuario.User" class="form-control" />
 
             <label for="senha">
                 Senha
@@ -67,9 +74,47 @@
         </div>
         <input type="submit" class="btn btn-primary" value="Cadastrar" />
 
+        
+        
+
     }
 
 </div>
+<script>
+
+    var nome = $("#nome").val();
+    var user = $("#user").val();
+
+
+    $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            url: "@Url.Action("verificarExistente", "Paciente")", // webmethod or web serivces URL
+        data: {
+                Nome: nome,
+                User: user
+
+        },
+            complete:
+                function validar(jqXHR, resposta) {
+                    if (jqXHR.responseJSON == "Sim") {
+                        $("#atualiza").html(atualizacao);
+                        $("#user").html("<input id='user' required value='@ViewBag.Paciente.Nome' class='is-invalid' />");
+
+                    } else {
+
+                    }
+                },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+            }
+    });
+
+
+    
+
+</script>
 
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>

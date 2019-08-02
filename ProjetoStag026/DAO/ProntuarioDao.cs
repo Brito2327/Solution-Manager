@@ -10,15 +10,17 @@ namespace ProjetoStag026.DAO
     {
 
 
-        public void Cadastrar(Prontuario obj)
+        public bool Cadastrar(Prontuario obj)
         {
+            bool valida = false;
             using (var contexto = new ConecaoContext())
             {
 
                 contexto.Prontuario.Add(obj);
                 contexto.SaveChanges();
+                valida = true;
             }
-
+            return valida;
         }
 
         public IList<Prontuario> Select()

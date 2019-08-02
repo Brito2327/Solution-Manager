@@ -47,25 +47,23 @@ namespace ProjetoStag026.Controllers
             return View();
         }
 
-        public ActionResult Cadastrar(String nomePaciente, Prontuario prontuario,
-            HistoriaPatologicaPregressa historia, String nomeComponente)
+        public ActionResult Cadastrar(String nomePaciente, String Hpp,String Hf,
+            String Historia,String Obs,IList<String> lista)
         {
+            
+            Componente_PacienteDao com = new Componente_PacienteDao();
             ProntuarioDao pro = new ProntuarioDao();
             PacienteDao dao = new PacienteDao();
             ComponenteDao co = new ComponenteDao();
             HistoriaPatologicaPregressaDao his = new HistoriaPatologicaPregressaDao();
+            HistoriaPatologicaPregressa h = new HistoriaPatologicaPregressa();
+            h.HF = Hf;
+            h.HistoriaSocial = Historia;
+            h.HPP = Hpp;
 
-            if (nomeComponente != null)
-            {
-                foreach (var item in co.Select())
-                {
-                    if (item.Nome == nomeComponente)
-                    {
-                        historia.ComponenteId = item.ID;
-                    }
-                }
-            }
-            his.Cadastrar(historia);
+            Prontuario prontuario = new Prontuario();
+            prontuario.Observacoes = Obs;
+            
             foreach (var item in dao.Select())
             {
                 if (item.Nome == nomePaciente)
@@ -73,10 +71,30 @@ namespace ProjetoStag026.Controllers
                     prontuario.PacienteId = item.ID;
                 }
             }
-            prontuario.HistoriaPatologicaPregressaId = historia.ID;
-            pro.Cadastrar(prontuario);
 
-            return RedirectToAction("Index");
+            if (lista != null)
+            {
+                foreach (var item in co.Select())
+                {
+                    foreach (var compi in lista)
+                    {
+                        if (item.Nome == compi)
+                        {
+                            Componente_Paciente comp = new Componente_Paciente();
+                            comp.ComponenteId = item.ID;
+                            comp.PacienteId = prontuario.PacienteId;
+                            com.Cadastrar(comp);
+                        }
+                    }
+
+                }
+            }
+            
+            his.Cadastrar(h);
+            prontuario.HistoriaPatologicaPregressaId = h.ID;
+            string valida= pro.Cadastrar(prontuario)? "Sim" : "Não";
+
+            return Json(valida);
         }
 
         public ActionResult Update(int idProntuario, String nomePaciente, String nomeComponente, String HPP,
@@ -84,7 +102,7 @@ namespace ProjetoStag026.Controllers
         {
 
 
-
+            Componente_PacienteDao com = new Componente_PacienteDao();
             ProntuarioDao pro = new ProntuarioDao();
             PacienteDao dao = new PacienteDao();
             ComponenteDao co = new ComponenteDao();
@@ -104,7 +122,10 @@ namespace ProjetoStag026.Controllers
                 {
                     if (item.Nome == nomeComponente)
                     {
-                        historia.ComponenteId = item.ID;
+                        Componente_Paciente comp = new Componente_Paciente();
+                        comp.ComponenteId = item.ID;
+                        comp.PacienteId = prontuario.PacienteId;
+                        com.Cadastrar(comp);
                     }
                 }
             }
@@ -135,6 +156,7 @@ namespace ProjetoStag026.Controllers
         }
         public ActionResult Prontuario(int id)
         {
+            Componente_PacienteDao com = new Componente_PacienteDao();
             ProntuarioDao dao = new ProntuarioDao();
             Prontuario prontuario = dao.BuscaPorId(id);
             HistoriaPatologicaPregressaDao h = new HistoriaPatologicaPregressaDao();
@@ -143,24 +165,33 @@ namespace ProjetoStag026.Controllers
             Paciente paciente = paci.BuscaPorId(prontuario.PacienteId);
 
             HistoriaPatologicaPregressa historia = h.BuscaPorId(prontuario.HistoriaPatologicaPregressaId);
-            string nomeComponente = "";
+            
+            IList<Componente> lista_componente = new List<Componente>();
 
-            if (historia.ComponenteId != null)
+            IList<Componente_Paciente> comPaci = com.BuscarAgendamentos(paciente.ID);
+            if (comPaci != null)
             {
-                Componente componente = co.BuscaPorId(historia.ComponenteId);
-
-                nomeComponente= componente.Nome;
+                IList<Componente_Paciente> lista = com.BuscarAgendamentos(paciente.ID);
+                foreach (var item in lista)
+                {
+                    Componente componente = co.BuscaPorId(item.ComponenteId);
+                    lista_componente.Add(componente);
+                }
+                ViewBag.Componente = lista_componente;
             }
             else
             {
-                nomeComponente = "Nao possui alergia";
+                ViewBag.Componente = null;
             }
-            ViewBag.Componente = nomeComponente;
+
+
             ViewBag.Historia = historia;
             ViewBag.Prontuario = prontuario;
             ViewBag.Paciente = paciente;
 
             return View();
         }
+
+       
     }
 }

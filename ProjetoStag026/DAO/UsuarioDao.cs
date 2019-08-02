@@ -70,7 +70,7 @@ namespace ProjetoStag026.DAO
             }
         }
 
-        public Usuario Busca(string login, string senha)
+        public  Usuario Busca(string login, string senha)
         {
             using (var contexto = new ConecaoContext())
             {

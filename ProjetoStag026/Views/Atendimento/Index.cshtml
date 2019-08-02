@@ -2,13 +2,25 @@
 @{
     Layout = "~/Views/Shared/_LayoutFuncionario.cshtml";
 }
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
 <div>
     <h3>
         Atendimentos
     </h3>
 </div>
+<div class="row float-right">
 
-<table class="table table-hover" id="myTable">
+    <a href="~/Relatorios/GerarRelatorio" target="_blank">
+        <b>GERAR PDF</b>
+    </a>
+</div>
+
+
+<table id="table_id" class="table table-hover">
     <thead>
         <tr>
             <th class="align-content-center">Id</th>
@@ -29,15 +41,12 @@
                 <td>@ViewBag.Atendiemtos[p].Plano </td>
             </tr>
         }
-        <tr>
-            <td>
-                <b>@ViewBag.Atendiemtos.Count registos de @ViewBag.Quantidade</b>
-            </td>
-            <td>
-                <a href="~/Relatorios/GerarRelatorio">
-                    <b>GERAR PDF</b>
-                </a>
-            </td>
-        </tr>
+
     </tbody>
 </table>
+<script>
+
+    $(document).ready(function () {
+        $('#table_id').DataTable();
+    });
+</script>

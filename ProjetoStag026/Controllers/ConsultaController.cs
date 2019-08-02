@@ -55,23 +55,26 @@ namespace ProjetoStag026.Controllers
                     prontuario = item;
                 }
             }
+            Componente_PacienteDao com = new Componente_PacienteDao();
             HistoriaPatologicaPregressaDao h = new HistoriaPatologicaPregressaDao();
             ComponenteDao co = new ComponenteDao();
             PacienteDao paci = new PacienteDao();
             Paciente paciente = paci.BuscaPorId(pacienteId);
 
             HistoriaPatologicaPregressa historia = h.BuscaPorId(prontuario.HistoriaPatologicaPregressaId);
-            string nomeComponente = "";
-            if (historia.ComponenteId != null)
-            {
-                Componente componente = co.BuscaPorId(historia.ComponenteId);
+            IList<Componente> lista_componente = new List<Componente>();
 
-               nomeComponente= componente.Nome;
-            }
-            else
+            if (com.BuscarAgendamentos(paciente.ID) != null)
             {
-               nomeComponente = "Nao Possui alergia";
+                IList<Componente_Paciente> lista = com.BuscarAgendamentos(paciente.ID);
+                foreach (var item in lista)
+                {
+                    Componente componente = co.BuscaPorId(item.ComponenteId);
+                    lista_componente.Add(componente);
+                }
             }
+
+            ViewBag.Componente = lista_componente;
 
             ConsultaDao con = new ConsultaDao();
             IList<Consulta> listaConsultas = con.BuscaPorPaciente(pacienteId);
@@ -84,7 +87,7 @@ namespace ProjetoStag026.Controllers
             ViewBag.Historia = historia;
             ViewBag.Prontuario = prontuario;
             ViewBag.Paciente = paciente;
-            ViewBag.Componente = nomeComponente;
+            
             return View();
         }
         public ActionResult Cadastrar(Consulta consulta,Anamnese anamnese, int agendamentoId,string nomeMedico)

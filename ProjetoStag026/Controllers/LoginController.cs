@@ -14,12 +14,11 @@ namespace ProjetoStag026.Controllers
         }
         public ActionResult Autentica(String login, String Senha)
         {
-            if (login == null || Senha == null) { return RedirectToAction("Index"); }
-            else
-            {
 
-                UsuarioDao dao = new UsuarioDao();
-                Usuario usuario = dao.Busca(login, Senha);
+            UsuarioDao dao = new UsuarioDao();
+            Usuario usuario = dao.Busca(login, Senha);
+            if (usuario != null)
+            {
                 CategoriasDAO cat = new CategoriasDAO();
                 Categoria categoria = cat.BuscaPorId(usuario.CategoriaId);
 
@@ -45,12 +44,9 @@ namespace ProjetoStag026.Controllers
                     Session["Funcionario"] = funcionario;
                     return RedirectToAction("Dashbord", "Funcionario");
                 }
-                else
-                {
-                    return RedirectToAction("Index");
-                }
             }
 
+            return RedirectToAction("Index");
         }
         public ActionResult Sair()
         {
