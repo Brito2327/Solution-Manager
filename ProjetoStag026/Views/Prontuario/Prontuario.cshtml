@@ -112,41 +112,37 @@
 
 <script>
     var nome = "@ViewBag.Paciente.Nome";
-    var hpp = "@ViewBag.historia.HPP";
-    var hf = " @ViewBag.historia.HF";
-    var social = "@ViewBag.historia.HistoriaSocial";
-    var cmop = [];
+    var hpp = "@ViewBag.Historia.HPP";
+    var hf = " @ViewBag.Historia.HF";
+    var social = "@ViewBag.Historia.HistoriaSocial";
+    var cmop = "";
      var observacao = " @ViewBag.Prontuario.Observacoes";
 
+    var contador = 0;
+    var totalComp = @ViewBag.Componente.Count;;
 </script>
 
 @if (ViewBag.Componente != null)
 {
-    int total = ViewBag.Componente.Count;
-    int contador = 0;
 
-    while (contador < total)
+    foreach (var item in ViewBag.Componente)
     {
+    <script>cmop+=("@item.Nome");
+        contador++;
+    </script>
 
-        if (contador > 0)
-        {
-            <script>cmop.push(",");</script>
-            <script>cmop.push("@ViewBag.Componente[contador].Nome");</script>
-        }
-        else
-        {
-        <script>cmop.push("@ViewBag.Componente[contador].Nome");</script>
-                contador++;
-            }    }
-
+    <script>
+        if (contador < totalComp) {
+        cmop+=(",");}</script>
     }
-    else
-    {
+}
+else
+{
     <script>
         cmop.push("Não possui nenhuma alergia");
     </script>
-    }
 
+}
 <script>
 
     $(function () {
@@ -173,7 +169,7 @@
             type: 'POST',
             dataType: 'json',
             cache: false,
-            url: "@Url.Action("Update","Prontuario")", // webmethod or web serivces URL
+            url: "@Url.Action("Update", "Prontuario")", // webmethod or web serivces URL
             data: {
                 nomePaciente: nomeP,
                 HPP: hppP ,

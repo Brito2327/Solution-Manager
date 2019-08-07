@@ -7,9 +7,10 @@ using System.Linq;
 using System.Web.Mvc;
 
 namespace ProjetoStag026.Controllers
-{[FiltroF]
+{
     public class AgendamentoController : Controller
     {
+        [FiltroF]
         public ActionResult Index()
         {
             MedicoDao me = new MedicoDao();
@@ -34,7 +35,8 @@ namespace ProjetoStag026.Controllers
             ViewBag.Medicos = me.Select();
             return View();
         }
-        public ActionResult Cadastrar(String nomePaciente,String nomeMedico,DateTime Data, String Hora,String Observacao,String Plano)
+        [FiltroF]
+        public ActionResult Cadastrar(String nomePaciente, String nomeMedico, DateTime Data, String Hora, String Observacao, String Plano)
         {
             AgendamentoDao ag = new AgendamentoDao();
             PacienteDao dao = new PacienteDao();
@@ -61,12 +63,12 @@ namespace ProjetoStag026.Controllers
                     agendamento.MedicoId = item.ID;
                 }
             }
-            
+
             string validacao = (ag.Cadastrar(agendamento) ? "Sim" : "Não");
             return Json(validacao);
 
         }
-
+        [FiltroF]
         public ActionResult Atualizar(Agendamento agendamento, String nomePaciente)
         {
             AgendamentoDao dao = new AgendamentoDao();
@@ -83,12 +85,12 @@ namespace ProjetoStag026.Controllers
             return RedirectToAction("Index");
 
         }
-
+        [FiltroF]
         public ActionResult Agendamento(int id)
         {
             AgendamentoDao dao = new AgendamentoDao();
             Agendamento agendamento = dao.BuscaPorId(id);
-            
+
 
             PacienteDao paci = new PacienteDao();
             Paciente paciente = paci.BuscaPorId(agendamento.PacienteId);
@@ -104,11 +106,15 @@ namespace ProjetoStag026.Controllers
 
         public ActionResult Excluir(int id)
         {
-            AgendamentoDao dao =new AgendamentoDao();
-            Agendamento agendamento = dao.BuscaPorId(id);
+            if (Session["Medico"] != null || Session["Funcionario"] != null)
+            {
+                AgendamentoDao dao = new AgendamentoDao();
+                Agendamento agendamento = dao.BuscaPorId(id);
 
-            string validacao = dao.excluir(agendamento) ? "Sim" : "Não";
-            return Json(validacao);
+                string validacao = dao.excluir(agendamento) ? "Sim" : "Não";
+                return Json(validacao);
+            }
+            return Json("Não");
         }
     }
 }

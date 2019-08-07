@@ -62,6 +62,15 @@ textarea {
     padding-top: 0;
     padding-bottom: 20px;
 }
+    .login header {
+        position: relative;
+        margin: 5px;
+        margin-bottom:30px;
+    }
+    .login h2{
+        color:deepskyblue;
+        font-display:auto;
+    }
 
 .login {
     width: 360px;
@@ -69,9 +78,12 @@ textarea {
     margin-top: 200px;
     margin-bottom: 0px;
     padding: 30px;
-    padding-top: 100px;
+    padding-top: 30px;
     padding-bottom: 15px;
     background-color: rgba(169,245,242,0.3);
+}
+.loginTentativa {
+    color: rgb(255, 46, 57);
 }
 
 .rodape {

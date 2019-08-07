@@ -19,82 +19,80 @@
         <div id="home" class="tab-pane fade in active">
 
             <div class="form-group float-left">
-                <form action="~/Consulta/Cadastrar" method="post">
-                    <div class="row">
+
+                <div class="row">
+                    <div>
+                        <ul class="form list-group">
+                            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                                Paciente
+                                <span class=" badge badge-primary badge-pill" id="tags">@ViewBag.Paciente.Nome </span>
+                                <input type="hidden" value="@ViewBag.Paciente.ID" id="pacienteId"  />
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <ul class="form list-group">
+                            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                                Data
+                                <span class=" badge badge-primary badge-pill" >@ViewBag.Agendamento.data </span>
+                                <input type="hidden" id="agendamentoId" value="@ViewBag.Agendamento.Id" />
+                                <input type="hidden" id="Data" value="@ViewBag.Agendamento.data"  />
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="form list-group">
+                            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                                Hora
+                                <span class=" badge badge-primary badge-pill" id="tags">@ViewBag.Agendamento.hora </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5">
                         <div>
                             <ul class="form list-group">
                                 <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-                                    Paciente
-                                    <span class=" badge badge-primary badge-pill" id="tags">@ViewBag.Paciente.Nome </span>
-                                    <input type="hidden" value="@ViewBag.Paciente.ID" name="consulta.PacienteId"/>
+                                    Médico
+                                    <span class=" badge badge-primary badge-pill" id="tags">@ViewBag.Medico.nome </span>
+                                    <input type="hidden" id="IdMedico" value="@ViewBag.Medico.ID" />
                                 </li>
                             </ul>
                         </div>
-
-                        <div>
-                            <ul class="form list-group">
-                                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-                                    Data
-                                    <span class=" badge badge-primary badge-pill" id="tags">@ViewBag.Agendamento.data </span>
-                                    <input type="hidden" value="@ViewBag.Agendamento.Id" name="agendamentoId" />
-                                    <input type="hidden" value="@ViewBag.Agendamento.data" name="consulta.Data" />
-                                </li>
-                            </ul>
+                        <div class="form-group">
+                            <label for="TPR">TPR( temperatura - pulso - respiração)</label>
+                            <input type="text" id="Tpr" required class="form-control"  />
+                            <label for="Antecedentes">Antecedentes</label>
+                            <input type="text" id="antecedentes"  required class="form-control" />
                         </div>
                         <div>
-                            <ul class="form list-group">
-                                <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-                                    Hora
-                                    <span class=" badge badge-primary badge-pill" id="tags">@ViewBag.Agendamento.hora </span>
-                                </li>
-                            </ul>
+                            <label for="qp">QP(Queixa principal )</label>
+                            <input type="text" id="Qp" required class="form-control" />
+                            <label for="HDA">HDA(História da doença atual)</label>
+                            <textarea  id="Hda" class="form-control" required></textarea>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-5">
-                            <div>
-                                <ul class="form list-group">
-                                    <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-                                        Médico
-                                        <span class=" badge badge-primary badge-pill" id="tags">@ViewBag.Medico.nome </span>
-                                        <input type="hidden" value="@ViewBag.Medico.ID" name="consulta.MedicoId" />
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="form-group">
-                                <label for="TPR">TPR( temperatura - pulso - respiração)</label>
-                                <input type="text" required class="form-control" name="anamnese.TPR" />
-                                <label for="Antecedentes">Antecedentes</label>
-                                <input type="text" name="anamnese.Antecedentes" required class="form-control" />
-                            </div>
-                            <div>
-                                <label for="qp">QP(Queixa principal )</label>
-                                <input type="text" name="anamnese.QP"   required class="form-control" />
-                                <label for="HDA">HDA(História da doença atual)</label>
-                                <textarea name="anamnese.HDA" class="form-control" required></textarea>
-                            </div>
+                    <div class="col-5">
+                        <div>
+                            <label for="exame">Exame físico</label>
+                            <input type="text" id="exFisico"  required class="form-control" />
+
+                            <label for="diagnostico">Diagnóstico</label>
+                            <textarea  id="diagnostico" required class="form-control"></textarea>
+
+                            <label for="prescri">Prescrição</label>
+                            <input type="search" id="prescri" onfocus="myFunction(this)" required class="form-control" />
                         </div>
-                        <div class="col-5">
-                            <div>
-                                <label for="exame">Exame físico</label>
-                                <input type="text" name="anamnese.ExameFisico" required class="form-control" />
-
-                                <label for="diagnostico">Diagnóstico</label>
-                                <textarea name="anamnese.Diagnostico" required class="form-control"></textarea>
-
-                                <label for="diagnostico">Prescrição</label>
-                                <input type="search" onfocus="myFunction(this)" name="anamnese.componentePrescrito" required class="form-control" />
-                            </div>
-                        </div>
-
                     </div>
 
+                </div>
+                <div class="form-group">
+                    <button type="button"  class="btn btn-primary" onclick="Cadastrar()">Finalizar consulta</button>
+                </div>
 
-
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Finalizar consulta</button>
-                    </div>
-                </form>
             </div>
 
         </div>
@@ -102,35 +100,45 @@
             <div style="width:100%">
 
                 <h2>Dados do Prontuario</h2>
+                @if (ViewBag.Prontuario.ID != 0)
+                {
+                    <ul class="form list-group">
+                        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                            Paciente
+                            <span class=" badge badge-primary badge-pill">@ViewBag.Paciente.Nome </span>
+                        </li>
+                        <h2>Historia Patologica Pregressa</h2>
+                        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                            HPP(história médica do paciente)
+                            <span class="badge badge-primary badge-pill">@ViewBag.Historia.HPP</span>
+                        </li>
+                        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                            HF(Histórico familiar)
+                            <span class="badge badge-primary badge-pill"> @ViewBag.Historia.HF</span>
+                        </li>
+                        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                            HistoriaSocial
+                            <span class="badge badge-primary badge-pill" > @ViewBag.Historia.HistoriaSocial</span>
+                        </li>
+                        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                            Componente Alergico
+                            <span class="badge badge-primary badge-pill"> @ViewBag.Historia.HF</span>
+                        </li>
 
-                <ul class="form list-group">
-                    <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-                        Paciente
-                        <span class=" badge badge-primary badge-pill" id="tags">@ViewBag.Paciente.Nome </span>
-                    </li>
-                    <h2>Historia Patologica Pregressa</h2>
-                    <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-                        HPP(história médica do paciente)
-                        <span class="badge badge-primary badge-pill" id="HPP">@ViewBag.Historia.HPP</span>
-                    </li>
-                    <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-                        HF(Histórico familiar)
-                        <span class="badge badge-primary badge-pill" id="HF"> @ViewBag.Historia.HF</span>
-                    </li>
-                    <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-                        HistoriaSocial
-                        <span class="badge badge-primary badge-pill" id="social"> @ViewBag.Historia.HistoriaSocial</span>
-                    </li>
-                    <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-                        Componente Alergico
-                        <span class="badge badge-primary badge-pill" id="componente"> @ViewBag.Historia.HF</span>
-                    </li>
+                        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                            Observações
+                            <span class="badge badge-primary badge-pill">@ViewBag.Prontuario.Observacoes </span>
+                        </li>
+                    </ul>
+                    }
+                    else
+                    {
+                    <div>
+                        <span>Prontuario Não Inicializado</span>
+                        <a href="~/Prontuario/Form" class="btn btn-primary">Novo Prontuario</a>
+                    </div>
+                }
 
-                    <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-                        Observações
-                        <span class="badge badge-primary badge-pill" id="obs">@ViewBag.Prontuario.Observacoes </span>
-                    </li>
-                </ul>
             </div>
         </div>
         <div id="myModal" class="modal">
@@ -139,7 +147,15 @@
             <div class="modal-content">
                 <div>
                     <span class="close">&times;</span>
-                    <p>Paciente Alergico ao componente @ViewBag.Componente</p>
+                    <p>Paciente Alergico ao componente :</p>
+                    @foreach (var item in ViewBag.Componente)
+                    {
+                        <p>
+                            @item.Nome;
+                        </p>
+                    }
+
+
                 </div>
 
             </div>
@@ -180,7 +196,18 @@
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 <script>
     function myFunction(x) {
-        if (@ViewBag.Historia.ComponenteId!= null) {
+        var compoentes = []
+</script>
+@foreach (var item in ViewBag.Componente)
+{
+    <script>
+        compoentes.push(@item.Nome);
+    </script>
+
+}
+<script>
+
+        if (componentes != null) {
             AbriModal();
         }
     }
@@ -201,6 +228,82 @@
         if (event.target == modal) {
             modal.style.display = "none";
         }
+    }
+
+   
+
+
+</script>
+<script>
+     function Cadastrar() {
+
+        var paciId = $("#pacienteId").val();
+        var Tpr = $("#Tpr").val();
+        var antece = $("#antecedentes").val();
+        var Qp = $("#Qp").val();
+        var Hda = $("#Hda").val();
+        var Exe = $("#exFisico").val();
+        var diagnostico = $("#diagnostico").val();
+        var prescri = $("#prescri").val();
+        var idMedico = $("#IdMedico").val();
+        var Data = $("#Data").val();
+         var id = $("#agendamentoId").val();
+
+     $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+         url: "@Url.Action("Cadastrar", "Consulta")", // webmethod or web serivces URL
+         data: {
+             PacienteId: paciId,
+             TPR: Tpr,
+             Antecedentes: antece,
+             QP: Qp,
+             HDA: Hda,
+             EXAME: Exe,
+             Diagnostico: diagnostico,
+             Prescricao: prescri,
+             MedicoId: idMedico,
+             data:Data
+
+         },
+            complete:
+                function validar(jqXHR, resposta) {
+                    if (jqXHR.responseJSON == "Sim") {
+                        finalizarAgendamento(id);
+                        window.location.href ="http://localhost:53981/Home";
+                    } else {
+                        alert("Erro aqui");
+                    }
+                },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+            }
+        });
+       
+     
+    }   
+
+    function finalizarAgendamento(id) {
+        
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            url: "@Url.Action("Excluir", "Agendamento")", // webmethod or web serivces URL
+            data: { id: id },
+            complete:
+                function validar(jqXHR, resposta) {
+                    if (jqXHR.responseJSON == "Sim") {
+
+                    } else {
+                        alert("Erro ao finalizar Consulta");
+                    }
+                },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+            }
+        });
     }
 </script>
 

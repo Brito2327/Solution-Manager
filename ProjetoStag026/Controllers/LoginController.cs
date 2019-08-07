@@ -14,6 +14,7 @@ namespace ProjetoStag026.Controllers
         }
         public ActionResult Autentica(String login, String Senha)
         {
+            string valida = "error";
 
             UsuarioDao dao = new UsuarioDao();
             Usuario usuario = dao.Busca(login, Senha);
@@ -27,14 +28,16 @@ namespace ProjetoStag026.Controllers
                     PacienteDao paci = new PacienteDao();
                     Paciente paciente = paci.BuscaUser(usuario.ID);
                     Session["Paciente"] = paciente;
-                    return RedirectToAction("Index", "Cliente");
+;
+                    valida = "Cliente";
                 }
                 else if (usuario != null && categoria.Medico == true)
                 {
                     MedicoDao me = new MedicoDao();
                     Medico medico = me.BuscaUser(usuario.ID);
                     Session["Medico"] = medico;
-                    return RedirectToAction("Index", "Home");
+                    
+                    valida = "Medico";
                 }
                 else if (usuario != null && categoria.Atendente == true)
                 {
@@ -42,11 +45,11 @@ namespace ProjetoStag026.Controllers
                     Funcionario funcionario = fun.BuscaUser(usuario.ID);
 
                     Session["Funcionario"] = funcionario;
-                    return RedirectToAction("Dashbord", "Funcionario");
+                    valida = "Funcionario";
                 }
             }
 
-            return RedirectToAction("Index");
+            return Json(valida);
         }
         public ActionResult Sair()
         {

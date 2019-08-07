@@ -49,23 +49,26 @@
 
 <script type="text/javascript">
     function excluir(Prontuario) {
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            cache: false,
-            url: "@Url.Action("Excluir","Prontuario")", // webmethod or web serivces URL
-            data: { id: Prontuario },
-            complete:
-                function validar(jqXHR, resposta) {
-                    if (jqXHR.responseJSON == "Sim") {
-                        $("#paciente-" + Prontuario).html("");
-                    } else {
-                        alert("Erro ao excluir");
-                    }
-                },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert('Error - ' + errorThrown);
-            }
-        });
+        var confirmado = confirm('Deseja deletar o Prontuario do paciente?');
+        if (confirmado) {
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                cache: false,
+                url: "@Url.Action("Excluir","Prontuario")", // webmethod or web serivces URL
+                data: { id: Prontuario },
+                complete:
+                    function validar(jqXHR, resposta) {
+                        if (jqXHR.responseJSON == "Sim") {
+                            $("#paciente-" + Prontuario).html("");
+                        } else {
+                            alert("Erro ao excluir");
+                        }
+                    },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error - ' + errorThrown);
+                }
+            });
+        }
     }
 </script>

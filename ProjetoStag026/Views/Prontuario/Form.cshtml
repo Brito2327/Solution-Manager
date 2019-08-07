@@ -15,6 +15,7 @@
         <div class="form-group float-left">
             
                 <div class="form-group">
+                    
                     <h2>Dados</h2>
                     <div class="row">
                         <div class="col-5">
@@ -28,16 +29,16 @@
                     <div class="row">
                         <div class="col-5">
                             <label for="historia">HPP(História patológica pregressa)</label>
-                            <textarea class="form-control"  placeholder="História..." name="historia.HPP"></textarea>
+                            <textarea class="form-control" id="Hpp" placeholder="História..." name="historia.HPP"></textarea>
                         </div>
 
                         <div class="col-5">
                             <label for="hf">HF( Histórico familiar)</label>
-                            <input type="text" name="historia.HF" class="form-control">
+                            <input type="text" id="Hf" class="form-control">
                         </div>
                         <div class="col-5">
                             <label for="historiaSocial">HistoriaSocial</label>
-                            <input type="text" name="historia.HistoriaSocial" class="form-control">
+                            <input type="text" id="Historio" class="form-control">
                         </div>
                         <div class="col-5 ">
                             <div class="row container1">
@@ -54,7 +55,7 @@
                         </div>
                         <div class="col-5">
                             <label for="observacao">Observação</label>
-                            <textarea class="form-control" placeholder="Observação..." name="prontuario.Observacoes"></textarea>
+                            <textarea class="form-control" placeholder="Observação..."id="obs"></textarea>
                         </div>
                     </div>
                     </div>
@@ -202,7 +203,7 @@
             complete:
                 function validar(jqXHR, resposta) {
                     if (jqXHR.responseText == "\"Sim\"") {
-                        window.location.href = "~/Prontuario/Index/";
+                        window.location.href = "Index";
                     } else {
                       
                     }

@@ -8,15 +8,17 @@ namespace ProjetoStag026.DAO
 {
     public class ConsultaDao
     {
-        public void Cadastrar(Consulta consulta)
+        public bool Cadastrar(Consulta consulta)
         {
+            bool valida = false;
             using (var contexto = new ConecaoContext())
             {
 
                 contexto.Consulta.Add(consulta);
                 contexto.SaveChanges();
+                valida = true;
             }
-
+            return valida;
         }
 
         public IList<Consulta> Select()

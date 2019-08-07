@@ -1,6 +1,7 @@
 ﻿using ProjetoStag026.DAO;
 using ProjetoStag026.Filtros;
 using ProjetoStag026.Models;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -71,6 +72,7 @@ namespace ProjetoStag026.Controllers
                 {
                     Componente componente = co.BuscaPorId(item.ComponenteId);
                     lista_componente.Add(componente);
+                    
                 }
             }
 
@@ -81,6 +83,12 @@ namespace ProjetoStag026.Controllers
             MedicoDao me = new MedicoDao();
             Medico medico = me.BuscaPorId(agendamento.MedicoId);
 
+
+
+
+
+
+
             ViewBag.Medico = medico;
             ViewBag.Agendamento = agendamento;
             ViewBag.Consultas = listaConsultas;
@@ -90,30 +98,30 @@ namespace ProjetoStag026.Controllers
             
             return View();
         }
-        public ActionResult Cadastrar(Consulta consulta,Anamnese anamnese, int agendamentoId,string nomeMedico)
+        public ActionResult Cadastrar(string TPR,string Antecedentes,string QP,int PacienteId,
+            string HDA,string EXAME,string Diagnostico,string Prescricao,int MedicoId,DateTime data)
         {
+            Consulta consulta = new Consulta();
+            Anamnese anamnese = new Anamnese();
+            consulta.MedicoId = MedicoId;
+            consulta.PacienteId = PacienteId;
+            consulta.Data = data;
+            anamnese.componentePrescrito = Prescricao;
+            anamnese.Antecedentes = Antecedentes;
+            anamnese.Diagnostico = Diagnostico;
+            anamnese.ExameFisico = EXAME;
+            anamnese.TPR = TPR;
+            anamnese.HDA = HDA;
+            anamnese.QP = QP;
+
             AnamneseDao ana = new AnamneseDao();
             ana.Cadastrar(anamnese);
             consulta.AnamneseId = anamnese.ID;
 
-            MedicoDao me = new MedicoDao();
-            foreach (var item in me.Select())
-            {
-                if (item.nome==nomeMedico)
-                {
-                    consulta.MedicoId = item.ID;
-                }
-
-            }
-
-
-            AgendamentoDao ag = new AgendamentoDao();
-            ag.excluirPorId(agendamentoId);
-
             ConsultaDao dao = new ConsultaDao();
-            dao.Cadastrar(consulta);
 
-            return RedirectToAction("Index", "Home");
+            string valida = dao.Cadastrar(consulta) ? "Sim" : "Nao";
+            return Json(valida);
         }
     }
 }
