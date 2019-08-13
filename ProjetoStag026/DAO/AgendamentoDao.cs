@@ -113,5 +113,14 @@ namespace ProjetoStag026.DAO
 
             }
         }
+
+        public IList<Agendamento> BuscarAgendamentosPorData(DateTime Data)
+        {
+            using (var contexto = new ConecaoContext())
+            {
+                return contexto.Agendamento.Where(p => p.data == Data).ToList();
+
+            }
+        }
     }
 }

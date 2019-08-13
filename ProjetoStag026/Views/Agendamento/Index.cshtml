@@ -6,6 +6,7 @@
 <link rel="stylesheet" href="~/Content/jquery-ui.css" />
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" type="text/css" />
 
 
 <div id="atualiza">
@@ -73,16 +74,16 @@
             </div>
             <div class="modal-body">
                 <h2>Agendamento</h2>
-                <form>
+                
                     <div class="form-group">
                         <div>
 
                             <label for="tags">Paciente</label>
-                            <input type="text" id="tags"  required class="form-control ">
+                            <input type="search" id="tags"  class="form-control ">
                         </div>
                         <div class="form-group">
                             <label for="medi">Medico</label>
-                            <input type="search" id="medi" required class="form-control ">
+                            <input type="search" id="medi"  class="form-control">
                         </div>
 
                         <div class="form-group">
@@ -106,10 +107,10 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary" onclick="Cadastro()">Agendar</button>
+                        <button type="button" class="btn btn-primary" onclick="Cadastro()">Agendar</button>
                     </div>
 
-            </form>
+        
             </div>
         </div>
     </div>
@@ -187,35 +188,79 @@
         var observacao = $("#observacao").val();
         var plano = $("#plano").val();
 
-
+        CampoVazio();
+      
         var atualizacao = $("atualiza").html();
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            cache: false,
-            url: "@Url.Action("Cadastrar","Agendamento")", // webmethod or web serivces URL
-            data: {
-                nomePaciente: nomeP,
-                nomeMedico: nomeM,
-                Data: data,
-                Hora: hora,
-                Observacao: observacao,
-                Plano: plano
-            },
-            complete:
-                function validar(jqXHR, resposta) {
-                    if (jqXHR.responseText == "\"Sim\"") {
-                        $("#Atualiza").html(atualizacao);
-                    } else {
-                        alert("Erro ao cadastrar agendamento");
-                    }
+        if (nomeP != "" && nomeM != "" && data != "" && hora != "" &&  plano != "") {
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                cache: false,
+                url: "@Url.Action("Cadastrar","Agendamento")", // webmethod or web serivces URL
+                data: {
+                    nomePaciente: nomeP,
+                    nomeMedico: nomeM,
+                    Data: data,
+                    Hora: hora,
+                    Observacao: observacao,
+                    Plano: plano
                 },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert('Error - ' + errorThrown);
+                complete:
+                    function validar(jqXHR, resposta) {
+                        if (jqXHR.responseText == "\"Sim\"") {
+                            window.location.href = "http://localhost:53981/Agendamento";
+                        } else {
+                            alert("Erro ao cadastrar agendamento");
+                            
+                        }
+                    },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error - ' + errorThrown);
+                }
+            });
+        } else {
+            alert("Algum campo obrigatorio foi deixado vazio");
+            
+        }
+
+    }
+
+    function CampoVazio() {
+
+        var nomeP = $("#tags").val();
+        var nomeM = $("#medi").val();
+        var data = $("#data").val();
+        var hora = $("#hora").val();
+        
+
+
+        if (nomeP == "" || nomeM == "" || hora == "" || data == "") {
+
+            if (nomeP == "") {
+                $("#tags")
+                    .data("title", "Campo obrigatório")
+                    .addClass("is-invalid")
+                    .tooltip();
             }
-        });
-
-
+            if (nomeM == "") {
+                $("#medi")
+                    .data("title", "Campo obrigatório")
+                    .addClass("is-invalid")
+                    .tooltip();
+            }
+            if (hora == "") {
+                $("#hora")
+                    .data("title", "Campo obrigatório")
+                    .addClass("is-invalid")
+                    .tooltip();
+            }
+            if (data == "") {
+                $("#data")
+                    .data("title", "Campo obrigatório")
+                    .addClass("is-invalid")
+                    .tooltip();
+            }
+        }
     }
 
 </script>

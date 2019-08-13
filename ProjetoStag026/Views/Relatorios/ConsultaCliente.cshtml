@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ProjetoStag026.Models.Atendimentos>
+@{
+    ViewBag.Title = "ConsultaCliente";
+    Layout = "~/Views/Shared/_LayoutCalendario.cshtml";
+}
+
+<div style="width:100%">
+    <div class="maring0"><h2>Dados da Consulta</h2></div>
+    <div>
+        
+        <ul class="form list-group">
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Paciente
+                <span class=" badge badge-primary badge-pill"> @ViewBag.Paciente.Nome</span>
+            </li>
+            </ul>
+    </div>
+    
+
+    <ul class="form list-group">
+        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+            Medico
+            <span class=" badge badge-primary badge-pill"> @ViewBag.Medico.nome</span>
+        </li>
+        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+            Data da Consulta
+            <span class="badge badge-primary badge-pill">@ViewBag.Consulta.Data.Date.ToString("dd/MM/yyyy")</span>
+
+        </li>
+        <div class="align-content-md-around">
+            <h2>Anamnese</h2>
+        </div>
+    
+        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+            TPR( temperatura - pulso - respiração)
+            <span class="badge badge-primary badge-pill"> @ViewBag.Anamnese.TPR</span>
+        </li>
+        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+            Antecedentes
+            <span class="badge badge-primary badge-pill"> @ViewBag.Anamnese.Antecedentes</span>
+        </li>
+        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+            QP(Queixa principal)
+            <span class="badge badge-primary badge-pill"> @ViewBag.Anamnese.QP</span>
+        </li>
+        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+            QP(Queixa principal)
+            <span class="badge badge-primary badge-pill"> @ViewBag.Anamnese.QP</span>
+        </li>
+        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+            HDA(História da doença no dia da consulta )
+            <span class="badge badge-primary badge-pill"> @ViewBag.Anamnese.HDA</span>
+        </li>
+        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+            Observações
+            <span class="badge badge-primary badge-pill"> @ViewBag.Consulta.Observacao</span>
+        </li>
+    </ul>
+</div>
+

@@ -11,9 +11,10 @@ using ProjetoStag026.Models;
 using ProjetoStag026.Filtros;
 
 namespace ProjetoStag026.Controllers
-{[FiltroF]
+{
     public class RelatoriosController:Controller
     {
+        [FiltroF]
         public ActionResult GerarRelatorio()
         {
 
@@ -62,6 +63,97 @@ namespace ProjetoStag026.Controllers
                     Model = atendimentos.ToPagedList(paginaNumero, atendimentos.Count)
                 };
                 
+            return pdf;
+        }
+      
+        public ActionResult ClienteProntuario()
+        {
+            Paciente paciente = (Paciente)Session["Paciente"];
+
+            Componente_PacienteDao com = new Componente_PacienteDao();
+            ProntuarioDao dao = new ProntuarioDao();
+            Prontuario prontuario = dao.BuscaPorProntuario(paciente.ID);
+            
+
+
+            HistoriaPatologicaPregressaDao h = new HistoriaPatologicaPregressaDao();
+            ComponenteDao co = new ComponenteDao();
+            PacienteDao paci = new PacienteDao();
+         
+
+            HistoriaPatologicaPregressa historia = h.BuscaPorId(prontuario.HistoriaPatologicaPregressaId);
+
+            IList<Componente> lista_componente = new List<Componente>();
+
+            IList<Componente_Paciente> comPaci = com.BuscarAgendamentos(paciente.ID);
+            if (comPaci != null)
+            {
+             
+                string nomes = "";
+                IList<Componente_Paciente> lista = com.BuscarAgendamentos(paciente.ID);
+                foreach (var item in lista)
+                {
+                    Componente componente = co.BuscaPorId(item.ComponenteId);
+                    lista_componente.Add(componente);
+                }
+                for(int i=0;i< lista_componente.Count;i++)
+                {
+                    Componente intermedio = lista_componente[i];
+                    nomes+= intermedio.Nome+",";
+                    
+                }
+
+                ViewBag.Componente = nomes;
+            }
+            else
+            {
+                ViewBag.Componente = "Nenhum Componente alergico";
+            }
+
+
+            ViewBag.Historia = historia;
+            ViewBag.Prontuario = prontuario;
+            ViewBag.Paciente = paciente;
+
+
+            
+
+            var pdf = new ViewAsPdf
+            {
+                ViewName = "ClienteProntuario",
+                PageSize = Size.A4,
+                IsGrayScale = true
+            };
+
+            return pdf;
+        }
+        public ActionResult ConsultaCliente(int idConsulta)
+        {
+            ConsultaDao dao = new ConsultaDao();
+            Consulta consulta = dao.BuscaPorId(idConsulta);
+            PacienteDao paci = new PacienteDao();
+
+            MedicoDao me = new MedicoDao();
+            Medico medico = me.BuscaPorId(consulta.MedicoId);
+
+            AnamneseDao ana = new AnamneseDao();
+            Anamnese anamnese = ana.BuscaPorId(consulta.AnamneseId);
+
+            ViewBag.Paciente = paci.BuscaPorId(consulta.PacienteId);
+            ViewBag.Anamnese = anamnese;
+            ViewBag.Consulta = consulta;
+            ViewBag.Medico = medico;
+
+
+
+
+            var pdf = new ViewAsPdf
+            {
+                ViewName = "ConsultaCliente",
+                PageSize = Size.A4,
+                IsGrayScale = true
+            };
+
             return pdf;
         }
     }

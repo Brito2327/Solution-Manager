@@ -4,37 +4,43 @@
 }
 
 <div style="width:100%">
-    <h2>Dados do Prontuario</h2>
+    <form>
+        <div class="float-right">
+            <h3><a href="~/Relatorios/ClienteProntuario" target="_blank">Imprimir</a></h3>
+        </div>
+        <h2>Dados do Prontuario</h2>
 
-    <ul class="form list-group">
-        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-            Paciente
-            <span class=" badge badge-primary badge-pill" id="tags"> </span>
-        </li>
-        <h2>Historia Patologica Pregressa</h2>
-        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-            HPP(história médica do paciente)
-            <span class="badge badge-primary badge-pill" id="HPP"></span>
-        </li>
-        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-            HF(Histórico familiar)
-            <span class="badge badge-primary badge-pill" id="HF"> </span>
-        </li>
-        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-            HistoriaSocial
-            <span class="badge badge-primary badge-pill" id="social"> </span>
-        </li>
-        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-            Componente Alergico
-            <span class="badge badge-primary badge-pill" id="componente"></span>
-        </li>
 
-        <li class="form-control list-group-item d-flex justify-content-between align-items-center">
-            Observações
-            <span class="badge badge-primary badge-pill" id="obs"> </span>
-        </li>
+        <ul class="form list-group">
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Paciente
+                <span class=" badge badge-primary badge-pill" id="tags"> </span>
+            </li>
+            <h2>Historia Patologica Pregressa</h2>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                HPP(história médica do paciente)
+                <span class="badge badge-primary badge-pill" id="HPP"></span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                HF(Histórico familiar)
+                <span class="badge badge-primary badge-pill" id="HF"> </span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                HistoriaSocial
+                <span class="badge badge-primary badge-pill" id="social"> </span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Componente Alergico
+                <span class="badge badge-primary badge-pill" id="componente"></span>
+            </li>
 
-    </ul>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Observações
+                <span class="badge badge-primary badge-pill" id="obs"> </span>
+            </li>
+
+        </ul>
+    </form>
 </div>
 
 <script>
@@ -46,12 +52,12 @@
      var observacao = " @ViewBag.Prontuario.Observacoes";
 
 </script>
-@if (@ViewBag.Componente != null)
+@if (ViewBag.Componente != null)
 {
-    foreach (var item in @ViewBag.Componente)
+    foreach (var item in ViewBag.Componente)
     {
         <script>
-            cmop.push(@ViewBag.Componente.Nome+",");
+            cmop.push('@item.Nome'+",");
         </script>
     }
 

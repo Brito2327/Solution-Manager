@@ -244,3 +244,4 @@ C:\Users\stag026\source\repos\ProjetoStag026\ProjetoStag026\obj\Debug\ProjetoSta
 C:\Users\stag026\source\repos\ProjetoStag026\ProjetoStag026\obj\Debug\ProjetoStag026.csproj.CopyComplete
 C:\Users\stag026\source\repos\ProjetoStag026\ProjetoStag026\obj\Debug\ProjetoStag026.dll
 C:\Users\stag026\source\repos\ProjetoStag026\ProjetoStag026\obj\Debug\ProjetoStag026.pdb
+C:\Users\stag026\source\repos\ProjetoStag026\ProjetoStag026\obj\Debug\ProjetoStag026.csprojAssemblyReference.cache

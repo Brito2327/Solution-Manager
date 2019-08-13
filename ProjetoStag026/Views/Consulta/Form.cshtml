@@ -7,6 +7,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
 
+
 <div class="container">
     <h2>Atendimento</h2>
     <ul class="nav nav-tabs">
@@ -26,7 +27,7 @@
                             <li class="form-control list-group-item d-flex justify-content-between align-items-center">
                                 Paciente
                                 <span class=" badge badge-primary badge-pill" id="tags">@ViewBag.Paciente.Nome </span>
-                                <input type="hidden" value="@ViewBag.Paciente.ID" id="pacienteId"  />
+                                <input type="hidden" value="@ViewBag.Paciente.ID" id="pacienteId" />
 
                             </li>
                         </ul>
@@ -36,9 +37,9 @@
                         <ul class="form list-group">
                             <li class="form-control list-group-item d-flex justify-content-between align-items-center">
                                 Data
-                                <span class=" badge badge-primary badge-pill" >@ViewBag.Agendamento.data </span>
+                                <span class=" badge badge-primary badge-pill">@ViewBag.Agendamento.data </span>
                                 <input type="hidden" id="agendamentoId" value="@ViewBag.Agendamento.Id" />
-                                <input type="hidden" id="Data" value="@ViewBag.Agendamento.data"  />
+                                <input type="hidden" id="Data" value="@ViewBag.Agendamento.data" />
                             </li>
                         </ul>
                     </div>
@@ -64,24 +65,24 @@
                         </div>
                         <div class="form-group">
                             <label for="TPR">TPR( temperatura - pulso - respiração)</label>
-                            <input type="text" id="Tpr" required class="form-control"  />
+                            <input type="text" id="Tpr" required class="form-control" />
                             <label for="Antecedentes">Antecedentes</label>
-                            <input type="text" id="antecedentes"  required class="form-control" />
+                            <input type="text" id="antecedentes" required class="form-control" />
                         </div>
                         <div>
                             <label for="qp">QP(Queixa principal )</label>
                             <input type="text" id="Qp" required class="form-control" />
                             <label for="HDA">HDA(História da doença atual)</label>
-                            <textarea  id="Hda" class="form-control" required></textarea>
+                            <textarea id="Hda" class="form-control" required></textarea>
                         </div>
                     </div>
                     <div class="col-5">
                         <div>
                             <label for="exame">Exame físico</label>
-                            <input type="text" id="exFisico"  required class="form-control" />
+                            <input type="text" id="exFisico" required class="form-control" />
 
                             <label for="diagnostico">Diagnóstico</label>
-                            <textarea  id="diagnostico" required class="form-control"></textarea>
+                            <textarea id="diagnostico" required class="form-control"></textarea>
 
                             <label for="prescri">Prescrição</label>
                             <input type="search" id="prescri" onfocus="myFunction(this)" required class="form-control" />
@@ -90,7 +91,7 @@
 
                 </div>
                 <div class="form-group">
-                    <button type="button"  class="btn btn-primary" onclick="Cadastrar()">Finalizar consulta</button>
+                    <button type="button" class="btn btn-primary" onclick="Cadastrar()">Finalizar consulta</button>
                 </div>
 
             </div>
@@ -118,7 +119,7 @@
                         </li>
                         <li class="form-control list-group-item d-flex justify-content-between align-items-center">
                             HistoriaSocial
-                            <span class="badge badge-primary badge-pill" > @ViewBag.Historia.HistoriaSocial</span>
+                            <span class="badge badge-primary badge-pill"> @ViewBag.Historia.HistoriaSocial</span>
                         </li>
                         <li class="form-control list-group-item d-flex justify-content-between align-items-center">
                             Componente Alergico
@@ -130,9 +131,9 @@
                             <span class="badge badge-primary badge-pill">@ViewBag.Prontuario.Observacoes </span>
                         </li>
                     </ul>
-                    }
-                    else
-                    {
+                }
+                else
+                {
                     <div>
                         <span>Prontuario Não Inicializado</span>
                         <a href="~/Prontuario/Form" class="btn btn-primary">Novo Prontuario</a>
@@ -194,20 +195,23 @@
 
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
 <script>
-    function myFunction(x) {
-        var compoentes = []
+    var compoentes = [];
 </script>
+
 @foreach (var item in ViewBag.Componente)
 {
     <script>
-        compoentes.push(@item.Nome);
+        compoentes.push("@item.Nome");
     </script>
-
 }
+
 <script>
 
-        if (componentes != null) {
+    function myFunction(x) {
+        if (compoentes != null) {
             AbriModal();
         }
     }
@@ -216,7 +220,7 @@
     // Get the <span> element that closes the modal
     var span = document.getElementsByClassName("close")[0];
     // When the user clicks the button, open the modal
-     function AbriModal () {
+    function AbriModal() {
         modal.style.display = "block";
     }
     // When the user clicks on <span> (x), close the modal
@@ -230,7 +234,7 @@
         }
     }
 
-   
+
 
 
 </script>
@@ -249,43 +253,45 @@
         var Data = $("#Data").val();
          var id = $("#agendamentoId").val();
 
-     $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            cache: false,
-         url: "@Url.Action("Cadastrar", "Consulta")", // webmethod or web serivces URL
-         data: {
-             PacienteId: paciId,
-             TPR: Tpr,
-             Antecedentes: antece,
-             QP: Qp,
-             HDA: Hda,
-             EXAME: Exe,
-             Diagnostico: diagnostico,
-             Prescricao: prescri,
-             MedicoId: idMedico,
-             data:Data
+         if (paciId != null && Tpr != null && antece != null && Qp != null && Hda != null && Exe != null && diagnostico != null &&
+             prescri != null && idMedico != null && Data != null ){
+             $.ajax({
+                 type: 'POST',
+                 dataType: 'json',
+                 cache: false,
+                 url: "@Url.Action("Cadastrar", "Consulta")", // webmethod or web serivces URL
+                 data: {
+                     PacienteId: paciId,
+                     TPR: Tpr,
+                     Antecedentes: antece,
+                     QP: Qp,
+                     HDA: Hda,
+                     EXAME: Exe,
+                     Diagnostico: diagnostico,
+                     Prescricao: prescri,
+                     MedicoId: idMedico,
+                     data: Data
 
-         },
-            complete:
-                function validar(jqXHR, resposta) {
-                    if (jqXHR.responseJSON == "Sim") {
-                        finalizarAgendamento(id);
-                        window.location.href ="http://localhost:53981/Home";
-                    } else {
-                        alert("Erro aqui");
-                    }
-                },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert('Error - ' + errorThrown);
-            }
-        });
-       
-     
-    }   
+                 },
+                 complete:
+                     function validar(jqXHR, resposta) {
+                         if (jqXHR.responseJSON == "Sim") {
+                             finalizarAgendamento(id);
+                             window.location.href = "http://localhost:53981/Home";
+                         } else {
+                             alert("Erro aqui");
+                         }
+                     },
+                 error: function (jqXHR, textStatus, errorThrown) {
+                     alert('Error - ' + errorThrown);
+                 }
+             });
+
+         }
+    }
 
     function finalizarAgendamento(id) {
-        
+
         $.ajax({
             type: 'POST',
             dataType: 'json',

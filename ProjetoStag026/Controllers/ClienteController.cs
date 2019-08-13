@@ -44,7 +44,7 @@ namespace ProjetoStag026.Controllers
             Componente_PacienteDao com = new Componente_PacienteDao();
             Paciente paciente = (Paciente)Session["Paciente"];
             ProntuarioDao dao = new ProntuarioDao();
-            Prontuario prontuario = dao.BuscaPorId(paciente.ID);
+            Prontuario prontuario = dao.BuscaPorProntuario(paciente.ID);
             HistoriaPatologicaPregressaDao h = new HistoriaPatologicaPregressaDao();
             HistoriaPatologicaPregressa historia = new HistoriaPatologicaPregressa();
             historia= h.BuscaPorId(prontuario.HistoriaPatologicaPregressaId);

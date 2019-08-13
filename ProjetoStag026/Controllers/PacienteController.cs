@@ -30,13 +30,14 @@ namespace ProjetoStag026.Controllers
         }
 
         [HttpPost]
-        public ActionResult Cadastrar(Paciente paciente, Endereco endereco, Usuario usuario, Categoria categoria, HttpPostedFileBase upImagem)
+        public ActionResult Cadastrar(Paciente paciente, Endereco endereco, Usuario usuario,  HttpPostedFileBase Imagem)
         {
             //iniciando instacia
             PacienteDao pa = new PacienteDao();
             EnderecoDao end = new EnderecoDao();
             UsuarioDao us = new UsuarioDao();
             CategoriasDAO cat = new CategoriasDAO();
+            Categoria categoria = new Categoria();
 
             //adicionando o id
             categoria.Paciente = true;
@@ -44,15 +45,15 @@ namespace ProjetoStag026.Controllers
             usuario.CategoriaId = categoria.Id;
             us.Cadastrar(usuario);
             end.Cadastrar(endereco);
-            if (upImagem == null)
+            if (Imagem == null)
             {
                 paciente.imagem = new byte[0];
             }
             else
             {
 
-                paciente.imagem = new byte[upImagem.ContentLength];
-                upImagem.InputStream.Read(paciente.imagem, 0, upImagem.ContentLength);
+                paciente.imagem = new byte[Imagem.ContentLength];
+                Imagem.InputStream.Read(paciente.imagem, 0, Imagem.ContentLength);
             }
 
 
@@ -63,6 +64,7 @@ namespace ProjetoStag026.Controllers
             //Aplicando à instancia
             pa.Cadastrar(paciente);
             return RedirectToAction("Index");
+
         }
 
         public ActionResult Paciente(int id)
@@ -71,10 +73,6 @@ namespace ProjetoStag026.Controllers
             EnderecoDao end = new EnderecoDao();
             UsuarioDao us = new UsuarioDao();
             CategoriasDAO cat = new CategoriasDAO();
-
-
-
-
 
             Paciente paciente = dao.BuscaPorId(id);
             Endereco endereco = end.BuscaPorId(paciente.EnderecoId);
@@ -103,7 +101,7 @@ namespace ProjetoStag026.Controllers
             return View();
         }
 
-      
+
 
         public ActionResult Update(Paciente paciente, Endereco endereco)
         {
@@ -112,8 +110,8 @@ namespace ProjetoStag026.Controllers
             UsuarioDao us = new UsuarioDao();
             CategoriasDAO cat = new CategoriasDAO();
 
-            
-           
+
+
             end.Alterar(endereco);
             dao.Alterar(paciente);
 

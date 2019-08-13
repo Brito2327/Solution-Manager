@@ -14,7 +14,7 @@
     <div style="width:100%">
         <h2>Dados Pessoais</h2>
         @{
-            var base64 = Convert.ToBase64String(@ViewBag.Paciente.imagem);
+            var base64 = Convert.ToBase64String(ViewBag.Paciente.imagem);
             var imgsrc = string.Format("data:image/png;base64,{0}", base64);
         }
         <img src="@imgsrc" class="img-thumbnail float-right" style="width:143px;" alt="...">

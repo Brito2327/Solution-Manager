@@ -9,15 +9,17 @@ namespace ProjetoStag026.DAO
 {
     public class PacienteDao
     {
-        public void Cadastrar(Paciente paciente)
+        public bool Cadastrar(Paciente paciente)
         {
+            bool valida = false;
             using (var contexto = new ConecaoContext())
             {
 
                 contexto.Paciente.Add(paciente);
                 contexto.SaveChanges();
+                valida = true;
             }
-
+            return valida;
         }
 
         public IList<Paciente> Select()

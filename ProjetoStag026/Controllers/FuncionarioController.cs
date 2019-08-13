@@ -57,9 +57,25 @@ namespace ProjetoStag026.Controllers
         public ActionResult Dashbord()
         {
             AgendamentoDao dao = new AgendamentoDao();
-            IList<Agendamento> lista = dao.Select().ToList();
-            lista.Count();
-            ViewBag.Agendamentos = lista;
+            IList<Agendamento> lista = dao.BuscarAgendamentosPorData(DateTime.Now.Date);
+            PacienteDao paDao = new PacienteDao();
+            IList<Paciente> listaPacientes = new List<Paciente>();
+            IList<Paciente> pacientes = paDao.Select();
+
+
+            foreach (var agenda in lista)
+            {
+                int id = agenda.PacienteId;
+                Paciente paciente = paDao.BuscaPorId(id);
+                listaPacientes.Add(paciente);
+            }
+
+            listaPacientes.Count();
+            ViewBag.Paciente = listaPacientes;
+            ViewBag.Pacientes = pacientes;
+            ViewBag.Agendamento = lista;
+
+           
             return View();
         }
     }

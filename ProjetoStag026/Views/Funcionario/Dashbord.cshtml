@@ -1,9 +1,9 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutFuncionario.cshtml";
 }
+<link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
 
-
-@*<div class="row">
+<div class="row">
     @for (int p = 0; p < ViewBag.Agendamento.Count; p++)
     {
         <div class="col-3">
@@ -13,7 +13,6 @@
                 <div class="card-body">
                     <h5 class="card-title">@ViewBag.Paciente[p].Nome</h5>
                     <p class="card-text">@ViewBag.Agendamento[p].observacao</p>
-                    <a href="~/Consulta/Form?pacienteId=@ViewBag.Paciente[p].ID&agendamentoId=@ViewBag.Agendamento[p].Id" class="btn btn-primary">Atender</a>
                 </div>
 
 
@@ -21,4 +20,4 @@
         </div>
 
     }
-</div>*@
+</div>

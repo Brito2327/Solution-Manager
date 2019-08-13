@@ -350,8 +350,8 @@
     <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\jquery-ui.theme.min.css" />
     <Content Include="Content\modernizr-2.6.2.js" />
-    <Content Include="Scripts\jquery.mask.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.mask.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -482,13 +482,14 @@
     <Content Include="Views\Shared\_LayoutFuncionario.cshtml" />
     <Content Include="Views\Shared\_LayoutPaciente.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
-    <Content Include="Views\Cliente\ConsultaIndividual.cshtml" />
     <Content Include="Views\Funcionario\Dashbord.cshtml" />
     <Content Include="Views\Shared\_LayoutCalendario.cshtml" />
     <Content Include="Views\Medico\Medico.cshtml" />
     <Content Include="Views\Atendimento\Index.cshtml" />
     <Content Include="Views\Relatorios\Relatorio.cshtml" />
     <Content Include="Views\Cliente\ProntuarioP.cshtml" />
+    <Content Include="Views\Relatorios\ClienteProntuario.cshtml" />
+    <Content Include="Views\Relatorios\ConsultaCliente.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

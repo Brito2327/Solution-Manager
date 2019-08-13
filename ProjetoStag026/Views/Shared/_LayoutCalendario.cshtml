@@ -14,8 +14,13 @@
 <body>
     <div>
         <header>
-            <nav class="navbar navbar-inverse navbar-fixed-top col-md-6"  style="height: 50px; background-color:black" >
-                <h2 style="color:aliceblue"> Relatorios de Atendimentos</h2>
+            <nav class="navbar navbar-inverse navbar-fixed-top col-md-6" style="height: 50px; background-color:black">
+                @if (Session["Paciente"] != null)
+                {
+                    <h2 style="color:aliceblue">Relatório do Paciente</h2>
+                }else{
+                <h2 style="color:aliceblue"> Relatórios de Atendimentos</h2>
+                }
             </nav>
         </header>
 

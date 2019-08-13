@@ -6,9 +6,10 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace ProjetoStag026.Controllers
-{[FiltroM]
+{
     public class ConsultaController : Controller
     {
+        [FiltroM]
         public ActionResult Index(int pacienteid)
         {
             ConsultaDao dao = new ConsultaDao();
@@ -16,6 +17,7 @@ namespace ProjetoStag026.Controllers
             ViewBag.Consultas = listaConsultas;
             return View();
         }
+
         public ActionResult ConsultaIndividual(int id)
         {
             ConsultaDao dao = new ConsultaDao();
@@ -32,6 +34,7 @@ namespace ProjetoStag026.Controllers
             ViewBag.Medico = medico;
             return View();
         }
+        [FiltroM]
         public ActionResult Form(int pacienteId, int agendamentoId)
         { AgendamentoDao ag = new AgendamentoDao();
             Agendamento agendamento = ag.BuscaPorId(agendamentoId);
@@ -98,6 +101,7 @@ namespace ProjetoStag026.Controllers
             
             return View();
         }
+        [FiltroM]
         public ActionResult Cadastrar(string TPR,string Antecedentes,string QP,int PacienteId,
             string HDA,string EXAME,string Diagnostico,string Prescricao,int MedicoId,DateTime data)
         {

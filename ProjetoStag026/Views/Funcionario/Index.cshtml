@@ -168,31 +168,32 @@
         var id = $("#idArmzenado").val();
 
 
+        if (nomeA != null && id != null) {
 
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                cache: false,
+                url: "@Url.Action("update", "Funcionario")", // webmethod or web serivces URL
+                data: {
+                    id: id,
+                    Nome: nomeA
 
-        $.ajax({
-            type: 'POST',
-            dataType: 'json',
-            cache: false,
-            url: "@Url.Action("update", "Funcionario")", // webmethod or web serivces URL
-            data: {
-                id: id,
-                Nome: nomeA
-
-            },
-            complete:
-                function validar(jqXHR, resposta) {
-                    if (jqXHR.responseJSON == "Sim") {
-                        $("#componente-").html("");
-                        $("#nome-" + id).text(nomeA);
-
-                    } else {
-                        alert("Erro ao excluir");
-                    }
                 },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert('Error - ' + errorThrown);
-            }
-        });
+                complete:
+                    function validar(jqXHR, resposta) {
+                        if (jqXHR.responseJSON == "Sim") {
+                            $("#componente-").html("");
+                            $("#nome-" + id).text(nomeA);
+
+                        } else {
+                            alert("Erro ao excluir");
+                        }
+                    },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error - ' + errorThrown);
+                }
+            });
+        }
     }
 </script>
