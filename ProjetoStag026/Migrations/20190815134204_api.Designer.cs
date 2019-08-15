@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoStag026.DAO;
 
 namespace ProjetoStag026.Migrations
 {
     [DbContext(typeof(ConecaoContext))]
-    partial class ConecaoContextModelSnapshot : ModelSnapshot
+    [Migration("20190815134204_api")]
+    partial class api
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,15 +145,17 @@ namespace ProjetoStag026.Migrations
 
             modelBuilder.Entity("ProjetoStag026.Models.Componente_Paciente", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Componente");
+                    b.Property<int>("ComponenteId");
 
                     b.Property<int>("PacienteId");
 
-                    b.HasKey("ID");
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComponenteId");
 
                     b.HasIndex("PacienteId");
 
@@ -164,13 +168,15 @@ namespace ProjetoStag026.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Componente");
+                    b.Property<int>("ComponenteId");
 
-                    b.Property<int>("PacienteId");
+                    b.Property<int>("RemedioId");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("PacienteId");
+                    b.HasIndex("ComponenteId");
+
+                    b.HasIndex("RemedioId");
 
                     b.ToTable("Componente_RemediosContext");
                 });
@@ -402,6 +408,11 @@ namespace ProjetoStag026.Migrations
 
             modelBuilder.Entity("ProjetoStag026.Models.Componente_Paciente", b =>
                 {
+                    b.HasOne("ProjetoStag026.Models.Componente", "componente")
+                        .WithMany()
+                        .HasForeignKey("ComponenteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("ProjetoStag026.Models.Paciente", "Paciente")
                         .WithMany()
                         .HasForeignKey("PacienteId")
@@ -410,9 +421,14 @@ namespace ProjetoStag026.Migrations
 
             modelBuilder.Entity("ProjetoStag026.Models.Componente_Remedio", b =>
                 {
-                    b.HasOne("ProjetoStag026.Models.Paciente", "Paciente")
+                    b.HasOne("ProjetoStag026.Models.Componente", "Componente")
                         .WithMany()
-                        .HasForeignKey("PacienteId")
+                        .HasForeignKey("ComponenteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ProjetoStag026.Models.Remedio", "Remedio")
+                        .WithMany()
+                        .HasForeignKey("RemedioId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

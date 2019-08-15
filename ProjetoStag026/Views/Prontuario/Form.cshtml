@@ -71,7 +71,7 @@
     var lista = [];
 
 </script>
-@foreach (var item in @ViewBag.Pacientes)
+@foreach (var item in ViewBag.Pacientes)
 {
     <script>
      lista.push("@item.Nome");
@@ -89,10 +89,10 @@
     var listaComponentes = [];
 
 </script>
-@foreach (var componentes in @ViewBag.Componentes)
+@foreach (var componentes in ViewBag.Componentes)
 {
     <script>
-        listaComponentes.push("@componentes.Nome");
+        listaComponentes.push("@componentes.PrincipioAtivo");
     </script>
 }
 <script>
@@ -100,6 +100,37 @@
         $("#tel").autocomplete({
             source: listaComponentes
         });
+        $("#lista1").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista2").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista3").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista4").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista5").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista6").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista7").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista8").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista9").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista10").autocomplete({
+            source: listaComponentes
+        });
+
     });
 </script>
 <script>

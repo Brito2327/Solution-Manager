@@ -43,13 +43,12 @@ namespace ProjetoStag026.DAO
         {
             foreach (var item in Select())
             {
-                if (item.Id == obj.Id)
+                if (item.ID == obj.ID)
                 {
                     using (var contexto = new ConecaoContext())
                     {
-                        item.ComponenteId = obj.ComponenteId;
+                        item.Componente = obj.Componente;
                         item.PacienteId = obj.PacienteId;
-
                         contexto.Componente_Paciente.Update(item);
                         contexto.SaveChanges();
                     }
@@ -62,7 +61,7 @@ namespace ProjetoStag026.DAO
             bool valida = false;
             foreach (var item in Select())
             {
-                if (item.Id == obj.Id)
+                if (item.ID == obj.ID)
                 {
                     using (var contexto = new ConecaoContext())
                     {
@@ -80,7 +79,7 @@ namespace ProjetoStag026.DAO
             using (var contexto = new ConecaoContext())
             {
                 return contexto.Componente_Paciente
-                    .Where(p => p.Id == id)
+                    .Where(p => p.PacienteId == id)
                     .FirstOrDefault();
             }
         }

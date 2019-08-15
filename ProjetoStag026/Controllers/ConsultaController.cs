@@ -29,6 +29,9 @@ namespace ProjetoStag026.Controllers
             AnamneseDao ana = new AnamneseDao();
             Anamnese anamnese = ana.BuscaPorId(consulta.AnamneseId);
 
+            PacienteDao paci = new PacienteDao();
+
+            ViewBag.Paciente = paci.BuscaPorId(consulta.PacienteId);
             ViewBag.Anamnese = anamnese;
             ViewBag.Consulta = consulta;
             ViewBag.Medico = medico;
@@ -71,15 +74,10 @@ namespace ProjetoStag026.Controllers
             if (com.BuscarAgendamentos(paciente.ID) != null)
             {
                 IList<Componente_Paciente> lista = com.BuscarAgendamentos(paciente.ID);
-                foreach (var item in lista)
-                {
-                    Componente componente = co.BuscaPorId(item.ComponenteId);
-                    lista_componente.Add(componente);
-                    
-                }
+                ViewBag.Componente = lista;
             }
 
-            ViewBag.Componente = lista_componente;
+            
 
             ConsultaDao con = new ConsultaDao();
             IList<Consulta> listaConsultas = con.BuscaPorPaciente(pacienteId);

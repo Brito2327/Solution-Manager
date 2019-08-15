@@ -33,6 +33,7 @@ namespace ProjetoStag026.Controllers
             ViewBag.Pacientes = pacientes;
             ViewBag.Agendamento = lista;
             ViewBag.Medicos = me.Select();
+
             return View();
         }
         [FiltroF]

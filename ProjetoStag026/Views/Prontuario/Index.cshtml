@@ -38,7 +38,7 @@
                     <a href="~/Consulta/Index?pacienteid=@ViewBag.Paciente[p].ID">Consultas</a>
                 </td>
                 <td class="align-content-center">
-                    <a href="#" onclick="excluir(@ViewBag.Prontuario[p].ID);">Excluir</a>
+                    <button type="button" class="btn btn-primary"  onclick="excluir(@ViewBag.Prontuario[p].ID);">Excluir</button>
 
                 </td>
 
@@ -60,7 +60,7 @@
                 complete:
                     function validar(jqXHR, resposta) {
                         if (jqXHR.responseJSON == "Sim") {
-                            $("#paciente-" + Prontuario).html("");
+                            $("#Prontuario-" + Prontuario).html("");
                         } else {
                             alert("Erro ao excluir");
                         }

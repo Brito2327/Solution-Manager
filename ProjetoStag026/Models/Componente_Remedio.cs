@@ -8,9 +8,9 @@ namespace ProjetoStag026.Models
     public class Componente_Remedio
     {
         public int ID { get; set; }
-        public Componente Componente { get; set; }
-        public int ComponenteId { get; set; }
-        public Remedio Remedio { get; set; }
-        public int RemedioId { get; set; }
+        public string  Componente { get; set; }
+        public Paciente Paciente { get; set; }
+        public int PacienteId { get; set; }
+        
     }
 }

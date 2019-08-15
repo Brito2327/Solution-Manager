@@ -7,12 +7,11 @@ namespace ProjetoStag026.Models
 {
     public class Componente_Paciente
     {
-        public int Id { get; set; }
-        public Componente componente { get; set; }
-        public int ComponenteId { get; set; }
+        public int ID { get; set; }
+        public string Componente { get; set; }
         public Paciente Paciente { get; set; }
         public int PacienteId { get; set; }
-            
+
 
     }
 }

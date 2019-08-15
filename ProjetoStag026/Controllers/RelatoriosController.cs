@@ -91,18 +91,12 @@ namespace ProjetoStag026.Controllers
              
                 string nomes = "";
                 IList<Componente_Paciente> lista = com.BuscarAgendamentos(paciente.ID);
+
                 foreach (var item in lista)
                 {
-                    Componente componente = co.BuscaPorId(item.ComponenteId);
-                    lista_componente.Add(componente);
+                    nomes += item.Componente + ",";
                 }
-                for(int i=0;i< lista_componente.Count;i++)
-                {
-                    Componente intermedio = lista_componente[i];
-                    nomes+= intermedio.Nome+",";
                     
-                }
-
                 ViewBag.Componente = nomes;
             }
             else

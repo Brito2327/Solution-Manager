@@ -372,6 +372,7 @@
     <Compile Include="Controllers\PacienteController.cs" />
     <Compile Include="Controllers\ProntuarioController.cs" />
     <Compile Include="Controllers\RelatoriosController.cs" />
+    <Compile Include="Controllers\RemedioController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="DAO\AgendamentoDao.cs" />
     <Compile Include="DAO\AnamneseDao.cs" />
@@ -382,6 +383,7 @@
     <Compile Include="DAO\Componente_PacienteDao.cs" />
     <Compile Include="DAO\ConecaoContext.cs" />
     <Compile Include="DAO\ConsultaDao.cs" />
+    <Compile Include="DAO\ConsumindoApiDao.cs" />
     <Compile Include="DAO\EnderecoDao.cs" />
     <Compile Include="DAO\FuncionarioDao.cs" />
     <Compile Include="DAO\HistoriaPatologicaPregressaDao.cs" />
@@ -428,6 +430,14 @@
     <Compile Include="Migrations\20190801195825_bla.cs" />
     <Compile Include="Migrations\20190801195825_bla.designer.cs">
       <DependentUpon>20190801195825_bla.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190815134204_api.cs" />
+    <Compile Include="Migrations\20190815134204_api.designer.cs">
+      <DependentUpon>20190815134204_api.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20190815194044_Apiiiiiiii.cs" />
+    <Compile Include="Migrations\20190815194044_Apiiiiiiii.designer.cs">
+      <DependentUpon>20190815194044_Apiiiiiiii.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ConecaoContextModelSnapshot.cs" />
     <Compile Include="Models\Agendamento.cs" />
@@ -490,6 +500,8 @@
     <Content Include="Views\Cliente\ProntuarioP.cshtml" />
     <Content Include="Views\Relatorios\ClienteProntuario.cshtml" />
     <Content Include="Views\Relatorios\ConsultaCliente.cshtml" />
+    <Content Include="Views\Remedio\ConsumindoApi.cshtml" />
+    <Content Include="Views\Componente\Referencias.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
