@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,9 +18,9 @@ namespace ProjetoStag026.Controllers
             Uri usuarioUri;
 
             client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:64543");
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
+            client.BaseAddress = new Uri("https://componentesd.mybluemix.net/");
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("aplicativo / json"));
+            //client.Encoding = UTF8Encoding.UTF8;
             HttpResponseMessage response = client.GetAsync("api/studentretrive").Result;
 
             //se retornar com sucesso busca os dados

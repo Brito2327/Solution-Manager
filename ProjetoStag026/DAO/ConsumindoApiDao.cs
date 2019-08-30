@@ -15,7 +15,7 @@ namespace ProjetoStag026.DAO
             Uri usuarioUri;
 
             client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:64543");
+            client.BaseAddress = new Uri("https://componentesd.mybluemix.net/");
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
             HttpResponseMessage response = client.GetAsync("api/studentretrive").Result;

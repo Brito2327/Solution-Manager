@@ -39,9 +39,27 @@ namespace ProjetoStag026.Controllers
             IList<Paciente> listaPaciente = pa.Select();
 
             ConsumindoApiDao con = new ConsumindoApiDao();
+            IList<string> compo = new List<string>();
+            bool valida = true;
+            foreach (var item in con.Consumir())
+            {
+                foreach (var item2 in compo)
+                {
+                    if (item.PrincipioAtivo==item2)
+                    {
+                        valida = false;
+                    }
+                }
+                if (valida)
+                {
+                    compo.Add(item.PrincipioAtivo);
+                }
+                valida = true;
+            }
+
 
             ViewBag.Pacientes = listaPaciente;
-            ViewBag.Componentes = con.Consumir();
+            ViewBag.Componentes = compo;
             return View();
         }
 

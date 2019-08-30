@@ -5,6 +5,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
 
 
@@ -84,8 +87,8 @@
                             <label for="diagnostico">Diagnóstico</label>
                             <textarea id="diagnostico" required class="form-control"></textarea>
 
-                            <label for="prescri">Prescrição</label>
-                            <input type="search" id="prescri" onfocus="myFunction(this)" required class="form-control" />
+                            <label>Prescrição</label>
+                            <input type="search" id="prescri" onfocus="myFunction(this)" class="form-control" />
                         </div>
                     </div>
 
@@ -148,14 +151,16 @@
             <div class="modal-content">
                 <div>
                     <span class="close">&times;</span>
-                    <p>Paciente Alergico ao componente :</p>
+                    <h1 style="color:orangered">Paciente Alergico ao componente </h1>
                     @foreach (var item in ViewBag.Componente)
                     {
-                        <p>
-                            @item.Nome;
-                        </p>
+                        if (item.Componente != "")
+                        {
+                            <h3 style="color:blue">
+                                @item.Componente.ToUpper()
+                            </h3>
+                        }
                     }
-
 
                 </div>
 
@@ -204,9 +209,52 @@
 @foreach (var item in ViewBag.Componente)
 {
     <script>
-        compoentes.push("@item.Nome");
+        compoentes.push("@item.Componente");
     </script>
 }
+
+
+
+@*<script>
+        var remedio = [];
+    </script>
+
+    @foreach (var item in ViewBag.Remedios)
+    {
+        <script>
+            remedio.push("@item.Nome");
+        </script>
+    }*@
+
+<script>
+    $(function () {
+        idPaciente = $("#pacienteId").val();
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            url: "@Url.Action("remedios", "Consulta")", // webmethod or web serivces URL
+            data: {
+                PacienteId: idPaciente
+            },
+            complete:
+                function validar(jqXHR, resposta) {
+                    var remedio = []
+                    jqXHR.responseJSON;
+                    for (var i = 0; i < jqXHR.responseJSON.length; i++) {
+                        remedio.push(jqXHR.responseJSON[i].Nome)
+                    }
+                    $("#prescri").autocomplete({
+                        source: remedio
+                    });
+                },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+            }
+        });
+    });
+
+</script>
 
 <script>
 

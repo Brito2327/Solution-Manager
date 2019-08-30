@@ -64,16 +64,16 @@ namespace ProjetoStag026.Controllers
             }
             Componente_PacienteDao com = new Componente_PacienteDao();
             HistoriaPatologicaPregressaDao h = new HistoriaPatologicaPregressaDao();
-            ComponenteDao co = new ComponenteDao();
+            //ComponenteDao co = new ComponenteDao();
             PacienteDao paci = new PacienteDao();
             Paciente paciente = paci.BuscaPorId(pacienteId);
 
             HistoriaPatologicaPregressa historia = h.BuscaPorId(prontuario.HistoriaPatologicaPregressaId);
-            IList<Componente> lista_componente = new List<Componente>();
-
+            //IList<Componente> lista_componente = new List<Componente>();
+            IList<Componente_Paciente> lista= new List<Componente_Paciente>();
             if (com.BuscarAgendamentos(paciente.ID) != null)
             {
-                IList<Componente_Paciente> lista = com.BuscarAgendamentos(paciente.ID);
+                lista = com.BuscarAgendamentos(paciente.ID);
                 ViewBag.Componente = lista;
             }
 
@@ -85,11 +85,9 @@ namespace ProjetoStag026.Controllers
             Medico medico = me.BuscaPorId(agendamento.MedicoId);
 
 
-
-
-
-
-
+           
+            
+            
             ViewBag.Medico = medico;
             ViewBag.Agendamento = agendamento;
             ViewBag.Consultas = listaConsultas;
@@ -124,6 +122,32 @@ namespace ProjetoStag026.Controllers
 
             string valida = dao.Cadastrar(consulta) ? "Sim" : "Nao";
             return Json(valida);
+        }
+        public JsonResult remedios(int pacienteId)
+        {
+            Componente_PacienteDao com = new Componente_PacienteDao();
+            IList<Componente_Paciente> lista = new List<Componente_Paciente>();
+            if (com.BuscarAgendamentos(pacienteId) != null)
+            {
+                lista = com.BuscarAgendamentos(pacienteId);
+                ViewBag.Componente = lista;
+            }
+
+            ConsumindoApiDao api = new ConsumindoApiDao();
+            IList<Remedio> RemediosQuePaicienteNaoTemAlergia = new List<Remedio>();
+
+            foreach (var item in api.Consumir())
+            {
+                foreach (var item2 in lista)
+                {
+                    if (!item.PrincipioAtivo.Contains(item2.Componente)&& RemediosQuePaicienteNaoTemAlergia.Count<11)
+                    {
+                        RemediosQuePaicienteNaoTemAlergia.Add(item);
+
+                    }
+                }
+            }
+            return Json(RemediosQuePaicienteNaoTemAlergia);
         }
     }
 }
