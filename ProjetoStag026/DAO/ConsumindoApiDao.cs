@@ -26,7 +26,7 @@ namespace ProjetoStag026.DAO
                 //pegando o cabeçalho
                 usuarioUri = response.Headers.Location;
 
-                //Pegando os dados do Rest e armazenando na variável usuários
+                //Pegando os dados do Rest e armazenando na variável do objeto Remedio
                 List<Remedio> remedios = (List<Remedio>)response.Content.ReadAsAsync<IEnumerable<Remedio>>().Result;
 
                 //preenchendo a lista com os dados retornados da variável
@@ -36,10 +36,8 @@ namespace ProjetoStag026.DAO
             //Se der erro na chamada, mostra o status do código de erro.
             else
             {
-
                 List<Remedio> remedios = null;
                 return remedios;
-
             }
         }
     }

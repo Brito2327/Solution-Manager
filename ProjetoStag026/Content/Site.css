@@ -67,9 +67,10 @@ textarea {
         margin: 5px;
         margin-bottom:30px;
     }
-    .login h2{
+    .login h4{
         color:deepskyblue;
         font-display:auto;
+        margin-top:20px;
     }
 
 .login {
@@ -78,7 +79,7 @@ textarea {
     margin-top: 200px;
     margin-bottom: 0px;
     padding: 30px;
-    padding-top: 30px;
+    padding-top: 2px;
     padding-bottom: 15px;
     background-color: rgba(169,245,242,0.3);
 }
