@@ -10,8 +10,8 @@ using ProjetoStag026.DAO;
 namespace ProjetoStag026.Migrations
 {
     [DbContext(typeof(ConecaoContext))]
-    [Migration("20190725210921_atualiza")]
-    partial class atualiza
+    [Migration("20190904203207_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,6 +30,8 @@ namespace ProjetoStag026.Migrations
                     b.Property<int>("MedicoId");
 
                     b.Property<int>("PacienteId");
+
+                    b.Property<string>("Plano");
 
                     b.Property<DateTime>("data");
 
@@ -88,6 +90,29 @@ namespace ProjetoStag026.Migrations
                     b.ToTable("Atendente");
                 });
 
+            modelBuilder.Entity("ProjetoStag026.Models.Atendimentos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("MedicoId");
+
+                    b.Property<int>("PacienteId");
+
+                    b.Property<string>("Plano");
+
+                    b.Property<DateTime>("data");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicoId");
+
+                    b.HasIndex("PacienteId");
+
+                    b.ToTable("Atendimentos");
+                });
+
             modelBuilder.Entity("ProjetoStag026.Models.Categoria", b =>
                 {
                     b.Property<int>("Id")
@@ -118,21 +143,36 @@ namespace ProjetoStag026.Migrations
                     b.ToTable("Componente");
                 });
 
+            modelBuilder.Entity("ProjetoStag026.Models.Componente_Paciente", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Componente");
+
+                    b.Property<int>("PacienteId");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("PacienteId");
+
+                    b.ToTable("Componente_Paciente");
+                });
+
             modelBuilder.Entity("ProjetoStag026.Models.Componente_Remedio", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ComponenteId");
+                    b.Property<string>("Componente");
 
-                    b.Property<int>("RemedioId");
+                    b.Property<int>("PacienteId");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ComponenteId");
-
-                    b.HasIndex("RemedioId");
+                    b.HasIndex("PacienteId");
 
                     b.ToTable("Componente_RemediosContext");
                 });
@@ -206,8 +246,6 @@ namespace ProjetoStag026.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ComponenteId");
-
                     b.Property<string>("HF");
 
                     b.Property<string>("HPP");
@@ -215,8 +253,6 @@ namespace ProjetoStag026.Migrations
                     b.Property<string>("HistoriaSocial");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("ComponenteId");
 
                     b.ToTable("HistoriaPatologicaPregressaContext");
                 });
@@ -249,6 +285,8 @@ namespace ProjetoStag026.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CPF");
 
                     b.Property<int>("EnderecoId");
 
@@ -304,6 +342,8 @@ namespace ProjetoStag026.Migrations
 
                     b.Property<string>("Nome");
 
+                    b.Property<string>("PrincipioAtivo");
+
                     b.HasKey("ID");
 
                     b.ToTable("Remedio");
@@ -349,16 +389,32 @@ namespace ProjetoStag026.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ProjetoStag026.Models.Componente_Remedio", b =>
+            modelBuilder.Entity("ProjetoStag026.Models.Atendimentos", b =>
                 {
-                    b.HasOne("ProjetoStag026.Models.Componente", "Componente")
+                    b.HasOne("ProjetoStag026.Models.Medico", "Medico")
                         .WithMany()
-                        .HasForeignKey("ComponenteId")
+                        .HasForeignKey("MedicoId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ProjetoStag026.Models.Remedio", "Remedio")
+                    b.HasOne("ProjetoStag026.Models.Paciente", "Paciente")
                         .WithMany()
-                        .HasForeignKey("RemedioId")
+                        .HasForeignKey("PacienteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ProjetoStag026.Models.Componente_Paciente", b =>
+                {
+                    b.HasOne("ProjetoStag026.Models.Paciente", "Paciente")
+                        .WithMany()
+                        .HasForeignKey("PacienteId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ProjetoStag026.Models.Componente_Remedio", b =>
+                {
+                    b.HasOne("ProjetoStag026.Models.Paciente", "Paciente")
+                        .WithMany()
+                        .HasForeignKey("PacienteId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -386,13 +442,6 @@ namespace ProjetoStag026.Migrations
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ProjetoStag026.Models.HistoriaPatologicaPregressa", b =>
-                {
-                    b.HasOne("ProjetoStag026.Models.Componente", "Componente")
-                        .WithMany()
-                        .HasForeignKey("ComponenteId");
                 });
 
             modelBuilder.Entity("ProjetoStag026.Models.Medico", b =>

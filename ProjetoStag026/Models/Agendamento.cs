@@ -16,5 +16,6 @@ namespace ProjetoStag026.Models
         public string hora { get; set; }
         public string observacao { get; set; }
         public string Plano { get; set; }
+       
     }
 }

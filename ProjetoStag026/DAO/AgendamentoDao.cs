@@ -122,5 +122,9 @@ namespace ProjetoStag026.DAO
 
             }
         }
+        public void AgendamentoPassado()
+        {
+
+        }
     }
 }

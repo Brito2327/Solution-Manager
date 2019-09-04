@@ -298,10 +298,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Prontuario.mdf" />
-    <Content Include="App_Data\Prontuario_log.ldf">
-      <DependentUpon>Prontuario.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -402,45 +398,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20190719205222_first.cs" />
-    <Compile Include="Migrations\20190719205222_first.designer.cs">
-      <DependentUpon>20190719205222_first.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190722182608_Funcionarios.cs" />
-    <Compile Include="Migrations\20190722182608_Funcionarios.designer.cs">
-      <DependentUpon>20190722182608_Funcionarios.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190725210921_atualiza.cs" />
-    <Compile Include="Migrations\20190725210921_atualiza.designer.cs">
-      <DependentUpon>20190725210921_atualiza.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190730191247_atendimento.cs" />
-    <Compile Include="Migrations\20190730191247_atendimento.designer.cs">
-      <DependentUpon>20190730191247_atendimento.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190730191841_atend.cs" />
-    <Compile Include="Migrations\20190730191841_atend.designer.cs">
-      <DependentUpon>20190730191841_atend.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190730192105_atendimentoo.cs" />
-    <Compile Include="Migrations\20190730192105_atendimentoo.designer.cs">
-      <DependentUpon>20190730192105_atendimentoo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190730194153_att.cs" />
-    <Compile Include="Migrations\20190730194153_att.designer.cs">
-      <DependentUpon>20190730194153_att.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190801195825_bla.cs" />
-    <Compile Include="Migrations\20190801195825_bla.designer.cs">
-      <DependentUpon>20190801195825_bla.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190815134204_api.cs" />
-    <Compile Include="Migrations\20190815134204_api.designer.cs">
-      <DependentUpon>20190815134204_api.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190815194044_Apiiiiiiii.cs" />
-    <Compile Include="Migrations\20190815194044_Apiiiiiiii.designer.cs">
-      <DependentUpon>20190815194044_Apiiiiiiii.cs</DependentUpon>
+    <Compile Include="Migrations\20190904203207_first.cs" />
+    <Compile Include="Migrations\20190904203207_first.designer.cs">
+      <DependentUpon>20190904203207_first.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ConecaoContextModelSnapshot.cs" />
     <Compile Include="Models\Agendamento.cs" />

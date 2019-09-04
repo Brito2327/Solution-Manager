@@ -36,7 +36,7 @@ namespace ProjetoStag026.DAO
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.
-                    UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=Prontuario;Trusted_Connection=true;");
+                    UseSqlServer("Server=tcp:dbcomponente.database.windows.net,1433;Initial Catalog=sistema;Persist Security Info=False;User ID=alexzao;Password=a1e2i3o4@;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
       

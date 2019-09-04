@@ -72,12 +72,28 @@ namespace ProjetoStag026.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "HistoriaPatologicaPregressaContext",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    HPP = table.Column<string>(nullable: true),
+                    HF = table.Column<string>(nullable: true),
+                    HistoriaSocial = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HistoriaPatologicaPregressaContext", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Remedio",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Nome = table.Column<string>(nullable: true)
+                    Nome = table.Column<string>(nullable: true),
+                    PrincipioAtivo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -106,54 +122,6 @@ namespace ProjetoStag026.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HistoriaPatologicaPregressaContext",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    HPP = table.Column<string>(nullable: true),
-                    HF = table.Column<string>(nullable: true),
-                    HistoriaSocial = table.Column<string>(nullable: true),
-                    ComponenteId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HistoriaPatologicaPregressaContext", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_HistoriaPatologicaPregressaContext_Componente_ComponenteId",
-                        column: x => x.ComponenteId,
-                        principalTable: "Componente",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Componente_RemediosContext",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ComponenteId = table.Column<int>(nullable: false),
-                    RemedioId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Componente_RemediosContext", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Componente_RemediosContext_Componente_ComponenteId",
-                        column: x => x.ComponenteId,
-                        principalTable: "Componente",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Componente_RemediosContext_Remedio_RemedioId",
-                        column: x => x.RemedioId,
-                        principalTable: "Remedio",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Atendente",
                 columns: table => new
                 {
@@ -174,13 +142,33 @@ namespace ProjetoStag026.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Funcionario",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Nome = table.Column<string>(nullable: true),
+                    UsuarioId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Funcionario", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Funcionario_Usuario_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuario",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Medico",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     nome = table.Column<string>(nullable: true),
-                    CRM = table.Column<double>(nullable: false),
+                    CRM = table.Column<string>(nullable: true),
                     Situacao = table.Column<string>(nullable: true),
                     AreaDeAtuacao = table.Column<string>(nullable: true),
                     UsuarioId = table.Column<int>(nullable: false)
@@ -203,6 +191,7 @@ namespace ProjetoStag026.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(nullable: true),
+                    CPF = table.Column<string>(nullable: true),
                     EnderecoId = table.Column<int>(nullable: false),
                     sexo = table.Column<string>(nullable: true),
                     data = table.Column<DateTime>(nullable: false),
@@ -238,7 +227,8 @@ namespace ProjetoStag026.Migrations
                     data = table.Column<DateTime>(nullable: false),
                     MedicoId = table.Column<int>(nullable: false),
                     hora = table.Column<string>(nullable: true),
-                    observacao = table.Column<string>(nullable: true)
+                    observacao = table.Column<string>(nullable: true),
+                    Plano = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -251,6 +241,74 @@ namespace ProjetoStag026.Migrations
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Agendamento_Paciente_PacienteId",
+                        column: x => x.PacienteId,
+                        principalTable: "Paciente",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Atendimentos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    data = table.Column<DateTime>(nullable: false),
+                    PacienteId = table.Column<int>(nullable: false),
+                    MedicoId = table.Column<int>(nullable: false),
+                    Plano = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Atendimentos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Atendimentos_Medico_MedicoId",
+                        column: x => x.MedicoId,
+                        principalTable: "Medico",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Atendimentos_Paciente_PacienteId",
+                        column: x => x.PacienteId,
+                        principalTable: "Paciente",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Componente_Paciente",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Componente = table.Column<string>(nullable: true),
+                    PacienteId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Componente_Paciente", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Componente_Paciente_Paciente_PacienteId",
+                        column: x => x.PacienteId,
+                        principalTable: "Paciente",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Componente_RemediosContext",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Componente = table.Column<string>(nullable: true),
+                    PacienteId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Componente_RemediosContext", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Componente_RemediosContext_Paciente_PacienteId",
                         column: x => x.PacienteId,
                         principalTable: "Paciente",
                         principalColumn: "ID",
@@ -335,14 +393,24 @@ namespace ProjetoStag026.Migrations
                 column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Componente_RemediosContext_ComponenteId",
-                table: "Componente_RemediosContext",
-                column: "ComponenteId");
+                name: "IX_Atendimentos_MedicoId",
+                table: "Atendimentos",
+                column: "MedicoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Componente_RemediosContext_RemedioId",
+                name: "IX_Atendimentos_PacienteId",
+                table: "Atendimentos",
+                column: "PacienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Componente_Paciente_PacienteId",
+                table: "Componente_Paciente",
+                column: "PacienteId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Componente_RemediosContext_PacienteId",
                 table: "Componente_RemediosContext",
-                column: "RemedioId");
+                column: "PacienteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Consulta_AnamneseId",
@@ -360,9 +428,9 @@ namespace ProjetoStag026.Migrations
                 column: "PacienteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HistoriaPatologicaPregressaContext_ComponenteId",
-                table: "HistoriaPatologicaPregressaContext",
-                column: "ComponenteId");
+                name: "IX_Funcionario_UsuarioId",
+                table: "Funcionario",
+                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Medico_UsuarioId",
@@ -404,10 +472,22 @@ namespace ProjetoStag026.Migrations
                 name: "Atendente");
 
             migrationBuilder.DropTable(
+                name: "Atendimentos");
+
+            migrationBuilder.DropTable(
+                name: "Componente");
+
+            migrationBuilder.DropTable(
+                name: "Componente_Paciente");
+
+            migrationBuilder.DropTable(
                 name: "Componente_RemediosContext");
 
             migrationBuilder.DropTable(
                 name: "Consulta");
+
+            migrationBuilder.DropTable(
+                name: "Funcionario");
 
             migrationBuilder.DropTable(
                 name: "Prontuario");
@@ -426,9 +506,6 @@ namespace ProjetoStag026.Migrations
 
             migrationBuilder.DropTable(
                 name: "Paciente");
-
-            migrationBuilder.DropTable(
-                name: "Componente");
 
             migrationBuilder.DropTable(
                 name: "Endereco");

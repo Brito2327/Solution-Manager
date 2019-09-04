@@ -11,6 +11,7 @@ namespace ProjetoStag026.Controllers
         public ActionResult Index()
         {
             return View();
+
         }
         public ActionResult Autentica(String login, String Senha)
         {
