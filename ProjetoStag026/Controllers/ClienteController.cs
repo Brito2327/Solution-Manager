@@ -53,18 +53,14 @@ namespace ProjetoStag026.Controllers
 
 
 
-        
+            IList<Componente_Paciente> lista = new List<Componente_Paciente>();
 
             if (com.BuscarAgendamentos(paciente.ID) != null)
             {
-                IList<Componente_Paciente> lista = com.BuscarAgendamentos(paciente.ID);
-                 ViewBag.Componente = lista;
+                 lista = com.BuscarAgendamentos(paciente.ID);
             }
-            else
-            {
-                ViewBag.Componente = null;
-            }
-
+             ViewBag.Componente = lista;
+            
             ViewBag.Historia = historia;
             ViewBag.Prontuario = prontuario;
             ViewBag.Paciente = paciente;

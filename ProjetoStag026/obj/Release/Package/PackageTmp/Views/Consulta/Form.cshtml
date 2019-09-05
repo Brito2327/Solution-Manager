@@ -139,7 +139,7 @@
                 {
                     <div>
                         <span>Prontuario Não Inicializado</span>
-                        <a href="~/Prontuario/Form" class="btn btn-primary">Novo Prontuario</a>
+                        <a href="/Prontuario/Form" class="btn btn-primary">Novo Prontuario</a>
                     </div>
                 }
 
@@ -209,22 +209,11 @@
 @foreach (var item in ViewBag.Componente)
 {
     <script>
-        compoentes.push("@item.Componente");
+        if (@item.Componente != "") {
+            compoentes.push("@item.Componente");
+        }
     </script>
 }
-
-
-
-@*<script>
-        var remedio = [];
-    </script>
-
-    @foreach (var item in ViewBag.Remedios)
-    {
-        <script>
-            remedio.push("@item.Nome");
-        </script>
-    }*@
 
 <script>
     $(function () {
@@ -325,7 +314,7 @@
                      function validar(jqXHR, resposta) {
                          if (jqXHR.responseJSON == "Sim") {
                              finalizarAgendamento(id);
-                             window.location.href = "http://localhost:53981/Home";
+                             window.location.href = "/Home";
                          } else {
                              alert("Erro aqui");
                          }

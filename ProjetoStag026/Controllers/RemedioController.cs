@@ -1,4 +1,5 @@
-﻿using ProjetoStag026.Models;
+﻿using ProjetoStag026.DAO;
+using ProjetoStag026.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,35 +15,20 @@ namespace ProjetoStag026.Controllers
 
         public ActionResult ConsumindoApi()
         {
-            HttpClient client;
-            Uri usuarioUri;
+            ConsumindoApiDao dao = new ConsumindoApiDao();
+            IList<Remedio> lista_remedios = dao.Consumir();
 
-            client = new HttpClient();
-            client.BaseAddress = new Uri("https://componentesd.mybluemix.net/");
-            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("aplicativo / json"));
-            //client.Encoding = UTF8Encoding.UTF8;
-            HttpResponseMessage response = client.GetAsync("api/studentretrive").Result;
-
-            //se retornar com sucesso busca os dados
-            if (response.IsSuccessStatusCode)
+            if (lista_remedios == null)
             {
-                //pegando o cabeçalho
-                usuarioUri = response.Headers.Location;
-
-                //Pegando os dados do Rest e armazenando na variável usuários
-                List<Remedio>remedios = (List<Remedio>)response.Content.ReadAsAsync<IEnumerable<Remedio>>().Result;
-
-                //preenchendo a lista com os dados retornados da variável
-                ViewBag.Remedios = remedios;
+                return HttpNotFound();
             }
-
-            //Se der erro na chamada, mostra o status do código de erro.
             else
             {
-                Response.Write(response.StatusCode.ToString() + " - " + response.ReasonPhrase);
+                ViewBag.Remedios = lista_remedios;
+                return View();
             }
 
-            return View();
+           
         }
 
     }

@@ -86,22 +86,26 @@ namespace ProjetoStag026.Controllers
             IList<Componente> lista_componente = new List<Componente>();
 
             IList<Componente_Paciente> comPaci = com.BuscarAgendamentos(paciente.ID);
+            int validador = 0;
             if (comPaci != null)
             {
              
                 string nomes = "";
                 IList<Componente_Paciente> lista = com.BuscarAgendamentos(paciente.ID);
-
+               
                 foreach (var item in lista)
                 {
+                    if (item.Componente != "") { 
                     nomes += item.Componente + ",";
+                        validador++;
+                    }
                 }
-                    
                 ViewBag.Componente = nomes;
-            }
-            else
+
+            if(validador==0)
             {
                 ViewBag.Componente = "Nenhum Componente alergico";
+            }
             }
 
 
