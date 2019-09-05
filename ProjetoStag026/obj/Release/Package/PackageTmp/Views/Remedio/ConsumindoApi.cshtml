@@ -1,0 +1,30 @@
+﻿
+@{
+
+    Layout = "~/Views/Shared/_LayoutFuncionario.cshtml";
+}
+
+
+<meta charset="utf-8" />
+<table class="table table-hover">
+    <thead>
+
+        <tr>
+            <th class="align-content-center">Id</th>
+            <th class="align-content-center">Prícipio Ativo</th>
+            <th class="align-content-center">Nome comercial</th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var remedio in ViewBag.Remedios)
+        {
+            <tr>
+                <td class="align-content-center">@remedio.ID</td>
+                <td>@remedio.Nome </td>
+                <td>@remedio.PrincipioAtivo </td>
+            </tr>
+        }
+    </tbody>
+</table>

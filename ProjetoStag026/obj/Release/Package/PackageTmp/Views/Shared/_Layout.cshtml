@@ -1,0 +1,54 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/Content/imagens/Logo MS-01.png" type="image/x-icon" />
+    <title>Manager Solution  </title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+
+
+    <script src="https://use.fontawesome.com/f72947d947.js"></script>
+</head>
+<body>
+    <div>
+
+
+        <header>
+            <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+
+                <a class="navbar-brand" href="/Home">Home</a>
+                <a class="navbar-brand" href="/Paciente">Pacientes</a>
+                <a class="navbar-brand" href="/Prontuario">Prontuario</a>
+
+                <form class="form-inline my-2 my-lg-0 float-right">
+                  
+                </form>
+                <i class="fa fa-user fa-lg fa-fw"></i>
+                <a class="navbar-brand" href="~/Login/Sair">Sair</a>
+            </nav>
+        </header>
+        
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+
+        <div class="maring0">
+
+            <div id="conteudo">
+                <div class="background-full"></div>
+                @RenderBody()
+            </div>
+
+            <hr />
+            <div class="footer">
+
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Solução  Manager Doctor System</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutFuncionario.cshtml";
+}
+<link rel="stylesheet" href="~/Content/bootstrap.min.css" type="text/css" />
+
+<div>
+    <h2>Funcionarios</h2>
+    <table class="table table-hover">
+        <thead>
+
+            <tr>
+
+                <th class="align-content-center">Id</th>
+                <th class="align-content-center">Nome</th>
+                <th class="align-content-center"></th>
+                <th class="align-content-center"></th>
+
+
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (ProjetoStag026.Models.Funcionario funcionario in ViewBag.Funcionarios)
+            {
+
+                <tr id="Funcionario-@funcionario.ID">
+                    <td class="align-content-center">@funcionario.ID</td>
+                    <td class="align-content-center" id="nome-@funcionario.ID">@funcionario.Nome</td>
+                    <td class="align-content-center">
+                        <button class="btn btn-primary" data-toggle="modal" onclick="Armazena('@funcionario.ID','@funcionario.Nome')" data-target="#AlterarModal">Editar</button>
+                    </td>
+                    <td class="align-content-center">
+                        <button class="btn btn-primary"  onclick="excluir(@funcionario.ID);">Excluir</button>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <button onclick="edit()" class="btn btn-primary " data-toggle="modal" data-target="#myModal">Cadastrar Funcionario</button>
+    </div>
+    <div class="modal">
+    </div>
+</div>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog ">
+
+        <div class="modal-content">
+            
+            <div class="modal-body">
+                <form action="~/Funcionario/Cadastrar" method="post">
+
+                    <div class="row">
+
+                        <div class="col-6">
+                            <label for="nome">Nome</label>
+                            <input type="text" name="funcionario.Nome" required class="form-control ">
+                            <h3>Acesso</h3>
+                        </div>
+
+                        
+                        <div class="form-group col-6">
+                            <label for="numero">Email</label>
+                            <input type="email" name="usuario.User" class="form-control" required>
+                        </div>
+
+                        <div class="col-6">
+                            <label for="senha">Senha</label>
+                            <input type="text" name="usuario.Password" required class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <div>
+                                <button type="submit" class="btn btn-primary" >Cadastrar</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">cancelar</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="AlterarModal" role="dialog">
+    <div class="modal-dialog ">
+
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <div>
+                        <h2>Nome</h2>
+                        <input type="text" id="nomeA" class="form-control" required>
+                        <input type="hidden" value="1" id="idArmzenado" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="alterar()">Alterar</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">cancelar</button>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>
+
+<script type="text/javascript">
+    function excluir(funcionarioId) {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            url: "@Url.Action("Excluir","Funcionario")", // webmethod or web serivces URL
+            data: { id: funcionarioId },
+            complete:
+                function validar(jqXHR, resposta) {
+                    if (jqXHR.responseJSON == "Sim") {
+                        $("#Funcionario-" + funcionarioId).html("");
+                    } else {
+                        alert("Erro ao excluir");
+                    }
+                },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+            }
+        });
+    }
+
+    function Armazena(id,nome) {
+
+        $("#idArmzenado").val(id);
+        $("#nomeA").val(nome);
+    }
+
+    function alterar() {
+
+
+        var nomeA = $("#nomeA").val();
+        var id = $("#idArmzenado").val();
+
+
+        if (nomeA != null && id != null) {
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                cache: false,
+                url: "@Url.Action("update", "Funcionario")", // webmethod or web serivces URL
+                data: {
+                    id: id,
+                    Nome: nomeA
+
+                },
+                complete:
+                    function validar(jqXHR, resposta) {
+                        if (jqXHR.responseJSON == "Sim") {
+                            $("#componente-").html("");
+                            $("#nome-" + id).text(nomeA);
+
+                        } else {
+                            alert("Erro ao excluir");
+                        }
+                    },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error - ' + errorThrown);
+                }
+            });
+        }
+    }
+</script>

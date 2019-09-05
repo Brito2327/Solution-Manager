@@ -1,0 +1,52 @@
+﻿@model PagedList.IPagedList<ProjetoStag026.Models.Atendimentos>
+@{
+    Layout = "~/Views/Shared/_LayoutFuncionario.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+<div>
+    <h3>
+        Atendimentos
+    </h3>
+</div>
+<div class="row float-right">
+
+    <a href="~/Relatorios/GerarRelatorio" target="_blank">
+        <b>GERAR PDF</b>
+    </a>
+</div>
+
+
+<table id="table_id" class="table table-hover">
+    <thead>
+        <tr>
+            <th class="align-content-center">Id</th>
+            <th class="align-content-center">Paciente</th>
+            <th class="align-content-center">Médico</th>
+            <th class="align-content-center">Data</th>
+            <th class="align-content-center">Plano</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int p = 0; p < ViewBag.Atendiemtos.Count; p++)
+        {
+            <tr>
+                <td class="align-content-center"> @ViewBag.Atendiemtos[p].Id</td>
+                <td class="align-content-center">@ViewBag.Pacientes[p]</td>
+                <td class="align-content-center">@ViewBag.Medico[p] </td>
+                <td>@ViewBag.Atendiemtos[p].data.Date.ToString("dd/MM/yyyy") </td>
+                <td>@ViewBag.Atendiemtos[p].Plano </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+<script>
+
+    $(document).ready(function () {
+        $('#table_id').DataTable();
+    });
+</script>

@@ -1,0 +1,24 @@
+﻿
+@{
+    
+    Layout = "~/Views/Shared/_LayoutFuncionario.cshtml";
+}
+<h2>Referencias</h2>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th class="align-content-center">Componente</th>
+            <th class="align-content-center">Remedio</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var componente in ViewBag.Referencias)
+        {
+            <tr>
+                <td class="align-content-center">@componente.PrincipioAtivo</td>
+                <td class="align-content-center">@componente.Nome</td>
+            </tr>
+        }
+    </tbody>
+</table>

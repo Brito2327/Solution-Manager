@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Usuarios</h2>
+
+    <table class="table table-dark">
+        <thead>
+
+            <tr>
+
+                <th>Id</th>
+                <th>Nome</th>
+               
+
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var usuario in ViewBag.Usuario)
+            {
+
+                <tr>
+                    <td>@usuario.ID</td>
+                    <td><a>@usuario.User</a></td>
+                   
+
+                </tr>
+            }
+        </tbody>
+    </table>

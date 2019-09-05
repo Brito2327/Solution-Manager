@@ -1,0 +1,105 @@
+﻿@if (Session["Medico"] != null)
+{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+else
+{
+    Layout = "~/Views/Shared/_LayoutFuncionario.cshtml";
+}
+<link rel="stylesheet" href="~/Content/bootstrap.min.css" type="text/css" />
+
+
+
+
+<a href="Paciente/Editar"></a>
+
+@if (Session["Medico"] == null)
+{
+    <div>
+
+        <a href="~/Paciente/Form" class="btn btn-primary ">
+            Novo Paciente
+        </a>
+    </div>
+}
+
+
+<table class="table table-dark">
+    <thead>
+
+        <tr>
+
+            <th class="align-content-center">Id</th>
+            <th class="align-content-center">Nome</th>
+            <th class="align-content-center">sexo</th>
+            <th class="align-content-center">Data de Nascimento</th>
+            <th class="align-content-center">Telefone</th>
+            <th class="align-content-center">Naturalidade</th>
+            <th class="align-content-center"></th>
+
+
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (ProjetoStag026.Models.Paciente paciente in ViewBag.Paciente)
+        {
+
+            <tr id="paciente-@paciente.ID">
+                <td class="align-content-center">@paciente.ID</td>
+                <td class="align-content-center"><a href="~/Paciente/Paciente?id=@paciente.ID">@paciente.Nome</a></td>
+                <td class="align-content-center">@paciente.sexo</td>
+                <td class="align-content-center">@paciente.data.Date.ToString("dd/MM/yyyy") </td>
+                <td class="align-content-center">@paciente.Telefone</td>
+                <td class="align-content-center">@paciente.Naturalidade</td>
+                @if (Session["Medico"] == null)
+                {
+
+                    <td class="align-content-center">
+                        <a href="#" onclick="excluir(@paciente.ID);">Excluir</a>
+
+                    </td>
+                }
+                else
+                {
+                    <td class="align-content-center"></td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+<script type="text/javascript">
+    function excluir(pacienteId) {
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            url: "@Url.Action("Excluir","Paciente")", // webmethod or web serivces URL
+            data: { id: pacienteId },
+            complete:
+                function validar(jqXHR, resposta) {
+                    if (jqXHR.responseJSON == "Sim") {
+                        $("#paciente-" + pacienteId).html("");
+                    } else {
+                        alert("Erro ao excluir");
+                    }
+                },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+            }
+        });
+
+
+    }
+
+</script>
+
+
+
