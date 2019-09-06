@@ -115,11 +115,11 @@
     var hpp = "@ViewBag.Historia.HPP";
     var hf = " @ViewBag.Historia.HF";
     var social = "@ViewBag.Historia.HistoriaSocial";
-    var cmop = "";
+    var cmop = [];
      var observacao = " @ViewBag.Prontuario.Observacoes";
 
     var contador = 0;
-    var totalComp = @ViewBag.Componente.Count;;
+    var totalComp = @ViewBag.Componente.Count;
 </script>
 
 @if (ViewBag.Componente != null)
@@ -127,25 +127,36 @@
 
     foreach (var item in ViewBag.Componente)
     {
-    <script>cmop+=("@item.Componente");
-        contador++;
-    </script>
-
-    <script>
-        if (contador < totalComp) {
-        cmop+=(",");}</script>
+        <script>
+        if ("@item.Componente" != "") {
+            cmop += ("@item.Componente");
+                cmop += (",");
+        }
+        </script>
     }
 }
-else
-{
-    <script>
-        cmop.push("Não possui nenhuma alergia");
-    </script>
 
-}
+<script>
+    $(function () {
+        var contador = 0;
+        cmop.forEach(function (item) {
+
+            if (item != "") {
+                contador++;
+            }
+
+        });
+        if (contador == 0) {
+            cmop = "Não possui alergia";
+        }
+    });
+</script>
+
+
 <script>
 
     $(function () {
+
         $("#tags").text(nome);
         $("#HPP").text(hpp);
         $("#HF").text(hf);

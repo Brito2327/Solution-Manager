@@ -126,7 +126,7 @@
                         </li>
                         <li class="form-control list-group-item d-flex justify-content-between align-items-center">
                             Componente Alergico
-                            <span class="badge badge-primary badge-pill"> @ViewBag.Historia.HF</span>
+                            <span class="badge badge-primary badge-pill" id="componentes"> </span>
                         </li>
 
                         <li class="form-control list-group-item d-flex justify-content-between align-items-center">
@@ -209,14 +209,18 @@
 @foreach (var item in ViewBag.Componente)
 {
     <script>
-        if (@item.Componente != "") {
+        if ("@item.Componente"!="") {
             compoentes.push("@item.Componente");
         }
     </script>
 }
 
 <script>
+
+    
+
     $(function () {
+
         idPaciente = $("#pacienteId").val();
         $.ajax({
             type: 'POST',
@@ -244,13 +248,36 @@
     });
 
 </script>
+<script>
+    $(function () {
+        var alergias;
+        var contador = 0;
+        compoentes.forEach(function (item) {
+
+            if (item!="") {
+                alergias += item + ",";
+                contador++;
+            }
+
+        });
+        if (contador == 0) {
+            alergias = "Não possui alergia";
+        }
+        $("#componentes").text(alergias);
+    });
+
+</script>
 
 <script>
 
     function myFunction(x) {
-        if (compoentes != null) {
-            AbriModal();
-        }
+        compoentes.forEach(function (item) {
+
+            if (item != "") {
+                AbriModal();
+                return;
+            }
+        });
     }
 
     var modal = document.getElementById("myModal");
