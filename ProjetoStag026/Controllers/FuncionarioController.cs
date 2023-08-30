@@ -1,13 +1,13 @@
-﻿using ProjetoStag026.DAO;
-using ProjetoStag026.Filtros;
-using ProjetoStag026.Models;
+﻿using ManagerSolution.DAO;
+using ManagerSolution.Filtros;
+using ManagerSolution.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ProjetoStag026.Controllers
+namespace ManagerSolution.Controllers
 {[FiltroF]
     public class FuncionarioController:Controller
     {
@@ -29,7 +29,7 @@ namespace ProjetoStag026.Controllers
             Categoria categoria = new Categoria();
             categoria.Atendente = true;
             cat.Cadastrar(categoria);
-            usuario.CategoriaId = categoria.Id;
+            usuario.Categoria = categoria.Id;
             us.Cadastrar(usuario);
             funcionario.UsuarioId = usuario.ID;
 

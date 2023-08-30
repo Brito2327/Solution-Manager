@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ProjetoStag026.Models
+namespace ManagerSolution.Models
 {
     public class Componente_Paciente
     {

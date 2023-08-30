@@ -1,11 +1,9 @@
-﻿using ProjetoStag026.Models;
-using System;
-using System.Collections;
+﻿using ManagerSolution.Models;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
-namespace ProjetoStag026.DAO
+namespace ManagerSolution.DAO
 {
     public class UsuarioDao
     {
@@ -60,7 +58,7 @@ namespace ProjetoStag026.DAO
                 }
             }
         }
-        public Usuario BuscaPorId(int id)
+        public Usuario BuscaPorId(long id)
         {
             using (var contexto = new ConecaoContext())
             {
@@ -72,8 +70,12 @@ namespace ProjetoStag026.DAO
 
         public  Usuario Busca(string login, string senha)
         {
+            
+
+
             using (var contexto = new ConecaoContext())
             {
+
                 return contexto.Usuario.FirstOrDefault(u => u.User == login && u.Password == senha);
             }
         }

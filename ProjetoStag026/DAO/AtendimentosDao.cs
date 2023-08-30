@@ -1,9 +1,9 @@
-﻿using ProjetoStag026.Models;
+﻿using ManagerSolution.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProjetoStag026.DAO
+namespace ManagerSolution.DAO
 {
     public class AtendimentosDao
     {
@@ -93,7 +93,7 @@ namespace ProjetoStag026.DAO
         {
             using (var contexto = new ConecaoContext())
             {
-                return contexto.Atendimentos.Where(p => p.MedicoId == medico.ID).ToList();
+                return contexto.Atendimentos.Where(p => p.Medico.ID == medico.ID).ToList();
 
             }
         }

@@ -1,11 +1,11 @@
-﻿using ProjetoStag026.DAO;
-using ProjetoStag026.Filtros;
-using ProjetoStag026.Models;
+﻿using ManagerSolution.DAO;
+using ManagerSolution.Filtros;
+using ManagerSolution.Models;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace ProjetoStag026.Controllers
+namespace ManagerSolution.Controllers
 {
     public class ConsultaController : Controller
     {
@@ -45,8 +45,8 @@ namespace ProjetoStag026.Controllers
             AtendimentosDao atend = new AtendimentosDao();
             Atendimentos atendimento = new Atendimentos();
             atendimento.data = agendamento.data;
-            atendimento.MedicoId = agendamento.MedicoId;
-            atendimento.PacienteId = agendamento.PacienteId;
+            atendimento.Medico.ID = agendamento.MedicoId;
+            atendimento.Paciente.ID = agendamento.PacienteId;
             atendimento.Plano = agendamento.Plano;
 
             atend.Cadastrar(atendimento);

@@ -6,11 +6,11 @@ using PagedList;
 using Rotativa;
 using Rotativa.Options;
 using System.Web.Mvc;
-using ProjetoStag026.DAO;
-using ProjetoStag026.Models;
-using ProjetoStag026.Filtros;
+using ManagerSolution.DAO;
+using ManagerSolution.Models;
+using ManagerSolution.Filtros;
 
-namespace ProjetoStag026.Controllers
+namespace ManagerSolution.Controllers
 {
     public class RelatoriosController:Controller
     {
@@ -30,7 +30,7 @@ namespace ProjetoStag026.Controllers
             {
                 foreach (var medico in me.Select())
                 {
-                    if (item.MedicoId == medico.ID)
+                    if (item.Medico.ID == medico.ID)
                     {
                         medicos.Add(medico.nome);
                     }
@@ -41,7 +41,7 @@ namespace ProjetoStag026.Controllers
             {
                 foreach (var paciente in dao.Select())
                 {
-                    if (item.PacienteId == paciente.ID)
+                    if (item.Paciente.ID == paciente.ID)
                     {
                         pacientes.Add(paciente.Nome);
                     }

@@ -1,10 +1,10 @@
-﻿using ProjetoStag026.DAO;
-using ProjetoStag026.Models;
+﻿using ManagerSolution.DAO;
+using ManagerSolution.Models;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace ProjetoStag026.Controllers
+namespace ManagerSolution.Controllers
 {
     public class UsuarioController : Controller
     {
@@ -24,7 +24,7 @@ namespace ProjetoStag026.Controllers
                 foreach (var cate in nomes)
                 {
 
-                    if (usu.CategoriaId == cate.Id)
+                    if (usu.Categoria == cate.Id)
                     {
                         if (cate.Medico)
                         {
@@ -71,7 +71,7 @@ namespace ProjetoStag026.Controllers
 
 
             UsuarioDao dao = new UsuarioDao();
-            usuario.CategoriaId = categoria.Id;
+            usuario.Categoria = categoria.Id;
             dao.Cadastrar(usuario);
             return RedirectToAction("Index");
         }

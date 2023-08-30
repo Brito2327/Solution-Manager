@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProjetoStag026.Models;
+using ManagerSolution.Models;
 using System;
 
-namespace ProjetoStag026.DAO
+namespace ManagerSolution.DAO
 {
     public class ConecaoContext : DbContext
     {
@@ -36,7 +36,11 @@ namespace ProjetoStag026.DAO
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.
-                    UseSqlServer("Server=tcp:dbcomponente.database.windows.net,1433;Initial Catalog=sistema;Persist Security Info=False;User ID=alexzao;Password=a1e2i3o4@;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+                    UseSqlServer(@"Server=maneger-solution.c3xxxqo6rkcn.us-east-1.rds.amazonaws.com,1433;
+                                Database=sm-desenvolvimento;
+                                User Id=ManegerSolution;
+                                Password=A1e2i3o4;");
+                //Server=myServerAddress,11433;Database=myDataBase;User Id=myUsername;Password=myPassword;")
             }
         }
       

@@ -1,10 +1,10 @@
-﻿using ProjetoStag026.Models;
+﻿using ManagerSolution.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ProjetoStag026.DAO
+namespace ManagerSolution.DAO
 {
     public class MedicoDao
     {
@@ -77,7 +77,7 @@ namespace ProjetoStag026.DAO
             }
         }
 
-        public Medico BuscaUser(int UsuarioId)
+        public Medico BuscaUser(long UsuarioId)
         {
             using (var contexto = new ConecaoContext())
             {

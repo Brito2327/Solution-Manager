@@ -1,12 +1,12 @@
-﻿using ProjetoStag026.DAO;
-using ProjetoStag026.Filtros;
-using ProjetoStag026.Models;
+﻿using ManagerSolution.DAO;
+using ManagerSolution.Filtros;
+using ManagerSolution.Models;
 using System;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ProjetoStag026.Controllers
+namespace ManagerSolution.Controllers
 {
     [FiltroFuncionarioMedico]
     public class PacienteController : Controller
@@ -42,7 +42,7 @@ namespace ProjetoStag026.Controllers
             //adicionando o id
             categoria.Paciente = true;
             cat.Cadastrar(categoria);
-            usuario.CategoriaId = categoria.Id;
+            usuario.Categoria = categoria.Id;
             us.Cadastrar(usuario);
             end.Cadastrar(endereco);
             if (Imagem == null)
@@ -77,7 +77,7 @@ namespace ProjetoStag026.Controllers
             Paciente paciente = dao.BuscaPorId(id);
             Endereco endereco = end.BuscaPorId(paciente.EnderecoId);
             Usuario usuario = us.BuscaPorId(paciente.UsuarioId);
-            Categoria categoria = cat.BuscaPorId(usuario.CategoriaId);
+            Categoria categoria = cat.BuscaPorId(usuario.Categoria);
 
             String tipo = "";
             if (categoria.Medico == true)

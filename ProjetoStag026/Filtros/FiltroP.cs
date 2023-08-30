@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace ProjetoStag026.Filtros
+namespace ManagerSolution.Filtros
 {
     public class FiltroP : ActionFilterAttribute
     {

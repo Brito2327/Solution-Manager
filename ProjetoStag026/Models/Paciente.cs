@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace ProjetoStag026.Models
+namespace ManagerSolution.Models
 {
+    [Table("Paciente", Schema = "sm-local")]
     public class Paciente
     {
         public int ID{get;set;}
@@ -13,11 +15,11 @@ namespace ProjetoStag026.Models
         public Endereco Endereco { get; set; }
         public int EnderecoId { get; set; }
         public string sexo { get; set; }
-        public DateTime data { get; set; }
+        public DateTime DataNascimento { get; set; }
         public string Telefone { get; set; }
         public string Naturalidade { get; set; }
         public Usuario Usuario { get; set; }
-        public int UsuarioId { get; set; }
+        public long UsuarioId { get; set; }
         public byte[] imagem { get; set; }
 
 

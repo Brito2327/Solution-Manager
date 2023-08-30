@@ -1,9 +1,10 @@
-﻿using ProjetoStag026.DAO;
-using ProjetoStag026.Models;
+﻿using ManagerSolution.DAO;
+using ManagerSolution.Enum;
+using ManagerSolution.Models;
 using System;
 using System.Web.Mvc;
 
-namespace ProjetoStag026.Controllers
+namespace ManagerSolution.Controllers
 {
     public class LoginController : Controller
     {
@@ -20,11 +21,9 @@ namespace ProjetoStag026.Controllers
             UsuarioDao dao = new UsuarioDao();
             Usuario usuario = dao.Busca(login, Senha);
             if (usuario != null)
-            {
-                CategoriasDAO cat = new CategoriasDAO();
-                Categoria categoria = cat.BuscaPorId(usuario.CategoriaId);
+            {   
 
-                if (usuario != null && categoria.Paciente == true)
+                if (usuario != null && (ECategoriaUsurio)usuario.Categoria == ECategoriaUsurio.Paciente)
                 {
                     PacienteDao paci = new PacienteDao();
                     Paciente paciente = paci.BuscaUser(usuario.ID);
@@ -32,7 +31,7 @@ namespace ProjetoStag026.Controllers
 ;
                     valida = "Cliente";
                 }
-                else if (usuario != null && categoria.Medico == true)
+                else if (usuario != null && (ECategoriaUsurio)usuario.Categoria == ECategoriaUsurio.Medico)
                 {
                     MedicoDao me = new MedicoDao();
                     Medico medico = me.BuscaUser(usuario.ID);
@@ -40,7 +39,7 @@ namespace ProjetoStag026.Controllers
                     
                     valida = "Medico";
                 }
-                else if (usuario != null && categoria.Atendente == true)
+                else if (usuario != null && (ECategoriaUsurio)usuario.Categoria == ECategoriaUsurio.Atendente)
                 {
                     FuncionarioDao fun = new FuncionarioDao();
                     Funcionario funcionario = fun.BuscaUser(usuario.ID);

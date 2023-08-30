@@ -1,4 +1,4 @@
-﻿namespace ProjetoStag026.Models
+﻿namespace ManagerSolution.Models
 {
     public class Endereco
     {

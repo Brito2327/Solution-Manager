@@ -1,8 +1,8 @@
-﻿using ProjetoStag026.Models;
+﻿using ManagerSolution.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProjetoStag026.DAO
+namespace ManagerSolution.DAO
 {
     public class AnamneseDao
     {

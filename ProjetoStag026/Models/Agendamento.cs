@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace ProjetoStag026.Models
+namespace ManagerSolution.Models
 {
+    [Table("Agendamento", Schema = "sm-local")]
     public class Agendamento
     {
         public int Id { get; set; }

@@ -1,12 +1,12 @@
-﻿using ProjetoStag026.DAO;
-using ProjetoStag026.Filtros;
-using ProjetoStag026.Models;
+﻿using ManagerSolution.DAO;
+using ManagerSolution.Filtros;
+using ManagerSolution.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
-namespace ProjetoStag026.Controllers
+namespace ManagerSolution.Controllers
 {
     public class AgendamentoController : Controller
     {

@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace ProjetoStag026.Models
+namespace ManagerSolution.Models
 {
+    [Table("Funcionario", Schema = "sm-local")]
     public class Funcionario
     {
-        public int ID { get; set; }
+        public long ID { get; set; }
         public string Nome { get; set; }
         public Usuario Usuario { get; set; }
-        public int UsuarioId { get; set; }
+        public long UsuarioId { get; set; }
     }
 }

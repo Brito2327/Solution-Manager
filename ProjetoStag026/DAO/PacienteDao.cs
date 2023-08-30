@@ -1,11 +1,11 @@
-﻿using ProjetoStag026.Models;
+﻿using ManagerSolution.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace ProjetoStag026.DAO
+namespace ManagerSolution.DAO
 {
     public class PacienteDao
     {
@@ -40,7 +40,7 @@ namespace ProjetoStag026.DAO
                     {
                         item.Nome = paciente.Nome;
                         item.sexo = paciente.sexo;
-                        item.data = paciente.data;
+                        item.DataNascimento = paciente.DataNascimento;
                         item.Telefone = paciente.Telefone;
                         item.Naturalidade = paciente.Naturalidade;
                         contexto.Paciente.Update(item);
@@ -82,7 +82,7 @@ namespace ProjetoStag026.DAO
         {
             throw new NotImplementedException();
         }
-        public Paciente BuscaUser(int UsuarioId)
+        public Paciente BuscaUser(long UsuarioId)
         {
             using (var contexto = new ConecaoContext())
             {
