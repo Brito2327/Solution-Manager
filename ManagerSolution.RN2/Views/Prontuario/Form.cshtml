@@ -1,0 +1,253 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<section>
+    <div class="row ">
+        <div class="form-group float-left">
+            
+                <div class="form-group">
+                    
+                    <h2>Dados</h2>
+                    <div class="row">
+                        <div class="col-5">
+                            <label for="tags">Paciente</label>
+                            <input type="text" id="tags" name="nomePaciente" class="form-control ">
+                        </div>
+
+                    </div>
+                    
+                    <h2>Historia Patológica Pregressa</h2>
+                    <div class="row">
+                        <div class="col-5">
+                            <label for="historia">HPP(História patológica pregressa)</label>
+                            <textarea class="form-control" id="Hpp" placeholder="História..." name="historia.HPP"></textarea>
+                        </div>
+
+                        <div class="col-5">
+                            <label for="hf">HF( Histórico familiar)</label>
+                            <input type="text" id="Hf" class="form-control">
+                        </div>
+                        <div class="col-5">
+                            <label for="historiaSocial">HistoriaSocial</label>
+                            <input type="text" id="Historio" class="form-control">
+                        </div>
+                        <div class="col-5 ">
+                            <div class="row container1">
+                                <input type="checkbox" onclick="desabilitar('sim','sim')" />
+                                <label for="comp" style="padding-right:20px;">Componente Alergico</label>
+                                
+                                <input type="text" id="tel" disabled class="form-control ">
+                                <button class="add_form_field btn btn-primary" id="cpm" disabled>
+                                    +
+                                </button>
+                               
+                               
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <label for="observacao">Observação</label>
+                            <textarea class="form-control" placeholder="Observação..."id="obs"></textarea>
+                        </div>
+                    </div>
+                    </div>
+                    
+                <div class="form-group">
+                    <button type="button"  onclick="cadastrar()" class="btn btn-primary">Criar</button>
+                </div>
+           
+        </div>
+    </div>
+</section>
+<script>
+    var lista = [];
+
+</script>
+@foreach (var item in ViewBag.Pacientes)
+{
+    <script>
+     lista.push("@item.Nome");
+    </script>
+}
+<script>
+    $(function () {
+        $("#tags").autocomplete({
+            source: lista
+        });
+    });
+</script>
+
+<script>
+    var listaComponentes = [];
+
+</script>
+@foreach (var componentes in ViewBag.Componentes)
+{
+    <script>
+        listaComponentes.push("@componentes");
+    </script>
+}
+<script>
+    $(function () {
+        $("#tel").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista1").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista2").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista3").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista4").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista5").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista6").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista7").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista8").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista9").autocomplete({
+            source: listaComponentes
+        });
+        $("#lista10").autocomplete({
+            source: listaComponentes
+        });
+
+    });
+</script>
+<script>
+    function desabilitar(valor,valor2) {
+        var status = document.getElementById('tel').disabled;
+
+        if (valor == 'sim' && !status) {
+            document.getElementById('tel').disabled = true;
+        } else {
+            document.getElementById('tel').disabled = false;
+        }
+        if (valor2 == 'sim' && !status) {
+            document.getElementById('cpm').disabled = true;
+        } else {
+            document.getElementById('cpm').disabled = false;
+        }
+    }
+
+    $(document).ready(function () {
+        var max_fields = 10;
+        var wrapper = $(".container1");
+        var add_button = $(".add_form_field");
+
+        var x = 1;
+        $(add_button).click(function (e) {
+            e.preventDefault();
+            if (x < max_fields) {
+                x++;
+                $(wrapper).append('<div class="row " style="width:100%;"><input type="text" id="lista' + x + '" class="form-control "><button  class="delete bnt btn-primary">-</button ></div> '); //add input box
+                replaceName();
+            } else {
+                alert('limite de componetentes excedido')
+            }
+
+        });
+
+        $(wrapper).on("click", ".delete", function (e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            x--;
+            replaceName();
+        })
+    });
+    function replaceName() {
+        wrapper.find("input:text").each(function () {
+            $(this).attr('name', "Texto" + (+$(this).index("input:text") + 1));
+            $(this).val($(this).attr('name'))
+        });
+    }
+
+    
+    function cadastrar() {
+
+        var nomep = $("#tags").val();
+        var hpp = $("#Hpp").val();
+        var hf = $("#Hf").val();
+        var historia = $("#Historio").val();
+        var observacao = $("#obs").val();
+        var comp1 = $("#tel").val();
+
+        //lista de compoentes
+
+        var x1 = $("#lista1").val();
+        var x2 = $("#lista2").val();
+        var x3 = $("#lista3").val();
+        var x4 = $("#lista4").val();
+        var x5 = $("#lista5").val();
+        var x6 = $("#lista6").val();
+        var x7 = $("#lista7").val();
+        var x8 = $("#lista8").val();
+        var x9 = $("#lista9").val();
+        var x10 = $("#lista10").val();
+
+        var ListaCompoente = [];
+        ListaCompoente.push(x1);
+        ListaCompoente.push(x2);
+        ListaCompoente.push(x3);
+        ListaCompoente.push(x4);
+        ListaCompoente.push(x5);
+        ListaCompoente.push(x6);
+        ListaCompoente.push(x7);
+        ListaCompoente.push(x8);
+        ListaCompoente.push(x9);
+        ListaCompoente.push(x10);
+        ListaCompoente.push(comp1);
+
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            cache: false,
+            url: "@Url.Action("Cadastrar","Prontuario")", // webmethod or web serivces URL
+            data: {
+                nomePaciente:nomep,
+                Hpp: hpp,
+                Hf: hf,
+                Historia: historia,
+                Obs: observacao,
+                lista: ListaCompoente
+            },
+            complete:
+                function validar(jqXHR, resposta) {
+                    if (jqXHR.responseText == "\"Sim\"") {
+                        window.location.href = "/Prontuario/Index";
+                    } else {
+                      
+                    }
+                },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error - ' + errorThrown);
+            }
+        });
+
+
+    }
+
+    
+
+</script>
+

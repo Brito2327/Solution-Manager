@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutPaciente.cshtml";
+}
+
+
+<table class="table table-hover" >
+    <thead>
+
+        <tr>
+            <th class="align-content-center">Id</th>
+            <th class="align-content-center">Data</th>
+            <th class="align-content-center">Observações</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var consulta in @ViewBag.Consultas)
+        {
+            <tr>
+                <td class="align-content-center">@consulta.ID</td>
+                <td>@consulta.Data </td>
+                <td>@consulta.Observacao </td>
+                <td>
+                    <a href="~/Consulta/ConsultaIndividual?id=@consulta.ID">Ver Mais</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

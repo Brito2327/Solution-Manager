@@ -1,0 +1,12 @@
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.Common\bin\Debug\net7.0\ManagerSolution.Common.deps.json
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.Common\bin\Debug\net7.0\ManagerSolution.Common.dll
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.Common\bin\Debug\net7.0\ManagerSolution.Common.pdb
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.Common\obj\Debug\net7.0\ManagerSolution.Common.csproj.AssemblyReference.cache
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.Common\obj\Debug\net7.0\ManagerSolution.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.Common\obj\Debug\net7.0\ManagerSolution.Common.AssemblyInfoInputs.cache
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.Common\obj\Debug\net7.0\ManagerSolution.Common.AssemblyInfo.cs
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.Common\obj\Debug\net7.0\ManagerSolution.Common.csproj.CoreCompileInputs.cache
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.Common\obj\Debug\net7.0\ManagerSolution.Common.dll
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.Common\obj\Debug\net7.0\refint\ManagerSolution.Common.dll
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.Common\obj\Debug\net7.0\ManagerSolution.Common.pdb
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.Common\obj\Debug\net7.0\ref\ManagerSolution.Common.dll

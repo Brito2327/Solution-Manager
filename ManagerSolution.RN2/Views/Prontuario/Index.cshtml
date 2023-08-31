@@ -1,0 +1,74 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Content/bootstrap.min.css" type="text/css" />
+<div>
+
+    <a href="~/Prontuario/Form" class="btn btn-primary ">
+        Novo Prontuario
+    </a>
+</div>
+<table class="table table-hover">
+    <thead>
+
+        <tr>
+
+            <th class="align-content-center">Id</th>
+            <th class="align-content-center">Paciente</th>
+            <th class="align-content-center">Observações</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (int p = 0; p < ViewBag.Prontuario.Count; p++)
+        {
+
+            <tr id="Prontuario-@ViewBag.Prontuario[p].ID">
+                <td class="align-content-center">@ViewBag.Prontuario[p].ID</td>
+                <td class="align-content-center">@ViewBag.Paciente[p].Nome</td>
+                <td class="align-content-center">@ViewBag.Prontuario[p].Observacoes</td>
+                <td>
+                    <a href="~/Prontuario/Prontuario/@ViewBag.Prontuario[p].ID">Visualizar</a>
+                </td>
+                <td class="align-content-center">
+                    <a href="~/Consulta/Index?pacienteid=@ViewBag.Paciente[p].ID">Consultas</a>
+                </td>
+                <td class="align-content-center">
+                    <button type="button" class="btn btn-primary"  onclick="excluir(@ViewBag.Prontuario[p].ID);">Excluir</button>
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    function excluir(Prontuario) {
+        var confirmado = confirm('Deseja deletar o Prontuario do paciente?');
+        if (confirmado) {
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                cache: false,
+                url: "@Url.Action("Excluir","Prontuario")", // webmethod or web serivces URL
+                data: { id: Prontuario },
+                complete:
+                    function validar(jqXHR, resposta) {
+                        if (jqXHR.responseJSON == "Sim") {
+                            $("#Prontuario-" + Prontuario).html("");
+                        } else {
+                            alert("Erro ao excluir");
+                        }
+                    },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error - ' + errorThrown);
+                }
+            });
+        }
+    }
+</script>

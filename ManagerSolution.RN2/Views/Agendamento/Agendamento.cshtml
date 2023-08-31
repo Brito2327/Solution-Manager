@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div>
+        @Html.ActionLink("Voltar para a lista de Agendamento", "Index", "Agendamento")
+    </div>
+       
+
+    
+
+    <div style="width:100%">
+        <h2>Dados do Agendamento</h2>
+
+        <ul class="form list-group">
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Médico
+                <span class=" badge badge-primary badge-pill"> @ViewBag.Medico.nome</span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Paciente
+                <span class=" badge badge-primary badge-pill"> @ViewBag.Paciente.Nome</span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Data da Consulta
+                <span class="badge badge-primary badge-pill">@ViewBag.Agendamento.data.Date.ToString("dd/MM/yyyy")</span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Hora
+                <span class="badge badge-primary badge-pill"> @ViewBag.agendamento.hora</span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Observações
+                <span class="badge badge-primary badge-pill"> @ViewBag.agendamento.observacao</span>
+            </li>
+        </ul>
+    </div>
+</div>

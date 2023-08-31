@@ -1,0 +1,91 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutPaciente.cshtml";
+}
+
+<div style="width:100%">
+    <header class="popover-header">
+        <a href="~/Relatorios/ClienteProntuario" target="_blank"><h3>Imprimir</h3></a>
+    </header>
+    <form>
+
+
+        <h2>Dados do Prontuario</h2>
+
+
+        <ul class="form list-group">
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Paciente
+                <span class=" badge badge-primary badge-pill" id="tags"> </span>
+            </li>
+            <h2>Historia Patologica Pregressa</h2>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                HPP(história médica do paciente)
+                <span class="badge badge-primary badge-pill" id="HPP"></span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                HF(Histórico familiar)
+                <span class="badge badge-primary badge-pill" id="HF"> </span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                HistoriaSocial
+                <span class="badge badge-primary badge-pill" id="social"> </span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Componente Alergico
+                <span class="badge badge-primary badge-pill" id="componente"></span>
+            </li>
+
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Observações
+                <span class="badge badge-primary badge-pill" id="obs"> </span>
+            </li>
+
+        </ul>
+    </form>
+</div>
+
+<script>
+    var nome = "@ViewBag.Paciente.Nome";
+    var hpp = "@ViewBag.historia.HPP";
+    var hf = " @ViewBag.historia.HF";
+    var social = "@ViewBag.historia.HistoriaSocial";
+    var cmop = [];
+     var observacao = " @ViewBag.Prontuario.Observacoes";
+    var validador=0
+</script>
+
+@foreach (var item in ViewBag.Componente)
+{
+    if (item.Componente != "")
+    {
+        <script>
+            cmop.push('@item.Componente' + ",");
+            validador++;
+        </script>
+    }
+
+}
+<script>
+    $(function () {
+        if (validador == 0) {
+
+            cmop.push("Não possui nenhuma alergia");
+        }
+    });
+</script>
+
+
+<script>
+
+    $(function () {
+        $("#tags").text(nome);
+        $("#HPP").text(hpp);
+        $("#HF").text(hf);
+        $("#social").text(social);
+        $("#componente").text(cmop);
+        $("#obs").text(observacao);
+    });
+</script>
+
+

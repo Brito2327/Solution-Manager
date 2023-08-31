@@ -1,0 +1,119 @@
+﻿body {
+    padding-top: 0;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.maring0 div {
+    margin: 10px;
+}
+
+.background-full {
+    background-image: url(imagens/fundo-1.png);
+    padding: 0px;
+    margin: 0px;
+    top: 0;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: 0.9;
+    background-size: cover;
+}
+
+.icon input[type=text] {
+    padding-left: 40px;
+}
+
+.icon input[type=password] {
+    padding-left: 40px;
+}
+
+.icon {
+    position: relative;
+    margin: 5px;
+}
+
+    .icon nav {
+        position: relative;
+        margin: 5px;
+    }
+
+    .icon i {
+        position: absolute;
+        left: 0;
+        top: 8px;
+        padding: 5px 15px;
+    }
+
+.login {
+    padding-top: 0;
+    padding-bottom: 20px;
+}
+    .login header {
+        position: relative;
+        margin: 5px;
+        margin-bottom:30px;
+    }
+    .login h4{
+        color:deepskyblue;
+        font-display:auto;
+        margin-top:20px;
+    }
+
+.login {
+    width: 360px;
+    margin: 0 auto;
+    margin-top: 200px;
+    margin-bottom: 0px;
+    padding: 30px;
+    padding-top: 2px;
+    padding-bottom: 15px;
+    background-color: rgba(169,245,242,0.3);
+}
+.loginTentativa {
+    color: rgb(255, 46, 57);
+}
+
+.rodape {
+    width: 360px;
+    margin: 0 auto;
+    margin-top: 0;
+    margin-bottom: 0px;
+    padding: 25px;
+    padding-top: 0px;
+    padding-bottom: 1px;
+    filter: opacity(alpha=60);
+    opacity: 0.3;
+}
+
+    .rodape p {
+        color: #01DFD7;
+    }
+
+.footer {
+    position: fixed;
+    bottom: 0;
+}
+
+.agenda h2{
+    position: absolute;
+    left: 90px;
+    top: 118px;
+    padding: 5px 15px
+}
+.Componente {
+    width:100%;
+}

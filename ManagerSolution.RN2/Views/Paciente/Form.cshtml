@@ -1,0 +1,247 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutFuncionario.cshtml";
+}
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.mask.js"></script>
+<div>
+
+    @using (Html.BeginForm("Cadastrar", "Paciente", null,FormMethod.Post, new { id = "formImg", enctype = "multipart/form-data" }))
+    {<div>
+            <div>
+                <h3>Dados</h3>
+            </div>
+
+            <div class="form-group float-right">
+                <label for="imagem">Imagem de perfil</label>
+                <input type="file" class="form-control-file" accept=".png" name="Imagem">
+            </div>
+            <label>Nome</label>
+            <input id="nome"  name="paciente.Nome"  class="form-control" />
+
+            <label>CPF</label>
+            <input id="cpf"  name="paciente.CPF" class="form-control" />
+
+            <label>Telefone ( )</label>
+            <input id="tel" type="tel" name="paciente.telefone" class="form-control" />
+
+
+            <label for="data">Data de nascimento</label>
+            <input id="data" type="date" name="paciente.data"  class="form-control" />
+
+            <label>
+                Email
+            </label>
+            <input type="email"  class="form-control "
+                   data-rule-number="true"
+                   data-rule-required="true"
+                   id="user" name="usuario.User" value=" " />
+
+            <label for="senha">
+                Senha
+            </label>
+            <input type="password" id="senha" name="usuario.Password" class="form-control" />
+
+        </div>
+
+        <hr />
+        <h3>Endereço</h3>
+        <div class="row">
+            <div class="col-4">
+                <label for="rua">Rua</label>
+                <input id="rua" name="endereco.rua" class="form-control" required />
+            </div>
+            <div class="col-4">
+                <label for="bairro">Bairro</label>
+                <input id="bairro" name="endereco.Bairro" class="form-control" required />
+            </div>
+            <div class="col-4">
+                <label for="cidade">Cidade</label>
+                <input id="cidade" name="endereco.Cidade"  class="form-control" required />
+            </div>
+
+            <div class="col-4">
+                <label for="numero">Numero</label>
+                <input id="num"  name="endereco.Numero" class="form-control" required />
+            </div>
+            <div class="col-4">
+                <label for="sexo">Sexo</label>
+                <select id="sexo" name="Paciente.sexo" class="form-control">
+                    <option class="form-control">Masculino</option>
+                    <option class="form-control">Feminino</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <label for="naturalidade">Naturalidade</label>
+                <input id="naturalidade" name="Paciente.Naturalidade" class="form-control" required />
+            </div>
+        </div>
+    }
+
+    <button type="button" class="btn btn-primary" onclick="verificarUserExistente()">Cadastrar</button>
+
+
+
+
+
+
+
+</div>
+<script>
+
+    $(document).ready(function () {
+        $("#cpf").mask('000.000.000-00');
+    });
+     function verificarUserExistente() {
+
+            var nome = $("#nome").val();
+            var user = $("#user").val();
+
+         $.ajax({
+             type: 'POST',
+             dataType: 'json',
+             cache: false,
+             url: "@Url.Action("verificarExistente", "Paciente")", // webmethod or web serivces URL
+             data:
+                {
+                    Nome: nome,
+                    User: user
+                },
+                complete:
+                    function validar(jqXHR, resposta) {
+                        if (jqXHR.responseJSON == "Sim") {
+                            $("#user").tooltip("destroy")
+                                .data("title", "Usuario ja existente")
+                                .addClass("is-invalid")
+                                .tooltip();
+                        } else {
+                            cadastrar();
+                        }
+                    },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error - ' + errorThrown);
+                }
+            });
+
+     }
+
+    function cadastrar() {
+
+        var nome = $("#nome").val();
+        var user = $("#user").val();
+        var cpf = $("#cpf").val();
+        var tel = $("#tel").val();
+        var senha = $("#senha").val();
+        var data = $("#data").val();
+        var rua = $("#rua").val();
+        
+        var bairro = $("#bairro").val();
+        var cidade = $("#cidade").val();
+        var sexo = $("#sexo").val();
+        var naturalidade = $("#naturalidade").val();
+
+
+
+        CampoVazio();
+
+         if (nome != "" && user != "" & cpf != "" && tel != ""
+            && senha != "" && data != "" && rua != "" && bairro != ""
+             && cidade != "" && sexo != "" && naturalidade != "") {
+             if (TestaCPF(cpf)) {
+
+                 //var formularioImg = new FormData($('#formImg')[0]);
+                 //$(formularioImg).submit();
+                 $('#formImg').submit();
+             } else {
+                 $("#cpf").tooltip("destroy")
+                     .data("title", "CPF Inválido")
+                     .addClass("is-invalid")
+                     .tooltip();
+                 alert("Cpf inválido");
+
+             }
+        } else {
+             alert("Algum campo obrigatorio foi deixado vazio");
+             //location.reload();
+        }
+
+
+    }
+
+
+    function CampoVazio() {
+        var user = $("#user").val();
+        var cpf = $("#cpf").val();
+        var senha = $("#senha").val();
+        var data = $("#data").val();
+        var nome = $("#nome").val();
+
+        if (cpf == "" || senha == "" || user == "" || data == "" || nome== "") {
+
+            if (cpf == "") {
+                $("#cpf").tooltip("destroy")
+                    .data("title", "Campo obrigatório")
+                    .addClass("is-invalid")
+                    .tooltip();
+            }
+            if (senha == "") {
+                $("#senha").tooltip("destroy")
+                    .data("title", "Campo obrigatório")
+                    .addClass("is-invalid")
+                    .tooltip();
+            }
+            if (user == "") {
+                $("#user").tooltip("destroy")
+                    .data("title", "Campo obrigatório")
+                    .addClass("is-invalid")
+                    .tooltip();
+            }
+            if (data == "") {
+                $("#data").tooltip("destroy")
+                    .data("title", "Campo obrigatório")
+                    .addClass("is-invalid")
+                    .tooltip();
+            }
+            if (nome == "") {
+                $("#nome").tooltip("destroy")
+                    .data("title", "Campo obrigatório")
+                    .addClass("is-invalid")
+                    .tooltip();
+            }
+
+        }
+    }
+
+    function TestaCPF(strCPF) {
+        var Soma;
+        var Resto;
+        Soma = 0;
+
+        strCPF = strCPF.replace(" ", ""); //tira espaço em branco
+        strCPF = strCPF.replace(".", ""); //tira ponto
+        strCPF = strCPF.replace(".", ""); //tira ponto
+        strCPF = strCPF.replace(".", ""); //tira ponto
+        strCPF = strCPF.replace("-", "");
+        if (strCPF == "00000000000") return false;
+
+        for (i = 1; i <= 9; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+        Resto = (Soma * 10) % 11;
+
+        if ((Resto == 10) || (Resto == 11)) Resto = 0;
+        if (Resto != parseInt(strCPF.substring(9, 10))) return false;
+
+        Soma = 0;
+        for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+        Resto = (Soma * 10) % 11;
+
+        if ((Resto == 10) || (Resto == 11)) Resto = 0;
+        if (Resto != parseInt(strCPF.substring(10, 11))) return false;
+        return true;
+    }
+
+</script>
+
+
+
+

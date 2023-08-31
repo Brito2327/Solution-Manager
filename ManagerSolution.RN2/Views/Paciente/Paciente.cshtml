@@ -1,0 +1,162 @@
+﻿@model ManagerSolution.RN.Models.Paciente
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/bootstrap.min.css" type="text/css" />
+
+<div>
+    <header class="popover-header">
+        @Html.ActionLink("Voltar para a lista de Paciente", "Index", "Paciente")
+
+    </header>
+
+    <div style="width:100%">
+        <h2>Dados Pessoais</h2>
+        @{
+            var base64 = Convert.ToBase64String(ViewBag.Paciente.imagem);
+            var imgsrc = string.Format("data:image/png;base64,{0}", base64);
+        }
+        <img src="@imgsrc" class="img-thumbnail float-right" style="width:143px;" alt="...">
+        <ul class="form list-group">
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Nome
+                <span class=" badge badge-primary badge-pill"> @ViewBag.Paciente.Nome</span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Data de Nascimento
+                <span class="badge badge-primary badge-pill">@ViewBag.Paciente.data.Date.ToString("dd/MM/yyyy")</span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Telefone
+                <span class="badge badge-primary badge-pill"> @ViewBag.Paciente.Telefone</span>
+            </li>
+        </ul>
+    </div>
+
+
+
+    <div style="width:100%">
+        <ul class="list-group">
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Email
+                <span class="badge badge-primary badge-pill">@ViewBag.Usuario.User</span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Senha
+                <span class="badge badge-primary badge-pill">@ViewBag.Usuario.Password</span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                sexo
+                <span class="badge badge-primary badge-pill">@ViewBag.Paciente.sexo</span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Naturalidade
+                <span class="badge badge-primary badge-pill">@ViewBag.Paciente.Naturalidade</span>
+            </li>
+            <div>
+                <h2>Endereço</h2>
+            </div>
+
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Rua
+                <span class="badge badge-primary badge-pill">@ViewBag.Endereco.rua</span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                numero
+                <span class="badge badge-primary badge-pill">@ViewBag.Endereco.Numero</span>
+            </li>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Bairro
+                <span class="badge badge-primary badge-pill">@ViewBag.Endereco.Bairro</span>
+            <li class="form-control list-group-item d-flex justify-content-between align-items-center">
+                Categoria
+                <span class="badge badge-primary badge-pill"> @ViewBag.Mensagem</span>
+            </li>
+        </ul>
+    </div>
+    <div class="modal">
+
+    </div>
+</div>
+<div>
+    <button onclick="edit()" class="btn btn-primary " data-toggle="modal" data-target="#myModal">Editar</button>
+</div>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog ">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">Cancelar</button>
+            </div>
+            <form action="~/Paciente/Update">
+
+
+                <div class="modal-body">
+
+                    <div>
+                        <h3>Dados</h3>
+                    </div>
+                    <label for="nome">Nome</label>
+                    <input id="nome" name="paciente.Nome" value="@ViewBag.Paciente.Nome" required class="form-control" />
+                    <input type="hidden" value="@ViewBag.Paciente.ID" name="paciente.ID" />
+
+                    <label for="data">Data de nascimento</label>
+                    <input id="data" type="date" value="@ViewBag.Paciente.data" name="paciente.data" required class="form-control" />
+
+
+
+                    <hr />
+                    <div>
+                        <h3>Endereço</h3>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-5">
+                            <label for="rua">Rua</label>
+                            <input id="rua " value="@ViewBag.Endereco.rua" name="endereco.rua" required class="form-control" />
+                            <input type="hidden" value="@ViewBag.Endereco.ID " name="endereco.ID" />
+                        </div>
+                        <div class="col-5">
+                            <label for="bairro">Bairro</label>
+                            <input id="bairro " value="@ViewBag.Endereco.Bairro" name="endereco.Bairro" required class="form-control" />
+                        </div>
+                        <div class="col-5">
+                            <label for="cidade">Cidade</label>
+                            <input id="cidade " value="@ViewBag.Endereco.Cidade" name="endereco.Cidade" class="form-control" />
+                        </div>
+
+                        <div class="col-5">
+                            <label for="numero">Numero</label>
+                            <input id="numero " value="@ViewBag.Endereco.Numero" name="endereco.Numero" required class="form-control" />
+                        </div>
+                        <div class="col-5">
+                            <label for="telefone">Telefone</label>
+                            <input id="telefone " value="@ViewBag.Paciente.Telefone" name="Paciente.Telefone" required class="form-control" />
+                        </div>
+                        <div class="col-5">
+                            <label for="sexo">Sexo</label>
+                            <input id="sexo " value="@ViewBag.Paciente.sexo" name="Paciente.sexo" required class="form-control" />
+                        </div>
+                        <div class="col-5">
+                            <label for="naturalidade">Naturalidade</label>
+                            <input id="naturalidade " value="@ViewBag.Paciente.Naturalidade" name="Paciente.Naturalidade" required class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit" data-dismiss="modal">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+

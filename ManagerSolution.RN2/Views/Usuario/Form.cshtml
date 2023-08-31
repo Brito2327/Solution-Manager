@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Form</title>
+</head>
+<body>
+    <div>
+        <form action="/Usuario/Cadastrar" method="post">
+            <label for="user">User:</label>
+            <input id="user" name="usuario.User" value="@ViewBag.Usuario.User" class="form-control" />
+
+
+            <label for="Password">Password</label>
+            <input id="password " name="usuario.Password" value="@ViewBag.Usuario.Password" class="form-control" />
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="paciente" value="true">
+                <label class="form-check-label" for="inlineCheckbox1">Paciente</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="atendente" value="true">
+                <label class="form-check-label" for="inlineCheckbox2">Fucionario</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="medico" value="true">
+                <label class="form-check-label" for="inlineCheckbox2">Médico</label>
+            </div>
+
+            <input type="submit" value="Cadastrar" />
+        </form>
+    </div>
+</body>
+</html>

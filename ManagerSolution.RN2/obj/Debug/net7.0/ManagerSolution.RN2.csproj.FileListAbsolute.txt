@@ -1,0 +1,5 @@
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.RN2\obj\Debug\net7.0\ManagerSolution.RN2.csproj.AssemblyReference.cache
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.RN2\obj\Debug\net7.0\ManagerSolution.RN2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.RN2\obj\Debug\net7.0\ManagerSolution.RN2.AssemblyInfoInputs.cache
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.RN2\obj\Debug\net7.0\ManagerSolution.RN2.AssemblyInfo.cs
+C:\Desenvolvimento Interno\Solution-Manager\ManagerSolution.RN2\obj\Debug\net7.0\ManagerSolution.RN2.csproj.CoreCompileInputs.cache

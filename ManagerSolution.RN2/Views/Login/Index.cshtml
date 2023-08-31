@@ -1,0 +1,83 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+<link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+<script src="https://use.fontawesome.com/f72947d947.js"></script>
+<link rel="stylesheet" type="text/css" href="htpps://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/font-awesome.css" />
+<div class="background-full"></div>
+
+<div class="login">
+   
+        <div class="row">
+            <img src="~/Content/imagens/Logo MS-03.png" />
+            <h4 class="text-center">Manager Solution</h4>
+        </div>
+  
+   
+        <label for="login">Login</label>
+        <div class="icon">
+            <div class="input-ima">
+                <i class="fa fa-user fa-lg fa-fw"></i>
+                <input type="text" id="login" class="form-control" placeholder="Usuario..." />
+            </div>
+        </div>
+        <div class="icon">
+            <div class="input-ima">
+                <i class="fa fa-unlock-alt fa-lg fa-fw"></i>
+                <input type="password" id="senha" class="form-control" required placeholder="Senha..." />
+                <label class="loginTentativa is-invalid" id="error" style="display:none"></label>
+            </div>
+        </div>
+        <button type="button" class="btn btn-secondary" onclick="logar()">Entrar</button>
+    
+
+</div>
+<div class="rodape">
+    <p>&copy; @DateTime.Now.Year -Solução Manager Doctor Sistem</p>
+</div>
+
+
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<script type="text/javascript">
+    function logar() {
+        var Login = $("#login").val();
+        var senha = $("#senha").val();
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                cache: false,
+                url: "@Url.Action("Autentica","Login")", // webmethod or web serivces URL
+                data: {
+                    login: Login,
+                    Senha: senha
+                },
+                complete:
+                    function validar(jqXHR, resposta) {
+                        if (jqXHR.responseJSON == "Funcionario") {
+                            window.location.href = "/Funcionario/Dashbord";
+                        } else if (jqXHR.responseJSON == "Medico") {
+                            window.location.href = "/Home";
+
+                        } else if (jqXHR.responseJSON == "Cliente") {
+                            window.location.href = "/Cliente";
+                        } else {
+                            loginError();
+                        }
+                    },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert('Error - ' + errorThrown);
+                }
+            });
+
+    }
+
+    function loginError() {
+
+        $("#error").css("display", "block");
+        $("#error").text("Login ou senha incorreta");
+    }
+</script>

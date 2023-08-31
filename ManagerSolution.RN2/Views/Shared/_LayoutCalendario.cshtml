@@ -1,0 +1,47 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="~/Content/imagens/Logo MS-01.png" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Manager Solution Relatório</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
+
+
+    <script src="https://use.fontawesome.com/f72947d947.js"></script>
+</head>
+<body>
+    <div>
+        <header>
+            <nav class="navbar navbar-inverse navbar-fixed-top col-md-6" style="height: 50px; background-color:black">
+                @if (Session["Paciente"] != null)
+                {
+                    <h2 style="color:aliceblue">Relatório do Paciente</h2>
+                }else{
+                <h2 style="color:aliceblue"> Relatórios de Atendimentos</h2>
+                }
+            </nav>
+        </header>
+
+        
+
+        <div class="marin0">
+
+            <div id="conteudo">
+                <div class="background-full"></div>
+                @RenderBody()
+            </div>
+
+            <hr />
+            <div class="footer">
+
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Solução  Manager Doctor System</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
