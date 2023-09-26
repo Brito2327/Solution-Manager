@@ -7,5 +7,7 @@
         ReadOnly = 1,
 
         SqlServer = 2,
+
+        teste = 3,
     }
 }
