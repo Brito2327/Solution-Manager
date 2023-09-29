@@ -10,7 +10,7 @@ namespace ManagerSolution.DAO
     {
         public void Cadastrar(Remedio remedio)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
 
                 contexto.Remedio.Add(remedio);
@@ -21,7 +21,7 @@ namespace ManagerSolution.DAO
 
         public IList<Remedio> Select()
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Remedio.ToList();
             }
@@ -33,7 +33,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == Idremedio)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         item.Nome = nome;
                         contexto.Remedio.Update(item);
@@ -49,7 +49,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == Idremedio)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         contexto.Remedio.Remove(item);
                         contexto.SaveChanges();
@@ -59,7 +59,7 @@ namespace ManagerSolution.DAO
         }
         public Remedio BuscaPorId(int id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Remedio
                     .Where(p => p.ID == id)

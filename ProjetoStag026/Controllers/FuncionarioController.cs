@@ -23,17 +23,17 @@ namespace ManagerSolution.Controllers
 
         public ActionResult Cadastrar(Funcionario funcionario,Usuario usuario)
         {
-            UsuarioDao us = new UsuarioDao();
-            FuncionarioDao dao = new FuncionarioDao();
-            CategoriasDAO cat = new CategoriasDAO();
-            Categoria categoria = new Categoria();
-            categoria.Atendente = true;
-            cat.Cadastrar(categoria);
-            usuario.Categoria = categoria.Id;
-            us.Cadastrar(usuario);
-            funcionario.UsuarioId = usuario.ID;
+            //UsuarioDao us = new UsuarioDao();
+            //FuncionarioDao dao = new FuncionarioDao();
+            //CategoriasDAO cat = new CategoriasDAO();
+            //Categoria categoria = new Categoria();
+            //categoria.Atendente = true;
+            //cat.Cadastrar(categoria);
+            //usuario.Categoria = categoria.Id;
+            //us.Cadastrar(usuario);
+            //funcionario.UsuarioId = usuario.ID;
 
-            dao.Cadastrar(funcionario);
+            //dao.Cadastrar(funcionario);
 
             return RedirectToAction("Index");
         }
@@ -65,7 +65,7 @@ namespace ManagerSolution.Controllers
 
             foreach (var agenda in lista)
             {
-                int id = agenda.PacienteId;
+                var id = agenda.Paciente.ID;
                 Paciente paciente = paDao.BuscaPorId(id);
                 listaPacientes.Add(paciente);
             }

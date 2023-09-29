@@ -9,7 +9,7 @@ using ManagerSolution.DAO;
 
 namespace ManagerSolution.Migrations
 {
-    [DbContext(typeof(ConecaoContext))]
+    [DbContext(typeof(GetConexao))]
     [Migration("20190904203207_first")]
     partial class first
     {

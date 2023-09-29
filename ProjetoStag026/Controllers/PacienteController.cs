@@ -1,6 +1,7 @@
 ﻿using ManagerSolution.DAO;
 using ManagerSolution.Filtros;
 using ManagerSolution.Models;
+using ManagerSolution.Sevices.PessoaService;
 using System;
 using System.Collections.Generic;
 using System.Web;
@@ -28,41 +29,20 @@ namespace ManagerSolution.Controllers
 
             return View();
         }
-
+        
         [HttpPost]
-        public ActionResult Cadastrar(Paciente paciente, Endereco endereco, Usuario usuario,  HttpPostedFileBase Imagem)
+        public ActionResult Cadastrar(Paciente paciente, Endereco endereco, Usuario usuario, HttpPostedFileBase Imagem)
         {
-            //iniciando instacia
-            PacienteDao pa = new PacienteDao();
-            EnderecoDao end = new EnderecoDao();
-            UsuarioDao us = new UsuarioDao();
-            CategoriasDAO cat = new CategoriasDAO();
-            Categoria categoria = new Categoria();
-
-            //adicionando o id
-            categoria.Paciente = true;
-            cat.Cadastrar(categoria);
-            usuario.Categoria = categoria.Id;
-            us.Cadastrar(usuario);
-            end.Cadastrar(endereco);
-            if (Imagem == null)
+            try
             {
-                paciente.imagem = new byte[0];
+                var pessoaService = new PessoaService();
+                pessoaService.Cadastrar(paciente, endereco, usuario, Imagem);
             }
-            else
+            catch (Exception ex)
             {
-
-                paciente.imagem = new byte[Imagem.ContentLength];
-                Imagem.InputStream.Read(paciente.imagem, 0, Imagem.ContentLength);
+               throw new Exception(ex.Message);
             }
-
-
-            //*-------------*
-            paciente.EnderecoId = endereco.ID;
-            paciente.UsuarioId = usuario.ID;
-
-            //Aplicando à instancia
-            pa.Cadastrar(paciente);
+           
             return RedirectToAction("Index");
 
         }
@@ -72,31 +52,31 @@ namespace ManagerSolution.Controllers
             PacienteDao dao = new PacienteDao();
             EnderecoDao end = new EnderecoDao();
             UsuarioDao us = new UsuarioDao();
-            CategoriasDAO cat = new CategoriasDAO();
+  
 
             Paciente paciente = dao.BuscaPorId(id);
-            Endereco endereco = end.BuscaPorId(paciente.EnderecoId);
-            Usuario usuario = us.BuscaPorId(paciente.UsuarioId);
-            Categoria categoria = cat.BuscaPorId(usuario.Categoria);
+           // Endereco endereco = end.BuscaPorId(paciente.EnderecoId);
+            
+            //Categoria categoria = cat.BuscaPorId(usuario.Categoria);
 
-            String tipo = "";
-            if (categoria.Medico == true)
-            {
-                tipo += " Medico ";
-            }
-            else if (categoria.Paciente == true)
-            {
-                tipo += " Paciente ";
-            }
-            else if (categoria.Atendente == true)
-            {
-                tipo += " Funcionario ";
-            }
+            //String tipo = "";
+            //if (categoria.Medico == true)
+            //{
+            //    tipo += " Medico ";
+            //}
+            //else if (categoria.Paciente == true)
+            //{
+            //    tipo += " Paciente ";
+            //}
+            //else if (categoria.Atendente == true)
+            //{
+            //    tipo += " Funcionario ";
+            //}
 
-            ViewBag.Paciente = paciente;
-            ViewBag.Endereco = endereco;
-            ViewBag.Usuario = usuario;
-            ViewBag.Mensagem = tipo;
+            //ViewBag.Paciente = paciente;
+            //ViewBag.Endereco = endereco;
+            //ViewBag.Usuario = usuario;
+            //ViewBag.Mensagem = tipo;
 
             return View();
         }
@@ -108,7 +88,7 @@ namespace ManagerSolution.Controllers
             PacienteDao dao = new PacienteDao();
             EnderecoDao end = new EnderecoDao();
             UsuarioDao us = new UsuarioDao();
-            CategoriasDAO cat = new CategoriasDAO();
+           
 
 
 
@@ -127,12 +107,12 @@ namespace ManagerSolution.Controllers
 
 
         }
-        public ActionResult verificarExistente(string nome, string user)
-        {
-            PacienteDao dao = new PacienteDao();
-            string valida = (dao.VerificarExistencia(nome, user) ? "Sim" : "Não");
-            return Json(valida);
-        }
+        //public ActionResult verificarExistente(string nome, string user)
+        //{
+        //    PacienteDao dao = new PacienteDao();
+        //    string valida = (dao.VerificarExistencia(nome, user) ? "Sim" : "Não");
+        //    return Json(valida);
+        //}
 
     }
 }

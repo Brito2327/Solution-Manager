@@ -44,14 +44,14 @@ else
     </thead>
 
     <tbody>
-        @foreach (ManagerSolution.Models.Paciente paciente in ViewBag.Paciente)
+        @foreach (ManagerSolution.Models.Pessoa paciente in ViewBag.Paciente)
         {
 
             <tr id="paciente-@paciente.ID">
-                <td class="align-content-center">@paciente.ID</td>
+                <td class="align-content-center">@paciente.ID]</td>
                 <td class="align-content-center"><a href="~/Paciente/Paciente?id=@paciente.ID">@paciente.Nome</a></td>
-                <td class="align-content-center">@paciente.sexo</td>
-                <td class="align-content-center">@paciente.data.Date.ToString("dd/MM/yyyy") </td>
+                <td class="align-content-center">@paciente.</td>
+                <td class="align-content-center">@paciente.DataNascimento.Value.ToString("dd/MM/yyyy") </td>
                 <td class="align-content-center">@paciente.Telefone</td>
                 <td class="align-content-center">@paciente.Naturalidade</td>
                 @if (Session["Medico"] == null)

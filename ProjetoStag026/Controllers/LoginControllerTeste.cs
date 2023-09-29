@@ -9,58 +9,58 @@ namespace ManagerSolution.Controllers
     public class LoginControllerTeste : BaseController
     {
 
-//        public ActionResult Index()
-//        {
-//            //return View();
+        //public ActionResult Index()
+        //{
+        //    //return View();
 
-//        }
-//        public ActionResult Autentica(String login, String Senha)
-//        {
-//            string valida = "error";
+        //}
+        //public ActionResult Autentica(String login, String Senha)
+        //{
+        //    string valida = "error";
 
-//            UsuarioDao dao = new UsuarioDao();
-//            Usuario usuario = dao.Busca(login, Senha);
-//            if (usuario != null)
-//            {
-//                CategoriasDAO cat = new CategoriasDAO();
-//                Categoria categoria = cat.BuscaPorId(usuario.CategoriaId);
+        //    UsuarioDao dao = new UsuarioDao();
+        //    Usuario usuario = dao.Busca(login, Senha);
+        //    if (usuario != null)
+        //    {
+        //        CategoriasDAO cat = new CategoriasDAO();
+        //        Categoria categoria = cat.BuscaPorId(usuario.CategoriaId);
 
-//                if (usuario != null && categoria.Paciente == true)
-//                {
-//                    PacienteDao paci = new PacienteDao();
-//                    Paciente paciente = paci.BuscaUser(usuario.ID);
-//                  //  Session["Paciente"] = paciente;
-//;
-//                    valida = "Cliente";
-//                }
-//                else if (usuario != null && categoria.Medico == true)
-//                {
-//                    MedicoDao me = new MedicoDao();
-//                    Medico medico = me.BuscaUser(usuario.ID);
-//                   // Session["Medico"] = medico;
-                    
-//                    valida = "Medico";
-//                }
-//                else if (usuario != null && categoria.Atendente == true)
-//                {
-//                    FuncionarioDao fun = new FuncionarioDao();
-//                    Funcionario funcionario = fun.BuscaUser(usuario.ID);
+        //        if (usuario != null && categoria.Paciente == true)
+        //        {
+        //            PacienteDao paci = new PacienteDao();
+        //            Paciente paciente = paci.BuscaUser(usuario.ID);
+        //            //  Session["Paciente"] = paciente;
+        //            ;
+        //            valida = "Cliente";
+        //        }
+        //        else if (usuario != null && categoria.Medico == true)
+        //        {
+        //            MedicoDao me = new MedicoDao();
+        //            Medico medico = me.BuscaUser(usuario.ID);
+        //            // Session["Medico"] = medico;
 
-//                  //  Session["Funcionario"] = funcionario;
-//                    valida = "Funcionario";
-//                }
-//            }
+        //            valida = "Medico";
+        //        }
+        //        else if (usuario != null && categoria.Atendente == true)
+        //        {
+        //            FuncionarioDao fun = new FuncionarioDao();
+        //            Funcionario funcionario = fun.BuscaUser(usuario.ID);
 
-//          //  return Json(valida);
-//        }
-//        public ActionResult Sair()
-//        {
-//          //  Session["Funcionario"] = null;
-//          //  Session["Paciente"] = null;
-//          //  Session["Medico"] = null;
+        //            //  Session["Funcionario"] = funcionario;
+        //            valida = "Funcionario";
+        //        }
+        //    }
 
-//           // return RedirectToAction("Index");
-//        }
+        //    //  return Json(valida);
+        //}
+        //public ActionResult Sair()
+        //{
+        //    //  Session["Funcionario"] = null;
+        //    //  Session["Paciente"] = null;
+        //    //  Session["Medico"] = null;
+
+        //    // return RedirectToAction("Index");
+        //}
 
 
 

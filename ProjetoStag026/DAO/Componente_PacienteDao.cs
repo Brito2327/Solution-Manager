@@ -11,7 +11,7 @@ namespace ManagerSolution.DAO
         public bool Cadastrar(Componente_Paciente obj)
         {
             bool valida = false;
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
 
                 contexto.Componente_Paciente.Add(obj);
@@ -21,10 +21,10 @@ namespace ManagerSolution.DAO
             return valida;
         }
 
-        internal IList<Componente_Paciente> BuscarAgendamentos(int pacienteId)
+        internal IList<Componente_Paciente> BuscarAgendamentos(long pacienteId)
         {
           
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Componente_Paciente.Where(p => p.PacienteId == pacienteId).ToList();
 
@@ -33,7 +33,7 @@ namespace ManagerSolution.DAO
 
         public IList<Componente_Paciente> Select()
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Componente_Paciente.ToList();
             }
@@ -45,7 +45,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == obj.ID)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         item.Componente = obj.Componente;
                         item.PacienteId = obj.PacienteId;
@@ -63,7 +63,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == obj.ID)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         contexto.Componente_Paciente.Remove(item);
                         contexto.SaveChanges();
@@ -76,7 +76,7 @@ namespace ManagerSolution.DAO
 
         public Componente_Paciente BuscaPorId(int id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Componente_Paciente
                     .Where(p => p.PacienteId == id)

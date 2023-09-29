@@ -11,7 +11,7 @@ namespace ManagerSolution.DAO
         public bool Cadastrar(Agendamento consulta)
         {
             bool valida = false;
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
 
                 contexto.Agendamento.Add(consulta);
@@ -24,7 +24,7 @@ namespace ManagerSolution.DAO
         internal IList<Agendamento> BuscarAgendamentos(string Data)
         {
             DateTime date = Convert.ToDateTime(Data);
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Agendamento.Where(p => p.data == date).ToList();
 
@@ -33,7 +33,7 @@ namespace ManagerSolution.DAO
 
         public IList<Agendamento> Select()
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Agendamento.ToList();
             }
@@ -45,12 +45,12 @@ namespace ManagerSolution.DAO
             {
                 if (item.Id == obj.Id)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
-                        item.PacienteId = obj.PacienteId;
+                        item.Paciente.ID = obj.Paciente.ID;
                         item.data = obj.data;
                         item.hora = obj.hora;
-                        item.observacao = obj.observacao;
+                        //item.observacao = obj.observacao;
 
                         contexto.Agendamento.Update(item);
                         contexto.SaveChanges();
@@ -66,7 +66,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.Id == obj.Id)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         contexto.Agendamento.Remove(item);
                         contexto.SaveChanges();
@@ -79,7 +79,7 @@ namespace ManagerSolution.DAO
 
         public Agendamento BuscaPorId(int id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Agendamento
                     .Where(p => p.Id == id)
@@ -94,7 +94,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.Id == agendamentoId)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         contexto.Agendamento.Remove(item);
                         contexto.SaveChanges();
@@ -107,16 +107,15 @@ namespace ManagerSolution.DAO
 
         public IList<Agendamento> BuscarAgendamentos(DateTime Data,Medico medico)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
-                return contexto.Agendamento.Where(p => p.data == Data && p.MedicoId==medico.ID).ToList();
-
+                return contexto.Agendamento.Where(p => p.data == Data && p.Medico.ID ==medico.ID).ToList();
             }
         }
 
         public IList<Agendamento> BuscarAgendamentosPorData(DateTime Data)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Agendamento.Where(p => p.data == Data).ToList();
 

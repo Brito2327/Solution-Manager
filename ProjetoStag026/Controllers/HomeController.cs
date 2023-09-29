@@ -13,7 +13,13 @@ namespace ManagerSolution.Controllers
     {
         public ActionResult Index()
         {
-            Medico medico = (Medico)Session["Medico"];
+            var usuario = (Usuario)Session["loggin"];
+
+            var pessoa = new Pessoa().BuscaPorId(usuario.PessoaId);
+
+            //Medico medico = (Medico)Session["Medico"];
+            var medico = new Medico().BuscaPorPessoaId(pessoa.ID);
+
             AgendamentoDao ag = new AgendamentoDao();
             IList<Agendamento> lista = ag.BuscarAgendamentos(DateTime.Now.Date, medico);
 
@@ -24,7 +30,7 @@ namespace ManagerSolution.Controllers
 
             foreach (var agenda in lista)
             {
-                int id = agenda.PacienteId;
+                var id = agenda.Paciente.ID;
                 Paciente paciente = dao.BuscaPorId(id);
                 listaPacientes.Add(paciente);
             }

@@ -13,7 +13,7 @@ namespace ManagerSolution.DAO
         public bool Cadastrar(Prontuario obj)
         {
             bool valida = false;
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
 
                 contexto.Prontuario.Add(obj);
@@ -25,7 +25,7 @@ namespace ManagerSolution.DAO
 
         public IList<Prontuario> Select()
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Prontuario.ToList();
             }
@@ -39,7 +39,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == obj.ID)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                        
                         
@@ -59,7 +59,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == obj.ID)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         contexto.Prontuario.Remove(item);
                         contexto.SaveChanges();
@@ -71,16 +71,16 @@ namespace ManagerSolution.DAO
         }
         public Prontuario BuscaPorId(int id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Prontuario
                     .Where(p => p.ID == id)
                     .FirstOrDefault();
             }
         }
-        public Prontuario BuscaPorProntuario(int pacienteId)
+        public Prontuario BuscaPorProntuario(long pacienteId)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 //IList<Consulta> x = contexto.Consulta.Where(p => p.PacienteId == pacienteId).ToList();
                 return contexto.Prontuario.FirstOrDefault(p => p.PacienteId == pacienteId);

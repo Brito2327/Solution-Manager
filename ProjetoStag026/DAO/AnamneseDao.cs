@@ -9,7 +9,7 @@ namespace ManagerSolution.DAO
 
         public void Cadastrar(Anamnese obj)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
 
                 contexto.Anamnese.Add(obj);
@@ -20,7 +20,7 @@ namespace ManagerSolution.DAO
 
         public IList<Anamnese> Select()
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Anamnese.ToList();
             }
@@ -32,7 +32,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == obj.ID)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         item.TPR = obj.TPR;
                         item.QP = obj.QP;
@@ -51,7 +51,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == obj.ID)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         contexto.Anamnese.Remove(item);
                         contexto.SaveChanges();
@@ -63,7 +63,7 @@ namespace ManagerSolution.DAO
         }
         public Anamnese BuscaPorId(int id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Anamnese
                     .Where(p => p.ID == id)

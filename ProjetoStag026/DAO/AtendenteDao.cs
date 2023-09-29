@@ -10,7 +10,7 @@ namespace ManagerSolution.DAO
     {
         public void Cadastrar(Atendente atendente)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
 
                 contexto.Atendente.Add(atendente);
@@ -21,7 +21,7 @@ namespace ManagerSolution.DAO
 
         public IList<Atendente> Select()
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Atendente.ToList();
             }
@@ -33,7 +33,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == Idusuario)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         item.Nome = nome;
                        
@@ -50,7 +50,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == Idusuario)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         contexto.Atendente.Remove(item);
                         contexto.SaveChanges();
@@ -60,7 +60,7 @@ namespace ManagerSolution.DAO
         }
         public Atendente BuscaPorId(int id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Atendente
                     .Where(p => p.ID == id)

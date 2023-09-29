@@ -12,12 +12,12 @@
                     <h2>@ViewBag.Agendamento[p].hora</h2>                   
                         <img src="~/Content/imagens/relogio.jpeg" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title">@ViewBag.Paciente[p].Nome</h5>
+                            <h5 class="card-title">@ViewBag.Agendamento[p].Paciente.Nome</h5>
                             <p class="card-text">@ViewBag.Agendamento[p].observacao</p>
 
 
 
-                            <a href="~/Consulta/Form?pacienteId=@ViewBag.Paciente[p].ID&agendamentoId=@ViewBag.Agendamento[p].Id" class="btn btn-primary">Atender</a>
+                            <a href="~/Consulta/Form?pacienteId=@ViewBag.Agendamento[p].Paciente.ID&agendamentoId=@ViewBag.Agendamento[p].Id" class="btn btn-primary">Atender</a>
                         </div>
                     
                    

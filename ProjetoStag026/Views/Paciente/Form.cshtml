@@ -111,7 +111,7 @@
                 complete:
                     function validar(jqXHR, resposta) {
                         if (jqXHR.responseJSON == "Sim") {
-                            $("#user").tooltip("destroy")
+                            $("#user").tooltip('dispose')
                                 .data("title", "Usuario ja existente")
                                 .addClass("is-invalid")
                                 .tooltip();
@@ -154,7 +154,7 @@
                  //$(formularioImg).submit();
                  $('#formImg').submit();
              } else {
-                 $("#cpf").tooltip("destroy")
+                 $("#cpf").tooltip('dispose')
                      .data("title", "CPF Inválido")
                      .addClass("is-invalid")
                      .tooltip();
@@ -180,31 +180,31 @@
         if (cpf == "" || senha == "" || user == "" || data == "" || nome== "") {
 
             if (cpf == "") {
-                $("#cpf").tooltip("destroy")
+                $("#cpf").tooltip('dispose')
                     .data("title", "Campo obrigatório")
                     .addClass("is-invalid")
                     .tooltip();
             }
             if (senha == "") {
-                $("#senha").tooltip("destroy")
+                $("#senha").tooltip('dispose')
                     .data("title", "Campo obrigatório")
                     .addClass("is-invalid")
                     .tooltip();
             }
             if (user == "") {
-                $("#user").tooltip("destroy")
+                $("#user").tooltip('dispose')
                     .data("title", "Campo obrigatório")
                     .addClass("is-invalid")
                     .tooltip();
             }
             if (data == "") {
-                $("#data").tooltip("destroy")
+                $("#data").tooltip('dispose')
                     .data("title", "Campo obrigatório")
                     .addClass("is-invalid")
                     .tooltip();
             }
             if (nome == "") {
-                $("#nome").tooltip("destroy")
+                $("#nome").tooltip('dispose')
                     .data("title", "Campo obrigatório")
                     .addClass("is-invalid")
                     .tooltip();

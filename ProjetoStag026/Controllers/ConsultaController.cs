@@ -44,9 +44,9 @@ namespace ManagerSolution.Controllers
             //Criando atendimento
             AtendimentosDao atend = new AtendimentosDao();
             Atendimentos atendimento = new Atendimentos();
-            atendimento.data = agendamento.data;
-            atendimento.Medico.ID = agendamento.MedicoId;
-            atendimento.Paciente.ID = agendamento.PacienteId;
+            atendimento.DataHora = agendamento.data;
+            atendimento.MedicoId = agendamento.Medico.ID;
+            atendimento.PacienteId = agendamento.Paciente.ID;
             atendimento.Plano = agendamento.Plano;
 
             atend.Cadastrar(atendimento);
@@ -82,7 +82,7 @@ namespace ManagerSolution.Controllers
             ConsultaDao con = new ConsultaDao();
             IList<Consulta> listaConsultas = con.BuscaPorPaciente(pacienteId);
             MedicoDao me = new MedicoDao();
-            Medico medico = me.BuscaPorId(agendamento.MedicoId);
+            Medico medico = me.BuscaPorId(agendamento.Medico.ID);
 
 
            
@@ -106,10 +106,10 @@ namespace ManagerSolution.Controllers
             consulta.MedicoId = MedicoId;
             consulta.PacienteId = PacienteId;
             consulta.Data = data;
-            anamnese.componentePrescrito = Prescricao;
+            //anamnese.componentePrescrito = Prescricao;
             anamnese.Antecedentes = Antecedentes;
-            anamnese.Diagnostico = Diagnostico;
-            anamnese.ExameFisico = EXAME;
+            //anamnese.Diagnostico = Diagnostico;
+            //anamnese.ExameFisico = EXAME;
             anamnese.TPR = TPR;
             anamnese.HDA = HDA;
             anamnese.QP = QP;

@@ -1,6 +1,7 @@
 ﻿using ManagerSolution.DAO;
 using ManagerSolution.Filtros;
 using ManagerSolution.Models;
+using ManagerSolution.Sevices.AgendamentoService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace ManagerSolution.Controllers
 
             foreach (var agenda in lista)
             {
-                int id = agenda.PacienteId;
+                var id = agenda.Paciente.ID;
                 Paciente paciente = dao.BuscaPorId(id);
                 listaPacientes.Add(paciente);
             }
@@ -37,35 +38,20 @@ namespace ManagerSolution.Controllers
             return View();
         }
         [FiltroF]
-        public ActionResult Cadastrar(String nomePaciente, String nomeMedico, DateTime Data, String Hora, String Observacao, String Plano)
+        public ActionResult Cadastrar(Agendamento agendamento)
         {
-            AgendamentoDao ag = new AgendamentoDao();
-            PacienteDao dao = new PacienteDao();
-            MedicoDao me = new MedicoDao();
-
-
-            Agendamento agendamento = new Agendamento();
-            agendamento.hora = Hora;
-            agendamento.data = Data;
-            agendamento.observacao = Observacao;
-            agendamento.Plano = Plano;
-            foreach (var item in dao.Select())
+            string validacao = "Não";
+            try
             {
-                if (item.Nome == nomePaciente)
-                {
-                    agendamento.PacienteId = item.ID;
-                }
+                var _agendamentoService = new AgendamentoService();
+                _agendamentoService.Cadastrar(agendamento);
+                validacao = "Sim";
             }
-
-            foreach (var item in me.Select())
-            {
-                if (item.nome == nomeMedico)
-                {
-                    agendamento.MedicoId = item.ID;
-                }
-            }
-
-            string validacao = (ag.Cadastrar(agendamento) ? "Sim" : "Não");
+            catch (Exception ex)
+            {                
+                throw new Exception(ex.Message);                
+            }            
+            
             return Json(validacao);
 
         }
@@ -75,13 +61,13 @@ namespace ManagerSolution.Controllers
             AgendamentoDao dao = new AgendamentoDao();
             PacienteDao paci = new PacienteDao();
 
-            foreach (var item in paci.Select())
-            {
-                if (item.Nome == nomePaciente)
-                {
-                    agendamento.PacienteId = item.ID;
-                }
-            }
+            //foreach (var item in paci.Select())
+            //{
+            //    if (item.Nome == nomePaciente)
+            //    {
+            //        agendamento.PacienteId = item.ID;
+            //    }
+            //}
             dao.Alterar(agendamento);
             return RedirectToAction("Index");
 
@@ -94,10 +80,10 @@ namespace ManagerSolution.Controllers
 
 
             PacienteDao paci = new PacienteDao();
-            Paciente paciente = paci.BuscaPorId(agendamento.PacienteId);
+            Paciente paciente = paci.BuscaPorId(agendamento.Paciente.ID);
 
             MedicoDao m = new MedicoDao();
-            Medico medico = m.BuscaPorId(agendamento.MedicoId);
+            Medico medico = m.BuscaPorId(agendamento.Medico.ID);
 
             ViewBag.Medico = medico;
             ViewBag.Paciente = paciente;

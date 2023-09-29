@@ -33,14 +33,10 @@ namespace ManagerSolution.Controllers
         {
             MedicoDao me = new MedicoDao();
             UsuarioDao dao = new UsuarioDao();
-            CategoriasDAO cat = new CategoriasDAO();
-            Categoria categoria = new Categoria();
-            categoria.Medico = true;
-            cat.Cadastrar(categoria);
-            usuario.Categoria = categoria.Id;
+            
             dao.Cadastrar(usuario);
 
-            medico.UsuarioId = usuario.ID;
+            //medico.UsuarioId = usuario.ID;
             me.Cadastrar(medico);
                       return RedirectToAction("Index");
 

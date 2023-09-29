@@ -10,7 +10,7 @@ namespace ManagerSolution.DAO
     {
         public void Cadastrar(Funcionario obj)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
 
                 contexto.Funcionario.Add(obj);
@@ -21,7 +21,7 @@ namespace ManagerSolution.DAO
 
         public IList<Funcionario> Select()
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Funcionario.ToList();
             }
@@ -32,16 +32,16 @@ namespace ManagerSolution.DAO
             bool valida = false;
             foreach (var item in Select())
             {
-                if (item.ID == obj.ID)
-                {
-                    using (var contexto = new ConecaoContext())
-                    {
-                        item.Nome = obj.Nome;
-                        contexto.Funcionario.Update(item);
-                        contexto.SaveChanges();
-                        valida = true;
-                    }
-                }
+                //if (item.ID == obj.ID)
+                //{
+                //    using (var contexto = new GetConexao())
+                //    {
+                //        item.Nome = obj.Nome;
+                //        contexto.Funcionario.Update(item);
+                //        contexto.SaveChanges();
+                //        valida = true;
+                //    }
+                //}
             }
             return valida;
         }
@@ -52,7 +52,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == idFuncionario)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         contexto.Funcionario.Remove(item);
                         contexto.SaveChanges();
@@ -64,19 +64,13 @@ namespace ManagerSolution.DAO
         }
         public Funcionario BuscaPorId(int? id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Funcionario
                     .Where(p => p.ID == id)
                     .FirstOrDefault();
             }
         }
-        public Funcionario BuscaUser(long UsuarioId)
-        {
-            using (var contexto = new ConecaoContext())
-            {
-                return contexto.Funcionario.FirstOrDefault(u => u.Usuario.ID == UsuarioId);
-            }
-        }
+       
     }
 }

@@ -11,7 +11,7 @@ namespace ManagerSolution.DAO
        
             public void Cadastrar(Endereco endereco)
             {
-                using (var contexto = new ConecaoContext())
+                using (var contexto = new GetConexao())
                 {
 
                     contexto.Endereco.Add(endereco);
@@ -22,7 +22,7 @@ namespace ManagerSolution.DAO
 
             public IList<Endereco> Select()
             {
-                using (var contexto = new ConecaoContext())
+                using (var contexto = new GetConexao())
                 {
                     return contexto.Endereco.ToList();
                 }
@@ -34,7 +34,7 @@ namespace ManagerSolution.DAO
                 {
                     if (item.ID == endereco.ID)
                     {
-                        using (var contexto = new ConecaoContext())
+                        using (var contexto = new GetConexao())
                         {
                         item.rua = endereco.rua;
                         item.Bairro = endereco.Bairro;
@@ -54,7 +54,7 @@ namespace ManagerSolution.DAO
                 {
                     if (item.ID == endereco.ID)
                     {
-                        using (var contexto = new ConecaoContext())
+                        using (var contexto = new GetConexao())
                         {
                             contexto.Endereco.Remove(item);
                             contexto.SaveChanges();
@@ -64,7 +64,7 @@ namespace ManagerSolution.DAO
             }
         public Endereco BuscaPorId(int id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Endereco
                     .Where(p => p.ID == id)

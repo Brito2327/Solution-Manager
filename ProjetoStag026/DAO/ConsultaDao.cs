@@ -11,7 +11,7 @@ namespace ManagerSolution.DAO
         public bool Cadastrar(Consulta consulta)
         {
             bool valida = false;
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
 
                 contexto.Consulta.Add(consulta);
@@ -23,7 +23,7 @@ namespace ManagerSolution.DAO
 
         public IList<Consulta> Select()
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Consulta.ToList();
             }
@@ -35,7 +35,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == consulta.ID)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         
                         
@@ -52,7 +52,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == obj.ID)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         contexto.Consulta.Remove(item);
                         contexto.SaveChanges();
@@ -63,7 +63,7 @@ namespace ManagerSolution.DAO
 
         public Consulta BuscaPorId(int id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Consulta
                     .Where(p => p.ID == id)
@@ -71,9 +71,9 @@ namespace ManagerSolution.DAO
             }
         }
 
-        public IList<Consulta> BuscaPorPaciente(int pacienteId)
+        public IList<Consulta> BuscaPorPaciente(long pacienteId)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 //IList<Consulta> x = contexto.Consulta.Where(p => p.PacienteId == pacienteId).ToList();
                 return contexto.Consulta.Where(p => p.PacienteId == pacienteId).ToList(); 

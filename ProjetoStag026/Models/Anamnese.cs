@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace ManagerSolution.Models
 {
+    [Table("Anamnese", Schema = "sm-local")]
     public class Anamnese
     {
         public int ID { get; set; }
@@ -15,9 +17,9 @@ namespace ManagerSolution.Models
         public string QP { get; set; }
         //História da doença atual (HDA): registro da doença, sintomas, quando começou, se a doença evoluiu.
         public string HDA { get; set; }
-        public string Diagnostico { get; set; }
-        public string ExameFisico { get; set; }
-        public string componentePrescrito { get; set; }
+        //public string Diagnostico { get; set; }
+        //public string ExameFisico { get; set; }
+        //public string componentePrescrito { get; set; }
 
     }
 }

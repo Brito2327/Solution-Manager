@@ -4,7 +4,7 @@
 }
 <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 <script src="https://use.fontawesome.com/f72947d947.js"></script>
-<link rel="stylesheet" type="text/css" href="htpps://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/fontawesome.min.js" />
 <div class="background-full"></div>
 
 <div class="login">
@@ -34,15 +34,17 @@
 
 </div>
 <div class="rodape">
-    <p>&copy; @DateTime.Now.Year -Solução Manager Doctor Sistem</p>
+    <p>&copy; @DateTime.Now.Year -Solution Manager Doctor Sistem</p>
 </div>
 
-
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
 
 <script type="text/javascript">
     function logar() {
+
+
         var Login = $("#login").val();
         var senha = $("#senha").val();
 
@@ -52,17 +54,17 @@
                 cache: false,
                 url: "@Url.Action("Autentica","Login")", // webmethod or web serivces URL
                 data: {
-                    login: Login,
-                    Senha: senha
+                    NomeUsuario: Login,
+                    Password: senha
                 },
                 complete:
                     function validar(jqXHR, resposta) {
-                        if (jqXHR.responseJSON == "Funcionario") {
+                        if (jqXHR.responseText.replace(/["]/g, '') == 'Funcionario') {
                             window.location.href = "/Funcionario/Dashbord";
-                        } else if (jqXHR.responseJSON == "Medico") {
+                        } else if (jqXHR.responseText.replace(/["]/g, '') == 'Medico') {
                             window.location.href = "/Home";
 
-                        } else if (jqXHR.responseJSON == "Cliente") {
+                        } else if (jqXHR.responseText.replace(/["]/g, '') == 'Cliente') {
                             window.location.href = "/Cliente";
                         } else {
                             loginError();

@@ -12,7 +12,7 @@ namespace ManagerSolution.DAO
         public bool Cadastrar(Atendimentos obj)
         {
             bool valida = false;
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
 
                 contexto.Atendimentos.Add(obj);
@@ -25,16 +25,16 @@ namespace ManagerSolution.DAO
         internal IList<Atendimentos> BuscarPorData(string Data)
         {
             DateTime date = Convert.ToDateTime(Data);
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
-                return contexto.Atendimentos.Where(p => p.data == date).ToList();
+                return contexto.Atendimentos.Where(p => p.DataHora == date).ToList();
 
             }
         }
 
         public IList<Atendimentos> Select()
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Atendimentos.ToList();
             }
@@ -46,7 +46,7 @@ namespace ManagerSolution.DAO
         //    {
         //        if (item.Id == obj.Id)
         //        {
-        //            using (var contexto = new ConecaoContext())
+        //            using (var contexto = new GetConexao())
         //            {
         //                item.PacienteId = obj.PacienteId;
         //                item.data = obj.data;
@@ -67,7 +67,7 @@ namespace ManagerSolution.DAO
         //    {
         //        if (item.Id == obj.Id)
         //        {
-        //            using (var contexto = new ConecaoContext())
+        //            using (var contexto = new GetConexao())
         //            {
         //                contexto.Atendimentos.Remove(item);
         //                contexto.SaveChanges();
@@ -80,7 +80,7 @@ namespace ManagerSolution.DAO
 
         public Atendimentos BuscaPorId(int id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Atendimentos
                     .Where(p => p.Id == id)
@@ -91,9 +91,9 @@ namespace ManagerSolution.DAO
 
         public IList<Atendimentos> BuscarPorMedico(Medico medico)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
-                return contexto.Atendimentos.Where(p => p.Medico.ID == medico.ID).ToList();
+                return contexto.Atendimentos.Where(p => p.MedicoId == medico.ID).ToList();
 
             }
         }

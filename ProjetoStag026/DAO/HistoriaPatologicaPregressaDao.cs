@@ -10,7 +10,7 @@ namespace ManagerSolution.DAO
     {
         public void Cadastrar(HistoriaPatologicaPregressa obj)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
 
                 contexto.HistoriaPatologicaPregressaContext.Add(obj);
@@ -21,7 +21,7 @@ namespace ManagerSolution.DAO
 
         public IList<HistoriaPatologicaPregressa> Select()
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.HistoriaPatologicaPregressaContext.ToList();
             }
@@ -33,7 +33,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == obj.ID)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         item.HF = obj.HF;
                         item.HistoriaSocial = obj.HistoriaSocial;
@@ -53,7 +53,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == obj.ID)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         contexto.HistoriaPatologicaPregressaContext.Remove(item);
                         contexto.SaveChanges();
@@ -65,7 +65,7 @@ namespace ManagerSolution.DAO
         }
         public HistoriaPatologicaPregressa BuscaPorId(int id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.HistoriaPatologicaPregressaContext
                     .Where(p => p.ID == id)

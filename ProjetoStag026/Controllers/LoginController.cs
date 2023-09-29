@@ -1,6 +1,7 @@
 ﻿using ManagerSolution.DAO;
 using ManagerSolution.Enum;
 using ManagerSolution.Models;
+using ManagerSolution.Sevices.PessoaService;
 using System;
 using System.Web.Mvc;
 
@@ -8,45 +9,44 @@ namespace ManagerSolution.Controllers
 {
     public class LoginController : Controller
     {
+        public string _usuarioLogado = "loggin";
 
         public ActionResult Index()
         {
             return View();
 
         }
-        public ActionResult Autentica(String login, String Senha)
+        public ActionResult Autentica(Usuario usuario)
         {
-            string valida = "error";
+            var valida = "";
+            try
+            {
+                var _usuarioService = new UsuarioService();
+                usuario = _usuarioService.ValidaLogin(usuario);
+                Session[_usuarioLogado] = usuario;
+                var pessoa = new Pessoa().BuscaPorId(usuario.PessoaId);
 
-            UsuarioDao dao = new UsuarioDao();
-            Usuario usuario = dao.Busca(login, Senha);
-            if (usuario != null)
-            {   
+                switch (pessoa.TipoFuncao)
+                {
+                    case EPerfil.Paciente:
+                        Session["Paciente"] = new Paciente().BuscaPorPessoaId(pessoa.ID);
+                        valida = "Cliente";
+                        break;
+                    case EPerfil.Medico:
+                        Session["Medico"] = new Medico().BuscaPorPessoaId(pessoa.ID);
+                        valida = "Medico";
+                        break;
+                    case EPerfil.Atendente:
 
-                if (usuario != null && (ECategoriaUsurio)usuario.Categoria == ECategoriaUsurio.Paciente)
-                {
-                    PacienteDao paci = new PacienteDao();
-                    Paciente paciente = paci.BuscaUser(usuario.ID);
-                    Session["Paciente"] = paciente;
-;
-                    valida = "Cliente";
+                        break;
+                    default:
+                        throw new Exception("Perfil de usuario não cadastrado");
                 }
-                else if (usuario != null && (ECategoriaUsurio)usuario.Categoria == ECategoriaUsurio.Medico)
-                {
-                    MedicoDao me = new MedicoDao();
-                    Medico medico = me.BuscaUser(usuario.ID);
-                    Session["Medico"] = medico;
-                    
-                    valida = "Medico";
-                }
-                else if (usuario != null && (ECategoriaUsurio)usuario.Categoria == ECategoriaUsurio.Atendente)
-                {
-                    FuncionarioDao fun = new FuncionarioDao();
-                    Funcionario funcionario = fun.BuscaUser(usuario.ID);
+            }
+            catch (Exception)
+            {
 
-                    Session["Funcionario"] = funcionario;
-                    valida = "Funcionario";
-                }
+                valida = "error";
             }
 
             return Json(valida);

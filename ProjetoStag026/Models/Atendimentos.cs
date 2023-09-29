@@ -7,10 +7,10 @@ namespace ManagerSolution.Models
 {
     public class Atendimentos
     {
-        public int Id { get; set; }
-        public DateTime data { get; set; }
-        public Paciente Paciente { get; set; }
-        public Medico Medico { get; set; }   
+        public long Id { get; set; }
+        public DateTime DataHora { get; set; }
+        public long PacienteId { get; set; }
+        public long MedicoId { get; set; }   
         public string Plano { get; set; }
     }
 }

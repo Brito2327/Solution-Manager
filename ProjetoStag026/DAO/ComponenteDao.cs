@@ -10,7 +10,7 @@ namespace ManagerSolution.DAO
     {
         public void Cadastrar(Componente componente)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
 
                 contexto.Componente.Add(componente);
@@ -21,7 +21,7 @@ namespace ManagerSolution.DAO
 
         public IList<Componente> Select()
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Componente.ToList();
             }
@@ -34,7 +34,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == obj.ID)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         item.Nome = obj.Nome;
                         contexto.Componente.Update(item);
@@ -52,7 +52,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == Idcomponente)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         contexto.Componente.Remove(item);
                         contexto.SaveChanges();
@@ -64,7 +64,7 @@ namespace ManagerSolution.DAO
         }
         public Componente BuscaPorId(int? id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Componente
                     .Where(p => p.ID == id)

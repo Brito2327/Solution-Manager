@@ -1,5 +1,8 @@
-﻿namespace ManagerSolution.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ManagerSolution.Models
 {
+    [Table("Endereco", Schema = "sm-local")]
     public class Endereco
     {
         public int ID { get; set; }

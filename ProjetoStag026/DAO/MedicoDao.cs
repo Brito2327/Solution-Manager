@@ -11,20 +11,20 @@ namespace ManagerSolution.DAO
 
         public void Cadastrar(Medico usuario)
         {
-            using (var contexto = new ConecaoContext())
+            using (var con = new GetConexao())
             {
 
-                contexto.Medico.Add(usuario);
-                contexto.SaveChanges();
+                con.Medico.Add(usuario);
+                con.SaveChanges();
             }
 
         }
 
         public IList<Medico> Select()
         {
-            using (var contexto = new ConecaoContext())
+            using (var con = new GetConexao())
             {
-                return contexto.Medico.ToList();
+                return con.Medico.ToList();
             }
 
         }
@@ -35,14 +35,14 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == obj.ID)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var con = new GetConexao())
                     {
                         item.nome = obj.nome;
                         item.CRM = obj.CRM;
                         item.Situacao = obj.Situacao;
                         item.AreaDeAtuacao = obj.AreaDeAtuacao;
-                        contexto.Medico.Update(item);
-                        contexto.SaveChanges();
+                        con.Medico.Update(item);
+                        con.SaveChanges();
                         valida = true;
 
                     }
@@ -50,39 +50,33 @@ namespace ManagerSolution.DAO
             }
             return valida;
         }
-        public bool excluir(int Idusuario)
+        public bool excluir(long Idusuario)
         {
             bool valida = false;
             foreach (var item in Select())
             {
                 if (item.ID == Idusuario)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var con = new GetConexao())
                     {
-                        contexto.Medico.Remove(item);
-                        contexto.SaveChanges();
+                        con.Medico.Remove(item);
+                        con.SaveChanges();
                         valida = true;
                     }
                 }
             }
             return valida;
         }
-        public Medico BuscaPorId(int id)
+        public Medico BuscaPorId(long id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var con = new GetConexao())
             {
-                return contexto.Medico
+                return con.Medico
                     .Where(p => p.ID == id)
                     .FirstOrDefault();
             }
         }
 
-        public Medico BuscaUser(long UsuarioId)
-        {
-            using (var contexto = new ConecaoContext())
-            {
-                return contexto.Medico.FirstOrDefault(u => u.Usuario.ID == UsuarioId);
-            }
-        }
+        
     }
 }

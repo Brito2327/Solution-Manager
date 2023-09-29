@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace ManagerSolution.Models
 {
+    [Table("Consulta", Schema = "sm-local")]
     public class Consulta
     {
         public int ID { get; set; }

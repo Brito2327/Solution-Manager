@@ -8,7 +8,7 @@ using ManagerSolution.DAO;
 
 namespace ManagerSolution.Migrations
 {
-    [DbContext(typeof(ConecaoContext))]
+    [DbContext(typeof(GetConexao))]
     partial class ConecaoContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

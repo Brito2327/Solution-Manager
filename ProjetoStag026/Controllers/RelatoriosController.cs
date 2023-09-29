@@ -30,7 +30,7 @@ namespace ManagerSolution.Controllers
             {
                 foreach (var medico in me.Select())
                 {
-                    if (item.Medico.ID == medico.ID)
+                    if (item.MedicoId == medico.ID)
                     {
                         medicos.Add(medico.nome);
                     }
@@ -41,10 +41,10 @@ namespace ManagerSolution.Controllers
             {
                 foreach (var paciente in dao.Select())
                 {
-                    if (item.Paciente.ID == paciente.ID)
-                    {
-                        pacientes.Add(paciente.Nome);
-                    }
+                    //if (item.PacienteId == paciente.ID)
+                    //{
+                    //    pacientes.Add(paciente.Nome);
+                    //}
                 }
             }
 

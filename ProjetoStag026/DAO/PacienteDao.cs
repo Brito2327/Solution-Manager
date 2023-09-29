@@ -12,11 +12,11 @@ namespace ManagerSolution.DAO
         public bool Cadastrar(Paciente paciente)
         {
             bool valida = false;
-            using (var contexto = new ConecaoContext())
+            using (var con = new GetConexao())
             {
 
-                contexto.Paciente.Add(paciente);
-                contexto.SaveChanges();
+                con.Paciente.Add(paciente);
+                con.SaveChanges();
                 valida = true;
             }
             return valida;
@@ -24,7 +24,7 @@ namespace ManagerSolution.DAO
 
         public IList<Paciente> Select()
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Paciente.ToList();
             }
@@ -32,32 +32,23 @@ namespace ManagerSolution.DAO
         }
         public void Alterar(Paciente paciente)
         {
-            foreach (var item in Select())
+
+            using (var contexto = new GetConexao())
             {
-                if (item.ID == paciente.ID)
-                {
-                    using (var contexto = new ConecaoContext())
-                    {
-                        item.Nome = paciente.Nome;
-                        item.sexo = paciente.sexo;
-                        item.DataNascimento = paciente.DataNascimento;
-                        item.Telefone = paciente.Telefone;
-                        item.Naturalidade = paciente.Naturalidade;
-                        contexto.Paciente.Update(item);
-                        contexto.SaveChanges();
-                    }
-                }
+                contexto.Paciente.Update(paciente);
+                contexto.SaveChanges();
             }
 
+
         }
-        public bool excluir( Paciente obj)
+        public bool excluir(Paciente obj)
         {
             bool valida = false;
             foreach (var item in Select())
             {
                 if (item.ID == obj.ID)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         contexto.Paciente.Remove(item);
                         contexto.SaveChanges();
@@ -68,9 +59,9 @@ namespace ManagerSolution.DAO
             return valida;
         }
 
-        public Paciente BuscaPorId(int? id)
+        public Paciente BuscaPorId(long? id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Paciente
                     .Where(p => p.ID == id)
@@ -82,28 +73,22 @@ namespace ManagerSolution.DAO
         {
             throw new NotImplementedException();
         }
-        public Paciente BuscaUser(long UsuarioId)
-        {
-            using (var contexto = new ConecaoContext())
-            {
-                return contexto.Paciente.FirstOrDefault(u => u.Usuario.ID == UsuarioId );
-            }
-        }
+       
 
-        public bool VerificarExistencia(string nome,string usuario)
-        {
-            bool valida = false;
-            using (var contexto = new ConecaoContext())
-            {
-                var item = contexto.Paciente.FirstOrDefault(u => u.Nome == nome);
-                var item2 = contexto.Usuario.FirstOrDefault(u => u.User == usuario);
-                if (item != null && item2 != null)
-                {
-                    valida = true;
-                }
-            }
-            return valida;
-        }
+        //public bool VerificarExistencia(string nome, string usuario)
+        //{
+        //    bool valida = false;
+        //    using (var contexto = new GetConexao())
+        //    {
+        //        var item = contexto.Paciente.FirstOrDefault(u => u.Nome == nome);
+        //        var item2 = contexto.Usuario.FirstOrDefault(u => u.User == usuario);
+        //        if (item != null && item2 != null)
+        //        {
+        //            valida = true;
+        //        }
+        //    }
+        //    return valida;
+        //}
     }
 
 }

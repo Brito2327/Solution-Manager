@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace ManagerSolution.Models
 {
+
+    [Table("Atendente", Schema = "sm-local")]
     public class Atendente
     {
         public int ID { get; set; }
-        public string Nome { get; set; }
-        public Usuario Usuario { get; set; }
+        public string Nome { get; set; }        
         public int UsuarioId { get; set; }
     }
 }

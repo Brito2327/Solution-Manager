@@ -84,10 +84,10 @@ namespace ManagerSolution.Controllers
 
             foreach (var item in dao.Select())
             {
-                if (item.Nome == nomePaciente)
-                {
-                    prontuario.PacienteId = item.ID;
-                }
+                //if (item.Nome == nomePaciente)
+                //{
+                //    prontuario.PacienteId = item.ID;
+                //}
             }
 
             if (lista != null)
@@ -142,10 +142,10 @@ namespace ManagerSolution.Controllers
 
             foreach (var item in dao.Select())
             {
-                if (item.Nome == nomePaciente)
-                {
-                    prontuario.PacienteId = item.ID;
-                }
+                //if (item.Nome == nomePaciente)
+                //{
+                //    prontuario.PacienteId = item.ID;
+                //}
             }
 
 

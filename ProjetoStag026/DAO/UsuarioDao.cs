@@ -10,7 +10,7 @@ namespace ManagerSolution.DAO
 
         public void Cadastrar(Usuario usuario)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
 
                 contexto.Usuario.Add(usuario);
@@ -21,7 +21,7 @@ namespace ManagerSolution.DAO
 
         public IList<Usuario> Select()
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Usuario.ToList();
             }
@@ -33,9 +33,9 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == obj.ID)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
-                        item.User = obj.User;
+                        item.NomeUsuario = obj.NomeUsuario;
                         item.Password = obj.Password;
                         contexto.Usuario.Update(item);
                         contexto.SaveChanges();
@@ -50,7 +50,7 @@ namespace ManagerSolution.DAO
             {
                 if (item.ID == Idusuario)
                 {
-                    using (var contexto = new ConecaoContext())
+                    using (var contexto = new GetConexao())
                     {
                         contexto.Usuario.Remove(item);
                         contexto.SaveChanges();
@@ -60,7 +60,7 @@ namespace ManagerSolution.DAO
         }
         public Usuario BuscaPorId(long id)
         {
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
                 return contexto.Usuario
                     .Where(p => p.ID == id)
@@ -73,10 +73,10 @@ namespace ManagerSolution.DAO
             
 
 
-            using (var contexto = new ConecaoContext())
+            using (var contexto = new GetConexao())
             {
 
-                return contexto.Usuario.FirstOrDefault(u => u.User == login && u.Password == senha);
+                return contexto.Usuario.FirstOrDefault(u => u.NomeUsuario == login && u.Password == senha);
             }
         }
     }
