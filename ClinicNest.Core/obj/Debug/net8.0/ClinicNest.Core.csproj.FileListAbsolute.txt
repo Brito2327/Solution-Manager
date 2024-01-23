@@ -1,0 +1,13 @@
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Core\bin\Debug\net8.0\ClinicNest.Core.deps.json
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Core\bin\Debug\net8.0\ClinicNest.Core.dll
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Core\bin\Debug\net8.0\ClinicNest.Core.pdb
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Core\obj\Debug\net8.0\ClinicNest.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Core\obj\Debug\net8.0\ClinicNest.Core.AssemblyInfoInputs.cache
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Core\obj\Debug\net8.0\ClinicNest.Core.AssemblyInfo.cs
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Core\obj\Debug\net8.0\ClinicNest.Core.csproj.CoreCompileInputs.cache
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Core\obj\Debug\net8.0\ClinicNest.Core.sourcelink.json
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Core\obj\Debug\net8.0\ClinicNest.Core.dll
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Core\obj\Debug\net8.0\refint\ClinicNest.Core.dll
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Core\obj\Debug\net8.0\ClinicNest.Core.pdb
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Core\obj\Debug\net8.0\ref\ClinicNest.Core.dll
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Core\obj\Debug\net8.0\ClinicNest.Core.csproj.AssemblyReference.cache

@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "dgSpecHash": "NVMKvOq0OjZa5VyZW8/6uqFpYy1CBUD1nQcotqwIGQInm9bjuEJJY2d7JFDI87+a63gTBUz4q+3ZMer0DdT8Qg==",
+  "success": true,
+  "projectFilePath": "C:\\Desenvolvimento interno\\Solution-Manager\\ClinicNest.Core\\ClinicNest.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\alexander.brito\\.nuget\\packages\\fluentvalidation\\11.8.1\\fluentvalidation.11.8.1.nupkg.sha512",
+    "C:\\Users\\alexander.brito\\.nuget\\packages\\refit\\7.0.0\\refit.7.0.0.nupkg.sha512",
+    "C:\\Users\\alexander.brito\\.nuget\\packages\\system.net.http.json\\7.0.1\\system.net.http.json.7.0.1.nupkg.sha512",
+    "C:\\Users\\alexander.brito\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
+    "C:\\Users\\alexander.brito\\.nuget\\packages\\system.text.json\\7.0.3\\system.text.json.7.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

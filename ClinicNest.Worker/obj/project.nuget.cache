@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "qfIYwGsJ2sQ8kJyfLvDxQa4oLYrG92pOZyqS5wfdBUGg31NlY4HGqrG1zwZ7sBJ6RCJFiF6qVW9hui89UhG4Cg==",
+  "success": true,
+  "projectFilePath": "C:\\Desenvolvimento interno\\Solution-Manager\\ClinicNest.Worker\\ClinicNest.Worker.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\alexander.brito\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
+    "C:\\Users\\alexander.brito\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\alexander.brito\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\alexander.brito\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512"
+  ],
+  "logs": []
+}

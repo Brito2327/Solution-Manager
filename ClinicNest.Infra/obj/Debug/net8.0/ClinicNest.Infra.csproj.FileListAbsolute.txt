@@ -1,0 +1,6 @@
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Infra\obj\Debug\net8.0\ClinicNest.Infra.csproj.AssemblyReference.cache
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Infra\obj\Debug\net8.0\ClinicNest.Infra.GeneratedMSBuildEditorConfig.editorconfig
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Infra\obj\Debug\net8.0\ClinicNest.Infra.AssemblyInfoInputs.cache
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Infra\obj\Debug\net8.0\ClinicNest.Infra.AssemblyInfo.cs
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Infra\obj\Debug\net8.0\ClinicNest.Infra.csproj.CoreCompileInputs.cache
+C:\Desenvolvimento interno\Solution-Manager\ClinicNest.Infra\obj\Debug\net8.0\ClinicNest.Infra.sourcelink.json

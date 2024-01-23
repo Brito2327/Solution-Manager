@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ClinicNest.Worker.props" />
+</Project>
